@@ -1,0 +1,42 @@
+@import 'bootstrap.css';
+
+@import 'glyphicons.css';
+
+@import 'spectrum.css';
+body {
+  padding-top: 70px;
+  padding-bottom: 40px;
+}
+h2 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.editlink {
+  float: right;
+  margin-top: 40px;
+}
+li .glyphicon {
+  vertical-align: text-top;
+}
+.nav-header {
+  color: #888;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.breadcrumb > li + li:before {
+  padding: 0 4px 0 9px;
+}
+.form-horizontal .radio-inline {
+  padding-top: 6px;
+}
+.form-horizontal .small-label {
+  font-weight: normal;
+  font-size: 14px;
+  padding-top: 9px;
+  padding-right: 0;
+}
+.code {
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+}
