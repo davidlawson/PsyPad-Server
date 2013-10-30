@@ -19,9 +19,9 @@ return array
 			 * Ports and sockets may be appended to the hostname.
 			 */
 			'hostname'   => 'localhost',
-			'database'   => 'movit',
-			'username'   => 'movit',
-			'password'   => 'M4?Sh$92mo',
+			'database'   => 'psypad',
+			'username'   => 'psypad',
+			'password'   => 'your_database_password',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
