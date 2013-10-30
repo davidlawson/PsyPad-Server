@@ -2,20 +2,6 @@
 
 class Controller_Security extends Controller_Template
 {
-    public function action_test()
-    {
-        $this->template->content = "";
-        $imagesets = ORM::factory('ImageSet')->find_all();
-        foreach($imagesets as $imageset)
-        {
-            $this->template->content .= $imageset->id."..";
-            echo $imageset->id."..";
-            $imageset->extract();
-            $this->template->content .= "d/";
-            echo "d/";
-        }
-    }
-
     public function action_login()
     {
         if ($this->request->method() == HTTP_Request::POST)
@@ -43,22 +29,23 @@ class Controller_Security extends Controller_Template
         HTTP::redirect('/');
     }
 
-    public function action_adduser()
-    {
-        // Create the user using form values
-/*
-        $user = new Model_User;
-        $user->create_user(array(
-            'username' => 'alice',
-            'email' => 's.yu11@student.unimelb.edu.au',
-            'password' => '8chars',
-            'password_confirm' => '8chars',
-        ), array(
-            'username',
-            'password',
-            'email'
-        ));
-*/
+    //TODO create a form for this
+    /* public function action_adduser()
+     {
+         // Create the user using form values
+
+         $user = new Model_User;
+         $user->create_user(array(
+             'username' => '',
+             'email' => '',
+             'password' => '',
+             'password_confirm' => '',
+         ), array(
+             'username',
+             'password',
+             'email'
+         ));
+
 
         // Grant user login role
         $user->add('roles', ORM::factory('Role', array('name' => 'login')));
@@ -68,6 +55,6 @@ class Controller_Security extends Controller_Template
         $default = Model_Participant::default_participant();
         $user->default_participant = $default;
         $user->save();
-    }
+    }*/
 
 }

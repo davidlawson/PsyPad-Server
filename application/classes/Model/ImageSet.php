@@ -23,7 +23,7 @@ class Model_ImageSet extends ORM
 
                 $name = zip_entry_name($zip_entry);
                 $components = explode('/', $name);
-		//$positions["debug"] = print_r($components, TRUE);
+                //$positions["debug"] = print_r($components, TRUE);
                 if (count($components) == 2)
                 {
                     $folder = $components[0];
@@ -50,7 +50,7 @@ class Model_ImageSet extends ORM
         zip_close($zip);
 
         $this->data = json_encode($positions);
-	$this->save();
+        $this->save();
 
         return $positions;
     }

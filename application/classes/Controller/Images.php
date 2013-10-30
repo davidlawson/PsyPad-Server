@@ -33,6 +33,7 @@ class Controller_Images extends Controller_Template
 
                 $this->template->content->message = '<pre>'.print_r($imageset->extract(), true).'</pre>';
 
+                // TODO validate upload here
                 //$this->template->content->message = 'Upload successful!';
             }
         }
