@@ -2,9 +2,14 @@
 
 class Controller_Api extends Controller
 {
+    private function post_data()
+    {
+        return json_decode($this->request->body(), true);
+    }
+
     private function do_login()
     {
-        $json = json_decode($this->request->body(), true);
+        $json = $this->post_data();
         if (!$json)
         {
             $this->response->status(403);
@@ -19,10 +24,10 @@ class Controller_Api extends Controller
             return false;
         }
 
-        return $json;
+        return true;
     }
 
-    public function action_list_users()
+    public function action_list_participants()
     {
         if (!$this->do_login()) return;
 
@@ -30,50 +35,17 @@ class Controller_Api extends Controller
 
         $output = array();
 
-        $output["default"] = "Description";
+        $output["default"] = $owner->default_participant->configurations->count_all() . " configurations";
 
         foreach ($owner->participants->find_all() as $participant)
         {
-            $output[$participant->username] = "Description";
+            $output[$participant->username] = $participant->configurations->count_all() . " configurations";
         }
 
         $this->response->body(json_encode($output));
     }
 
-    public function action_uploadlogs()
-    {
-        if ( ! ($json = $this->do_login())) return;
-
-        $owner = Auth::instance()->get_user();
-
-        foreach($json["log_data"] as $username => $logs)
-        {
-            $user = $owner->participants->where('username', '=', $username)->find();
-            if (!$user->loaded())
-            {
-                $user->username = $username;
-                $user->user = $owner;
-                $user->save();
-            }
-
-            foreach($logs as $log_timestamp => $log_content)
-            {
-                $existing_log = $user->logs->where('log_timestamp', '=', $log_timestamp)->find();
-                if ($existing_log->loaded()) continue;
-
-                $log = new Model_Log();
-                $log->participant = $user;
-                $log->log_timestamp = $log_timestamp;
-                $log->upload_timestamp = time();
-                $log->data = $log_content;
-                $log->save();
-            }
-        }
-
-        $this->response->body('Logs saved');
-    }
-
-    public function action_load_user()
+    public function action_load_participant()
     {
         if (!$this->do_login()) return;
 
@@ -87,7 +59,8 @@ class Controller_Api extends Controller
 
             if ( ! $participant->loaded())
             {
-                $this->response->body('User not found');
+                $this->response->status(404);
+                $this->response->body('Participant not found');
                 return;
             }
 
@@ -104,12 +77,13 @@ class Controller_Api extends Controller
         }
         else
         {
-            $this->response->body('No user selected');
+            $this->response->status(404);
+            $this->response->body('No participant selected');
             return;
         }
     }
 
-    public function action_load_users()
+    public function action_load_participants()
     {
         if (!$this->do_login()) return;
 
@@ -145,7 +119,11 @@ class Controller_Api extends Controller
         $this->response->body(json_encode($data));
     }
 
-    public function action_save_user()
+    /**
+     * Creates a new participant if they don't exist
+     * Deletes all existing configurations, replaces them with provided ones
+     */
+    public function action_save_participant()
     {
         if (!$this->do_login()) return;
 
@@ -183,16 +161,17 @@ class Controller_Api extends Controller
         }
         else
         {
-            $this->response->body('No user selected');
+            $this->response->status(404);
+            $this->response->body('No participant selected');
             return;
         }
     }
 
-    public function action_save_users()
+    public function action_save_participants()
     {
         if (!$this->do_login()) return;
 
-        $json = json_decode($this->request->body(), true);
+        $json = $this->post_data();
 
         foreach ($json["users"] as $username => $configurations_data)
         {
@@ -227,59 +206,43 @@ class Controller_Api extends Controller
         }
     }
 
+    /**
+     * Creates new participants on server if they don't exist
+     */
     public function action_upload_logs()
     {
         if (!$this->do_login()) return;
-	$json = json_decode($this->request->body(), true);
-	foreach ($json["log_data"] as $username => $log_data)
-	{
-		$participant = Auth::instance()->get_user()->participants
+
+        $json = $this->post_data();
+
+        foreach ($json["log_data"] as $username => $log_data)
+        {
+            $participant = Auth::instance()->get_user()->participants
                 ->where('username', '=', $username)
                 ->find();
 
             if ($username == 'default') $participant = Auth::instance()->get_user()->default_participant;
 
-                if (!$participant->loaded())
+            if (!$participant->loaded())
             {
                 $participant->username = $username;
                 $participant->user = Auth::instance()->get_user();
                 $participant->save();
             }
 
-		foreach($log_data as $one_log_id => $one_log_data)
-		{
-			$new_log = new Model_Log();
-			$new_log->where('participant_id', '=', $participant->id)->where('log_timestamp', '=', $one_log_id)->find();
-			if ($new_log->loaded()) continue;
-			
-			$new_log->participant = $participant;
-			$new_log->data = $one_log_data;
-			$new_log->log_timestamp = $one_log_id;
-			$new_log->upload_timestamp = time();
-			$new_log->save();
-		}
-	}
-    }
+            foreach($log_data as $one_log_id => $one_log_data)
+            {
+                $new_log = new Model_Log();
+                $new_log->where('participant_id', '=', $participant->id)->where('log_timestamp', '=', $one_log_id)->find();
+                if ($new_log->loaded()) continue;
 
-    public function action_sync()
-    {
-        if (!$this->do_login()) return;
-
-        $owner = Auth::instance()->get_user();
-        $participants = $owner->participants->find_all();
-
-        $output = '{';
-
-        foreach($participants as $participant)
-        {
-            if ($participant->configuration)
-                $output .= '"'.$participant->username.'": '.$participant->configuration.',';
+                $new_log->participant = $participant;
+                $new_log->data = $one_log_data;
+                $new_log->log_timestamp = $one_log_id;
+                $new_log->upload_timestamp = time();
+                $new_log->save();
+            }
         }
-
-        $output .= '}';
-
-        $this->response->headers('Content-Type', 'application/json');
-        $this->response->body($output);
     }
 
     public function action_imageset()
@@ -294,6 +257,7 @@ class Controller_Api extends Controller
         }
         else
         {
+            $this->response->status(404);
             $this->response->body('Image set not found');
             return;
         }

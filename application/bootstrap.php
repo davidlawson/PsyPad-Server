@@ -1,5 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+//TODO don't allow restricted user names (admin, default) on app as well!
+
 // -- Environment setup --------------------------------------------------------
 
 // Load the core Kohana class
@@ -126,33 +128,30 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
-Route::set('export', 'export/<action>')
-    ->defaults(array(
-    'controller' => 'export'
-));
+/* API routes */
 
-Route::set('load_user', 'api/load_user/<username>')
+Route::set('load_user', 'api/load_participant/<username>')
     ->defaults(array(
         'controller' => 'api',
-        'action' => 'load_user'
+        'action' => 'load_participant'
     ));
 
-Route::set('load_users', 'api/load_users')
+Route::set('load_users', 'api/load_participants')
     ->defaults(array(
         'controller' => 'api',
-        'action' => 'load_users'
+        'action' => 'load_participants'
     ));
 
-Route::set('save_user', 'api/save_user/<username>')
+Route::set('save_user', 'api/save_participant/<username>')
     ->defaults(array(
         'controller' => 'api',
-        'action' => 'save_user'
+        'action' => 'save_participant'
     ));
 
-Route::set('save_users', 'api/save_users')
+Route::set('save_users', 'api/save_participants')
     ->defaults(array(
         'controller' => 'api',
-        'action' => 'save_users'
+        'action' => 'save_participants'
     ));
 
 Route::set('upload', 'api/upload_logs')
@@ -161,16 +160,23 @@ Route::set('upload', 'api/upload_logs')
     'action' => 'upload_logs'
 ));
 
-Route::set('list_users', 'api/list_users')
+Route::set('list_users', 'api/list_participants')
     ->defaults(array(
         'controller' => 'api',
-        'action' => 'list_users'
+        'action' => 'list_participants'
     ));
 
 Route::set('images_download', 'api/imageset/<id>')
     ->defaults(array(
         'controller' => 'api',
         'action' => 'imageset'
+    ));
+
+/* Website routes */
+
+Route::set('export', 'export/<action>')
+    ->defaults(array(
+        'controller' => 'export'
     ));
 
 Route::set('imageset_delete', 'images/<id>/delete')
@@ -185,16 +191,16 @@ Route::set('images', 'images')
         'action' => 'index'
     ));
 
-Route::set('add_user', 'participants/add')
-    ->defaults(array(
-        'controller' => 'participants',
-        'action' => 'add'
-    ));
-
 Route::set('configurations', 'participants/<username>/configurations(/<configid>)')
     ->defaults(array(
         'controller' => 'participants',
         'action' => 'configurations'
+    ));
+
+Route::set('add_participant', 'participants/add')
+    ->defaults(array(
+        'controller' => 'participants',
+        'action' => 'add'
     ));
 
 Route::set('participants', 'participants(/<username>)')
