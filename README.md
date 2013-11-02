@@ -13,3 +13,5 @@ Files to configure:
 - application/bootstrap.php
 - application/config/auth.php
 - application/config/database.php
+
+MySQL database file: movit.sql
