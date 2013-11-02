@@ -15,7 +15,7 @@ class Model_Participant extends ORM
 
     public function get_link()
     {
-        return '/participants/'.$this->username;
+        return URL::site('participants/'.$this->username);
     }
 
     public static function default_participant()

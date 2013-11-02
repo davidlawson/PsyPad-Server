@@ -5,6 +5,6 @@
         <?php foreach($participants as $participant): ?>
             <li<?php if (isset($username) && $participant->username == $username): ?> class="active"<?php endif ?>><a href="<?php echo $participant->get_link() ?>"><?php echo $participant->username ?></a></li>
         <?php endforeach; ?>
-        <li <?php if(Request::$current->action() == 'add'): ?>class="active"<?php endif ?>><a href="/participants/add"><span class="glyphicon glyphicon-plus-sign"></span> Add participant</a></li>
+        <li <?php if(Request::$current->action() == 'add'): ?>class="active"<?php endif ?>><a href="<?php echo URL::site('participants/add') ?>"><span class="glyphicon glyphicon-plus-sign"></span> Add participant</a></li>
     </ul>
 </div><!--/.well -->

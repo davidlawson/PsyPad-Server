@@ -64,22 +64,35 @@ class Controller_Participants extends Controller_Template
         if ($this->request->method() == HTTP_Request::POST)
         {
             $data = $this->request->post();
-            $user = new Model_Participant();
-            $user->username = $data['username'];
-            $user->user = Auth::instance()->get_user();
-            $user->save();
 
-            $default_user = Auth::instance()->get_user()->default_participant;
-            foreach($default_user->configurations->find_all() as $configuration)
+            $existing = Auth::instance()->get_user()->participants->where('username', '=', $data['username']);
+            if ($existing->loaded())
             {
-                $new_conf = new Model_Configuration();
-                $new_conf->copy_from($configuration);
-                $new_conf->participant = $user;
-                $new_conf->save();
+                $this->template->content->error = 'User already exists';
             }
+            else if ($data['username'] == 'admin' || $data['username'] == 'default')
+            {
+                $this->template->content->error = 'Reserved username, please choose something else';
+            }
+            else
+            {
+                $user = new Model_Participant();
+                $user->username = $data['username'];
+                $user->user = Auth::instance()->get_user();
+                $user->save();
 
-            $this->redirect('/participants/'.$user->username);
-            return;
+                $default_user = Auth::instance()->get_user()->default_participant;
+                foreach($default_user->configurations->find_all() as $configuration)
+                {
+                    $new_conf = new Model_Configuration();
+                    $new_conf->copy_from($configuration);
+                    $new_conf->participant = $user;
+                    $new_conf->save();
+                }
+
+                $this->redirect('/participants/'.$user->username);
+                return;
+            }
         }
 
         $this->template->sidebar = View::factory('participants/sidebar');

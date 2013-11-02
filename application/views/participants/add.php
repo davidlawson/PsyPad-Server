@@ -1,5 +1,7 @@
 <h1>Add Participant</h1>
 
+<?php if (isset($error)): ?><p class="alert alert-danger"><?php echo $error ?></p><?php endif ?>
+
 <form action="" method="post" style="margin-top: 20px;">
 
     <div class="form-group">
