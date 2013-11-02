@@ -25,7 +25,7 @@
         <?php endif; ?>
     </ol>
 
-    <a class="btn btn-default" href="/participants/<?php echo $participant->username ?>/configurations/add">Add configuration</a>
+    <a class="btn btn-default" href="<?php echo URL::site('participants/'.$participant->username.'/configurations/add') ?>">Add configuration</a>
 
     <h2 style="margin-top: 20px;">Logs</h2>
 
@@ -209,5 +209,5 @@
 <?php else: ?>
     <h2>Participant Management</h2>
     <p>Please select a participant to the left.</p>
-    <p><a href="/export/logs">Export all logs</a></p>
+    <p><a href="<?php echo URL::site('/export/logs') ?>">Export all logs</a></p>
 <?php endif; ?>

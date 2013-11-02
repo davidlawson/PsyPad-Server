@@ -2,7 +2,7 @@
 
 <ul>
     <?php foreach($imagesets as $imageset): ?>
-        <li><a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', $imageset->path) ?>"><?php echo $imageset->name ?></a> [<a href="/images/<?php echo $imageset->id?>/delete" onclick="return confirm('Are you sure?')">delete</a>]</li>
+        <li><a href="<?php echo str_replace($_SERVER['DOCUMENT_ROOT'], '', $imageset->path) ?>"><?php echo $imageset->name ?></a> [<a href="<?php echo URL::site('images/'.$imageset->id.'/delete') ?>" onclick="return confirm('Are you sure?')">delete</a>]</li>
     <?php endforeach; ?>
 </ul>
 <h2>Upload</h2>

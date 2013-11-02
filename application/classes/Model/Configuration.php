@@ -9,7 +9,7 @@ class Model_Configuration extends ORM
 
     public function edit_link()
     {
-        return '/participants/'.$this->participant->username.'/configurations/'.$this->id;
+        return URL::site('participants/'.$this->participant->username.'/configurations/'.$this->id);
     }
 
     public function serialize_configuration()

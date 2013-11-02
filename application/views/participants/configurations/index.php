@@ -18,4 +18,4 @@
     <?php endif; ?>
 </ol>
 
-<a class="btn btn-default" href="/participants/<?php echo $participant->username ?>/configurations/add">Add configuration</a>
+<a class="btn btn-default" href="<?php echo URL::site('participants/'.$participant->username.'/configurations/add') ?>">Add configuration</a>

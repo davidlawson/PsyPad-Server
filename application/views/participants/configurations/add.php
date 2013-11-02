@@ -191,7 +191,7 @@
                 <?php endforeach ?>
             </select>
 
-            <a href="/images" class="btn btn-default" style="margin-top: 10px" target="_blank">Manage image sequences</a>
+            <a href="<?php echo URL::site('images') ?>" class="btn btn-default" style="margin-top: 10px" target="_blank">Manage image sequences</a>
         </div>
     </div>
 
