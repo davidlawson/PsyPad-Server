@@ -23,26 +23,15 @@ process logfiles from tests that have been conducted on the iPad.
 using the links above.</p>
 
 
-<video width="320" height="240" controls>
-  <source src="/media/videos/exampleSession_MOCS.mov" type="video/quicktime">
-</video>
-<video width="320" height="240" controls>
-  <source src="/media/videos/exampleSession_gdm.mov" type="video/quicktime">
-</video>
-<video width="320" height="240" controls>
-  <source src="/media/videos/exampleSession_survey.mov" type="video/quicktime">
-</video>
-
-
 <hr>
 
 
-<img src="media/images/unimelb_logo.png", alt="University of Melbourne Logo", 
-        width="20%", 
-        class="pull-right">
 <img src="media/images/nectar_logo.png", alt="Nectar Logo", 
     width="20%",
     class="pull-right">
 <img src="media/images/arc_logo.png", alt="ARC Logo", 
     width="20%",
     class="pull-right">
+<img src="media/images/unimelb_logo.png", alt="University of Melbourne Logo", 
+        width="20%", 
+        class="pull-right">

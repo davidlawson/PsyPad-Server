@@ -42,6 +42,7 @@ class Controller_Api extends Controller
             $output[$participant->username] = $participant->configurations->count_all() . " configurations";
         }
 
+        $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($output));
     }
 
