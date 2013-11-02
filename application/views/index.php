@@ -26,12 +26,6 @@ using the links above.</p>
 <hr>
 
 
-<img src="<?php echo HTML::image('media/images/nectar_logo.png') ?>" alt="Nectar Logo"
-    width="20%"
-    class="pull-right">
-<img src="<?php echo HTML::image('media/images/arc_logo.png') ?>" alt="ARC Logo"
-    width="20%"
-    class="pull-right">
-<img src="<?php echo HTML::image('media/images/unimelb_logo.png') ?>" alt="University of Melbourne Logo"
-        width="20%"
-        class="pull-right">
+<?php echo HTML::image('media/images/nectar_logo.png', array('alt' => 'Nectar Logo', 'width' => '20%', 'class' => 'pull-right')) ?>
+<?php echo HTML::image('media/images/arc_logo.png', array('alt' => 'ARC Logo', 'width' => '20%', 'class' => 'pull-right')) ?>
+<?php echo HTML::image('media/images/unimelb_logo.png', array('alt' => 'University of Melbourne Logo', 'width' => '20%', 'class' => 'pull-right')) ?>
