@@ -6,3 +6,10 @@ Adequate permissions will need to be set for:
 - application/cache/
 - uploads/
 - uploads/imagesets/
+
+Files to configure:
+
+- .htaccess
+- application/bootstrap.php
+- application/config/auth.php
+- application/config/database.php
