@@ -65,7 +65,7 @@ class Controller_Participants extends Controller_Template
         {
             $data = $this->request->post();
 
-            $existing = Auth::instance()->get_user()->participants->where('username', '=', $data['username']);
+            $existing = Auth::instance()->get_user()->participants->where('username', '=', $data['username'])->find();
             if ($existing->loaded())
             {
                 $this->template->content->error = 'User already exists';
