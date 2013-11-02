@@ -117,7 +117,7 @@ class Controller_Participants extends Controller_Template
             }
 
             $this->breadcrumb();
-            $this->breadcrumb('User Management', '/participants');
+            $this->breadcrumb('Participants', '/participants');
             $this->breadcrumb($participant->username, '/participants/'.$participant->username);
             $this->breadcrumb('Configurations', '/participants/'.$participant->username.'/configurations');
 
