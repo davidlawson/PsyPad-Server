@@ -9,6 +9,30 @@
         });
     });
 
+    function presentationTime($el, value, callback) {
+        var presentationTimeInfinite = $('#infinite_presentation_time-0:checked').length == 1;
+        if (presentationTimeInfinite) return {
+            value: value, valid: true
+        };
+
+        if (value.match(/^(\d+\.?\d*|\.\d+)$/) != null)
+        {
+            return {
+                value: value,
+                valid: value > 0,
+                message: 'Value must be > 0'
+            };
+        }
+        else
+        {
+            return {
+                value: value,
+                valid: false,
+                message: 'Invalid format'
+            };
+        }
+    }
+
     function multipleValues($el, value, callback) {
         var useStaircaseMethod = $('#use_staircase_method-0:checked').length == 1;
         if (useStaircaseMethod)
@@ -603,8 +627,9 @@
         </div>
 
         <div class="col-lg-8">
-            <input id="presentation_time" name="presentation_time" type="text" class="form-control" pattern="(?:[1-9]\d*|0)?(?:\.\d+)?" placeholder="d.dd (Presentation time if not infinite, in seconds)">
+            <input id="presentation_time" name="presentation_time" type="text" class="form-control" data-validation-callback-callback="presentationTime" placeholder="d.dd (Presentation time if not infinite, in seconds)">
             <small>d.dd (Presentation time if not infinite, in seconds)</small>
+            <p class="help-block"></p>
         </div>
     </div>
 

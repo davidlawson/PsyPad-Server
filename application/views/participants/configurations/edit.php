@@ -677,6 +677,7 @@
             <div class="col-lg-8">
                 <input id="presentation_time" name="presentation_time" type="text" class="form-control" data-validation-callback-callback="presentationTime" placeholder="d.dd (Presentation time if not infinite, in seconds)" value="<?php echo $configuration->presentation_time ?>">
                 <small>d.dd (Presentation time if not infinite, in seconds)</small>
+                <p class="help-block"></p>
             </div>
         </div>
 
