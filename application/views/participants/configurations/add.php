@@ -365,7 +365,7 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="background_colour">Background colour</label>
         <div class="col-lg-10">
-            <input id="background_colour" name="background_colour" type="color" class="form-control">
+            <input id="background_colour" name="background_colour" type="color" value="#000000" class="form-control">
             <small>#XXXXXX (hexadecimal RGB)</small>
         </div>
     </div>
@@ -407,11 +407,11 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="exit_button_colour">Exit button colour</label>
         <div class="col-lg-4">
-            <input id="exit_button_bg" name="exit_button_bg" type="color" class="form-control">
+            <input id="exit_button_bg" name="exit_button_bg" type="color" value="#000000" class="form-control">
             <small>#XXXXXX (background)</small>
         </div>
         <div class="col-lg-4">
-            <input id="exit_button_fg" name="exit_button_fg" type="color" class="form-control">
+            <input id="exit_button_fg" name="exit_button_fg" type="color" value="#000000" class="form-control">
             <small>#XXXXXX (exit cross)</small>
         </div>
     </div>
@@ -465,19 +465,19 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="button_bg">Background colours</label>
         <div class="col-lg-2">
-            <input id="button1_bg" name="button1_bg" type="color" class="form-control">
+            <input id="button1_bg" name="button1_bg" type="color" value="#000000" class="form-control">
             <small>B1 #XXXXXX</small>
         </div>
         <div class="col-lg-2">
-            <input id="button2_bg" name="button2_bg" type="color" class="form-control">
+            <input id="button2_bg" name="button2_bg" type="color" value="#000000" class="form-control">
             <small>B2 #XXXXXX</small>
         </div>
         <div class="col-lg-2">
-            <input id="button3_bg" name="button3_bg" type="color" class="form-control">
+            <input id="button3_bg" name="button3_bg" type="color" value="#000000" class="form-control">
             <small>B3 #XXXXXX</small>
         </div>
         <div class="col-lg-2">
-            <input id="button4_bg" name="button4_bg" type="color" class="form-control">
+            <input id="button4_bg" name="button4_bg" type="color" value="#000000" class="form-control">
             <small>B4 #XXXXXX</small>
         </div>
     </div>
@@ -485,19 +485,19 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="button_text">Text colours</label>
         <div class="col-lg-2">
-            <input id="button1_fg" name="button1_fg" type="color" class="form-control">
+            <input id="button1_fg" name="button1_fg" type="color" value="#000000" class="form-control">
             <small>B1 #XXXXXX</small>
         </div>
         <div class="col-lg-2">
-            <input id="button2_fg" name="button2_fg" type="color" class="form-control">
+            <input id="button2_fg" name="button2_fg" type="color" value="#000000" class="form-control">
             <small>B2 #XXXXXX</small>
         </div>
         <div class="col-lg-2">
-            <input id="button3_fg" name="button3_fg" type="color" class="form-control">
+            <input id="button3_fg" name="button3_fg" type="color" value="#000000" class="form-control">
             <small>B3 #XXXXXX</small>
         </div>
         <div class="col-lg-2">
-            <input id="button4_fg" name="button4_fg" type="color" class="form-control">
+            <input id="button4_fg" name="button4_fg" type="color" value="#000000" class="form-control">
             <small>B4 #XXXXXX</small>
         </div>
     </div>
