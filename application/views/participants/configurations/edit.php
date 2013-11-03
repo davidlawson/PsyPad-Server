@@ -673,20 +673,6 @@
                 <small>Specified seed</small>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="col-lg-2 control-label" for="attempt_facial_recognition">Attempt facial recognition</label>
-            <div class="col-lg-10">
-                <label class="radio-inline" for="attempt_facial_recognition-0">
-                    <input type="radio" name="attempt_facial_recognition" id="attempt_facial_recognition-0" value="1"<?php if ($configuration->attempt_facial_recognition): ?> checked="checked"<?php endif ?>>
-                    Yes
-                </label>
-                <label class="radio-inline" for="attempt_facial_recognition-1">
-                    <input type="radio" name="attempt_facial_recognition" id="attempt_facial_recognition-1" value="0"<?php if (!$configuration->attempt_facial_recognition): ?> checked="checked"<?php endif ?>>
-                    No
-                </label>
-            </div>
-        </div>
     </fieldset>
 
     <button type="submit" name="action" value="save" class="btn btn-default">Save Configuration</button>

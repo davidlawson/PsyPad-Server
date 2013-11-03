@@ -93,7 +93,6 @@ class Model_Configuration extends ORM
         $data["presentation_time"] = $this->presentation_time;
         $data["use_specified_seed"] = $this->use_specified_seed;
         $data["specified_seed"] = $this->specified_seed;
-        $data["attempt_facial_recognition"] = $this->attempt_facial_recognition;
 
         return $data;
     }
