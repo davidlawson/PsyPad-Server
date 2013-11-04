@@ -57,6 +57,6 @@ class Model_ImageSet extends ORM
 
     public function get_url()
     {
-        return "/api/imageset/".$this->id;
+        return "api/imageset/".$this->id;
     }
 }
