@@ -44,6 +44,7 @@ class Controller_Api extends Controller
 
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($output));
+        $this->response->headers('Content-Length', (string) $this->response->content_length());
     }
 
     public function action_load_participant()
@@ -75,6 +76,7 @@ class Controller_Api extends Controller
             }
 
             $this->response->body(json_encode($configurations));
+            $this->response->headers('Content-Length', (string) $this->response->content_length());
         }
         else
         {
@@ -82,42 +84,6 @@ class Controller_Api extends Controller
             $this->response->body(json_encode(array('error' => 'No participant selected')));
             return;
         }
-    }
-
-    public function action_load_participants()
-    {
-        if (!$this->do_login()) return;
-
-        $participants = Auth::instance()->get_user()->participants->find_all();
-
-        $default_participant = Auth::instance()->get_user()->default_participant;
-
-        $this->response->headers('Content-Type', 'application/json');
-
-        $data = array();
-
-        foreach ($participants as $participant)
-        {
-            $configurations = array();
-
-            foreach ($participant->configurations->order_by('position', 'ASC')->find_all() as $configuration)
-            {
-                $configurations[] = $configuration->serialize_configuration();
-            }
-
-            $data[$participant->username] = $configurations;
-        }
-
-        $configurations = array();
-
-        foreach ($default_participant->configurations->order_by('position', 'ASC')->find_all() as $configuration)
-        {
-            $configurations[] = $configuration->serialize_configuration();
-        }
-
-        $data["default"] = $configurations;
-
-        $this->response->body(json_encode($data));
     }
 
     /**
@@ -168,47 +134,6 @@ class Controller_Api extends Controller
             $this->response->body(json_encode(array('error' => 'No participant selected')));
             return;
         }
-    }
-
-    public function action_save_participants()
-    {
-        if (!$this->do_login()) return;
-
-        $json = $this->post_data();
-
-        foreach ($json["users"] as $username => $configurations_data)
-        {
-            $participant = Auth::instance()->get_user()->participants
-                ->where('username', '=', $username)
-                ->find();
-
-            if ($username == 'default') $participant = Auth::instance()->get_user()->default_participant;
-
-            if ( ! $participant->loaded())
-            {
-                $participant = new Model_Participant();
-                $participant->user = Auth::instance()->get_user();
-                $participant->username = $username;
-                $participant->save();
-            }
-
-            foreach ($participant->configurations->find_all() as $configuration)
-            {
-                $configuration->delete();
-            }
-
-            $i = 0;
-            foreach ($configurations_data as $configuration_data)
-            {
-                $configuration = new Model_Configuration();
-                $configuration->load_from($configuration_data);
-                $configuration->participant = $participant;
-                $configuration->position = $i++;
-                $configuration->save();
-            }
-        }
-
-        $this->response->body(json_encode(array('success' => true)));
     }
 
     /**
