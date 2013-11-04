@@ -84,6 +84,7 @@ CREATE TABLE `configurations` (
   `presentation_time` float NOT NULL DEFAULT '2',
   `use_specified_seed` tinyint(1) NOT NULL DEFAULT '0',
   `specified_seed` int(11) NOT NULL DEFAULT '0',
+  `attempt_facial_recognition` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `participant_id` (`participant_id`),
   KEY `imageset_id` (`imageset_id`),
