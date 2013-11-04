@@ -159,6 +159,8 @@ class Controller_Api extends Controller
                 $configuration->position = $i++;
                 $configuration->save();
             }
+
+            $this->response->body('Success');
         }
         else
         {
@@ -243,6 +245,8 @@ class Controller_Api extends Controller
                 $new_log->upload_timestamp = time();
                 $new_log->save();
             }
+
+            $this->response->body('Success');
         }
     }
 
