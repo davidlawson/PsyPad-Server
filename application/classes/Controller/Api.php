@@ -13,14 +13,14 @@ class Controller_Api extends Controller
         if (!$json)
         {
             $this->response->status(403);
-            $this->response->body('Invalid data provided.');
+            $this->response->body(json_encode(array('error' => 'Invalid data provided.')));
             return false;
         }
 
         if ( ! Auth::instance()->login($json["username"], $json["password"]))
         {
             $this->response->status(403);
-            $this->response->body('Bad username/password');
+            $this->response->body(json_encode(array('error' => 'Bad username/password')));
             return false;
         }
 
@@ -61,7 +61,7 @@ class Controller_Api extends Controller
             if ( ! $participant->loaded())
             {
                 $this->response->status(404);
-                $this->response->body('Participant not found');
+                $this->response->body(json_encode(array('error' => 'Participant not found')));
                 return;
             }
 
@@ -79,7 +79,7 @@ class Controller_Api extends Controller
         else
         {
             $this->response->status(404);
-            $this->response->body('No participant selected');
+            $this->response->body(json_encode(array('error' => 'No participant selected')));
             return;
         }
     }
@@ -160,12 +160,12 @@ class Controller_Api extends Controller
                 $configuration->save();
             }
 
-            $this->response->body('Success');
+            $this->response->body(json_encode(array('success' => true)));
         }
         else
         {
             $this->response->status(404);
-            $this->response->body('No participant selected');
+            $this->response->body(json_encode(array('error' => 'No participant selected')));
             return;
         }
     }
@@ -207,6 +207,8 @@ class Controller_Api extends Controller
                 $configuration->save();
             }
         }
+
+        $this->response->body(json_encode(array('success' => true)));
     }
 
     /**
@@ -246,7 +248,7 @@ class Controller_Api extends Controller
                 $new_log->save();
             }
 
-            $this->response->body('Success');
+            $this->response->body(json_encode(array('success' => true)));
         }
     }
 
@@ -263,7 +265,7 @@ class Controller_Api extends Controller
         else
         {
             $this->response->status(404);
-            $this->response->body('Image set not found');
+            $this->response->body(json_encode(array('error' => 'Image set not found')));
             return;
         }
     }
