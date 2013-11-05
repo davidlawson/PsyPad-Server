@@ -128,7 +128,7 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="name">Configuration Name</label>
         <div class="col-lg-10">
-            <input id="name" name="name" type="text" class="form-control">
+            <input id="name" name="name" type="text" required="required" class="form-control">
         </div>
     </div>
 
@@ -136,7 +136,7 @@
         <label class="col-lg-2 control-label" for="enabled">Enabled</label>
         <div class="col-lg-10">
             <label class="radio-inline" for="enabled-0">
-                <input type="radio" name="enabled" id="enabled-0" value="1">
+                <input type="radio" name="enabled" id="enabled-0" value="1" checked="checked">
                 Yes
             </label>
             <label class="radio-inline" for="enabled-1">
@@ -154,7 +154,7 @@
                 Yes
             </label>
             <label class="radio-inline" for="practice_configuration-1">
-                <input type="radio" name="practice_configuration" id="practice_configuration-1" value="0">
+                <input type="radio" name="practice_configuration" id="practice_configuration-1" value="0" checked="checked">
                 No
             </label>
         </div>
@@ -172,31 +172,31 @@
         <label class="col-lg-2 control-label" for="day_of_week">Day of week this configuration applies</label>
         <div class="col-lg-10">
             <label class="checkbox-inline" for="day_of_week_mon">
-                <input type="checkbox" name="day_of_week_mon" id="day_of_week_mon" value="1">
+                <input type="checkbox" name="day_of_week_mon" id="day_of_week_mon" value="1" checked="checked">
                 Mon
             </label>
             <label class="checkbox-inline" for="day_of_week_tue">
-                <input type="checkbox" name="day_of_week_tue" id="day_of_week_tue" value="1">
+                <input type="checkbox" name="day_of_week_tue" id="day_of_week_tue" value="1" checked="checked">
                 Tue
             </label>
             <label class="checkbox-inline" for="day_of_week_wed">
-                <input type="checkbox" name="day_of_week_wed" id="day_of_week_wed" value="1">
+                <input type="checkbox" name="day_of_week_wed" id="day_of_week_wed" value="1" checked="checked">
                 Wed
             </label>
             <label class="checkbox-inline" for="day_of_week_thu">
-                <input type="checkbox" name="day_of_week_thu" id="day_of_week_thu" value="1">
+                <input type="checkbox" name="day_of_week_thu" id="day_of_week_thu" value="1" checked="checked">
                 Thu
             </label>
             <label class="checkbox-inline" for="day_of_week_fri">
-                <input type="checkbox" name="day_of_week_fri" id="day_of_week_fri" value="1">
+                <input type="checkbox" name="day_of_week_fri" id="day_of_week_fri" value="1" checked="checked">
                 Fri
             </label>
             <label class="checkbox-inline" for="day_of_week_sat">
-                <input type="checkbox" name="day_of_week_sat" id="day_of_week_sat" value="1">
+                <input type="checkbox" name="day_of_week_sat" id="day_of_week_sat" value="1" checked="checked">
                 Sat
             </label>
             <label class="checkbox-inline" for="day_of_week_sun">
-                <input type="checkbox" name="day_of_week_sun" id="day_of_week_sun" value="1">
+                <input type="checkbox" name="day_of_week_sun" id="day_of_week_sun" value="1" checked="checked">
                 Sun
             </label>
         </div>
@@ -227,7 +227,7 @@
                 Yes
             </label>
             <label class="radio-inline" for="loop_animated_images-1">
-                <input type="radio" name="loop_animated_images" id="loop_animated_images-1" value="0">
+                <input type="radio" name="loop_animated_images" id="loop_animated_images-1" value="0" checked="checked">
                 No
             </label>
         </div>
@@ -254,7 +254,7 @@
                 Yes
             </label>
             <label class="radio-inline" for="use_staircase_method-1">
-                <input type="radio" name="use_staircase_method" id="use_staircase_method-1" value="0">
+                <input type="radio" name="use_staircase_method" id="use_staircase_method-1" value="0" checked="checked">
                 No
             </label>
         </div>
@@ -445,7 +445,7 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="button_text">Button text</label>
         <div class="col-lg-2">
-            <input id="button1_text" name="button1_text" type="text" class="form-control" placeholder="Button 1">
+            <input id="button1_text" name="button1_text" type="text" required="required" class="form-control" placeholder="Button 1">
             <small>Button 1</small>
         </div>
         <div class="col-lg-2">
@@ -508,19 +508,19 @@
 
         <label class="col-lg-1 control-label small-label">Button 1</label>
         <div class="col-lg-2">
-            <input id="button1_x" name="button1_x" type="number" class="form-control" placeholder="X position">
+            <input id="button1_x" name="button1_x" type="number" required="required" class="form-control" placeholder="X position">
             <small>X position</small>
         </div>
         <div class="col-lg-2">
-            <input id="button1_y" name="button1_y" type="number" class="form-control" placeholder="Y position">
+            <input id="button1_y" name="button1_y" type="number" required="required" class="form-control" placeholder="Y position">
             <small>Y position</small>
         </div>
         <div class="col-lg-2">
-            <input id="button1_w" name="button1_w" type="number" class="form-control" placeholder="Width">
+            <input id="button1_w" name="button1_w" type="number" required="required" class="form-control" placeholder="Width">
             <small>Width</small>
         </div>
         <div class="col-lg-2">
-            <input id="button1_h" name="button1_h" type="number" class="form-control" placeholder="Height">
+            <input id="button1_h" name="button1_h" type="number" required="required" class="form-control" placeholder="Height">
             <small>Height</small>
         </div>
     </div>
@@ -595,7 +595,7 @@
                 Yes
             </label>
             <label class="radio-inline" for="require_next-1">
-                <input type="radio" name="require_next" id="require_next-1" value="0">
+                <input type="radio" name="require_next" id="require_next-1" value="0" checked="checked">
                 No
             </label>
         </div>
@@ -604,11 +604,11 @@
     <div class="form-group">
         <label class="col-lg-2 control-label" for="time_between_each_question">Time between each question (s)</label>
         <div class="col-lg-4">
-            <input id="time_between_each_question" name="time_between_each_question_mean" type="text" pattern="(?:[1-9]\d*|0)?(?:\.\d+)?" class="form-control" placeholder="d.dd (Mean)">
+            <input id="time_between_each_question" name="time_between_each_question_mean" type="text" pattern="(?:[1-9]\d*|0)?(?:\.\d+)?" class="form-control" placeholder="d.dd (Mean)" value="0">
             <small>d.dd (Mean)</small>
         </div>
         <div class="col-lg-4">
-            <input id="time_between_each_question" name="time_between_each_question_plusminus" type="text" pattern="(?:[1-9]\d*|0)?(?:\.\d+)?" class="form-control" placeholder="d.dd (± variation)">
+            <input id="time_between_each_question" name="time_between_each_question_plusminus" type="text" pattern="(?:[1-9]\d*|0)?(?:\.\d+)?" class="form-control" placeholder="d.dd (± variation)" value="0">
             <small>d.dd (± variation)</small>
         </div>
     </div>
@@ -617,7 +617,7 @@
         <label class="col-lg-2 control-label" for="infinite_presentation_time">Infinite presentation time</label>
         <div class="col-lg-2">
             <label class="radio-inline" for="infinite_presentation_time-0">
-                <input type="radio" name="infinite_presentation_time" id="infinite_presentation_time-0" value="1">
+                <input type="radio" name="infinite_presentation_time" id="infinite_presentation_time-0" value="1" checked="checked">
                 Yes
             </label>
             <label class="radio-inline" for="infinite_presentation_time-1">
@@ -641,7 +641,7 @@
                 Yes
             </label>
             <label class="radio-inline" for="use_specified_seed-1">
-                <input type="radio" name="use_specified_seed" id="use_specified_seed-1" value="0">
+                <input type="radio" name="use_specified_seed" id="use_specified_seed-1" value="0" checked="checked">
                 No
             </label>
         </div>
@@ -659,7 +659,7 @@
                 Yes
             </label>
             <label class="radio-inline" for="attempt_facial_recognition-1">
-                <input type="radio" name="attempt_facial_recognition" id="attempt_facial_recognition-1" value="0">
+                <input type="radio" name="attempt_facial_recognition" id="attempt_facial_recognition-1" value="0" checked="checked">
                 No
             </label>
         </div>
