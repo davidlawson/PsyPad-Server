@@ -214,7 +214,7 @@ class Controller_Participants extends Controller_Template
                                 $new_configuration->participant = $to_participant;
                                 $new_configuration->save();
 
-                                $this->template->content->message = "Configuration copied to ".$to_participant->username.", <a href=\"/participants/".$to_participant->username."/configurations/".$new_configuration->id."\">go there now</a>";
+                                $this->template->content->message = "Configuration copied to ".$to_participant->username.", <a href=\"".URL::site("participants/".$to_participant->username."/configurations/".$new_configuration->id)."\">go there now</a>";
                             }
                         }
                         else
@@ -226,7 +226,7 @@ class Controller_Participants extends Controller_Template
                                 $to_configuration->copy_from($configuration);
                                 $to_configuration->save();
 
-                                $this->template->content->message = "Configuration copied to ".$to_configuration->participant->username.", <a href=\"/participants/".$to_configuration->participant->username."/configurations/".$to_configuration->id."\">go there now</a>";
+                                $this->template->content->message = "Configuration copied to ".$to_configuration->participant->username.", <a href=\"".URL::site("participants/".$to_configuration->participant->username."/configurations/".$to_configuration->id)."\">go there now</a>";
                             }
                         }
                     }
