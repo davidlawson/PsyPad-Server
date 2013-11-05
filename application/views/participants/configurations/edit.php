@@ -413,7 +413,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="background_colour">Background colour</label>
             <div class="col-lg-10">
-                <input id="background_colour" name="background_colour" type="color" class="form-control" value="<?php echo $configuration->background_colour ?>">
+                <input id="background_colour" name="background_colour" type="color" required="required" class="form-control" value="<?php echo $configuration->background_colour ?>">
                 <small>#XXXXXX (hexadecimal RGB)</small>
             </div>
         </div>
@@ -455,11 +455,11 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="exit_button_colour">Exit button colour</label>
             <div class="col-lg-4">
-                <input id="exit_button_bg" name="exit_button_bg" type="color" class="form-control" value="<?php echo $configuration->exit_button_bg ?>">
+                <input id="exit_button_bg" name="exit_button_bg" type="color" required="required" class="form-control" value="<?php echo $configuration->exit_button_bg ?>">
                 <small>#XXXXXX (background)</small>
             </div>
             <div class="col-lg-4">
-                <input id="exit_button_fg" name="exit_button_fg" type="color" class="form-control" value="<?php echo $configuration->exit_button_fg ?>">
+                <input id="exit_button_fg" name="exit_button_fg" type="color" required="required" class="form-control" value="<?php echo $configuration->exit_button_fg ?>">
                 <small>#XXXXXX (exit cross)</small>
             </div>
         </div>
@@ -513,19 +513,19 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="button_bg">Background colours</label>
             <div class="col-lg-2">
-                <input id="button1_bg" name="button1_bg" type="color" class="form-control" value="<?php echo $configuration->button1_bg ?>">
+                <input id="button1_bg" name="button1_bg" type="color" required="required" class="form-control" value="<?php echo $configuration->button1_bg ?>">
                 <small>B1 #XXXXXX</small>
             </div>
             <div class="col-lg-2">
-                <input id="button2_bg" name="button2_bg" type="color" class="form-control" value="<?php echo $configuration->button2_bg ?>">
+                <input id="button2_bg" name="button2_bg" type="color" required="required" class="form-control" value="<?php echo $configuration->button2_bg ?>">
                 <small>B2 #XXXXXX</small>
             </div>
             <div class="col-lg-2">
-                <input id="button3_bg" name="button3_bg" type="color" class="form-control" value="<?php echo $configuration->button3_bg ?>">
+                <input id="button3_bg" name="button3_bg" type="color" required="required" class="form-control" value="<?php echo $configuration->button3_bg ?>">
                 <small>B3 #XXXXXX</small>
             </div>
             <div class="col-lg-2">
-                <input id="button4_bg" name="button4_bg" type="color" class="form-control" value="<?php echo $configuration->button4_bg ?>">
+                <input id="button4_bg" name="button4_bg" type="color" required="required" class="form-control" value="<?php echo $configuration->button4_bg ?>">
                 <small>B4 #XXXXXX</small>
             </div>
         </div>
@@ -533,19 +533,19 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="button_text">Text colours</label>
             <div class="col-lg-2">
-                <input id="button1_fg" name="button1_fg" type="color" class="form-control" value="<?php echo $configuration->button1_fg ?>">
+                <input id="button1_fg" name="button1_fg" type="color" required="required" class="form-control" value="<?php echo $configuration->button1_fg ?>">
                 <small>B1 #XXXXXX</small>
             </div>
             <div class="col-lg-2">
-                <input id="button2_fg" name="button2_fg" type="color" class="form-control" value="<?php echo $configuration->button2_fg ?>">
+                <input id="button2_fg" name="button2_fg" type="color" required="required" class="form-control" value="<?php echo $configuration->button2_fg ?>">
                 <small>B2 #XXXXXX</small>
             </div>
             <div class="col-lg-2">
-                <input id="button3_fg" name="button3_fg" type="color" class="form-control" value="<?php echo $configuration->button3_fg ?>">
+                <input id="button3_fg" name="button3_fg" type="color" required="required" class="form-control" value="<?php echo $configuration->button3_fg ?>">
                 <small>B3 #XXXXXX</small>
             </div>
             <div class="col-lg-2">
-                <input id="button4_fg" name="button4_fg" type="color" class="form-control" value="<?php echo $configuration->button4_fg ?>">
+                <input id="button4_fg" name="button4_fg" type="color" required="required" class="form-control" value="<?php echo $configuration->button4_fg ?>">
                 <small>B4 #XXXXXX</small>
             </div>
         </div>
