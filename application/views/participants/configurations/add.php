@@ -424,7 +424,7 @@
         <label class="col-lg-2 control-label" for="num_buttons">Number of buttons</label>
         <div class="col-lg-10">
             <label class="radio-inline" for="num_buttons-0">
-                <input type="radio" name="num_buttons" id="num_buttons-0" value="1">
+                <input type="radio" name="num_buttons" id="num_buttons-0" value="1" checked="checked">
                 1
             </label>
             <label class="radio-inline" for="num_buttons-1">
