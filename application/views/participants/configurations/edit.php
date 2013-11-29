@@ -176,7 +176,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="name">Configuration Name</label>
             <div class="col-lg-10">
-                <input id="name" name="name" type="text" class="form-control" value="<?php echo $configuration->name ?>">
+                <input id="name" name="name" type="text" required="required" class="form-control" value="<?php echo $configuration->name ?>">
             </div>
         </div>
 

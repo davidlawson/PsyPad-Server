@@ -21,4 +21,30 @@ class Model_User extends Model_Auth_User {
         )
     );
 
+    /*public function rules()
+    {
+        return array(
+            'username' => array(
+                array('not_empty'),
+                array('max_length', array(':value', 32)),
+                array(array($this, 'unique'), array('username', ':value')),
+            ),
+            'password' => array(
+                array('not_empty'),
+            ),
+            'email' => array(
+                array('not_empty'),
+                array('email'),
+                array(array($this, 'unique'), array('email', ':value')),
+            ),
+        );
+    }*/
+
+    public static function get_password_validation($values)
+    {
+        return Validation::factory($values)
+            //->rule('password', 'min_length', array(':value', 8))
+            ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
+    }
+
 } // End User Model
