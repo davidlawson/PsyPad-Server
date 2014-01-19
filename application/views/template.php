@@ -94,9 +94,11 @@ function generate_breadcrumbs($breadcrumbs)
 
     <hr>
 
+    <!-- 
     <footer>
         <p>&copy; David Lawson, 2013</p>
     </footer>
+    -->
 
 </div> <!-- /container -->
 </body>

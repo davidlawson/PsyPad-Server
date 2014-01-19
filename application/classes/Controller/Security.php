@@ -31,16 +31,16 @@ class Controller_Security extends Controller_Template
     }
 
     //TODO create a form for this
-    /* public function action_adduser()
+    /*public function action_adduser()
      {
          // Create the user using form values
 
          $user = new Model_User;
          $user->create_user(array(
-             'username' => '',
-             'email' => '',
-             'password' => '',
-             'password_confirm' => '',
+             'username' => 'carline',
+             'email' => 'carline.bernard@gmail.com',
+             'password' => 'dranr3b',
+             'password_confirm' => 'dranr3b',
          ), array(
              'username',
              'password',
