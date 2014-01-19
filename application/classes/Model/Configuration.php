@@ -91,6 +91,8 @@ class Model_Configuration extends ORM
         $data["time_between_each_question_plusminus"] = $this->time_between_each_question_plusminus;
         $data["infinite_presentation_time"] = $this->infinite_presentation_time;
         $data["presentation_time"] = $this->presentation_time;
+        $data["response_window_is_infinite"] = $this->response_window_is_infinite;
+        $data["response_window"] = $this->response_window;
         $data["use_specified_seed"] = $this->use_specified_seed;
         $data["specified_seed"] = $this->specified_seed;
         $data["attempt_facial_recognition"] = $this->attempt_facial_recognition;
