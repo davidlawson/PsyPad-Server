@@ -33,6 +33,30 @@
         }
     }
 
+    function responseWindow($el, value, callback) {
+        var responseWindowIsInfinite = $('#response_window_is_infinite-0:checked').length == 1;
+        if (responseWindowIsInfinite) return {
+            value: value, valid: true
+        };
+
+        if (value.match(/^(\d+\.?\d*|\.\d+)$/) != null)
+        {
+            return {
+                value: value,
+                valid: value > 0,
+                message: 'Value must be > 0'
+            };
+        }
+        else
+        {
+            return {
+                value: value,
+                valid: false,
+                message: 'Invalid format'
+            };
+        }
+    }
+
     function multipleValues($el, value, callback) {
         var useStaircaseMethod = $('#use_staircase_method-0:checked').length == 1;
         if (useStaircaseMethod)
@@ -629,6 +653,26 @@
         <div class="col-lg-8">
             <input id="presentation_time" name="presentation_time" type="text" class="form-control" data-validation-callback-callback="presentationTime" placeholder="d.dd (Presentation time if not infinite, in seconds)">
             <small>d.dd (Presentation time if not infinite, in seconds)</small>
+            <p class="help-block"></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-lg-2 control-label" for="response_window_is_infinite">Infinite response window</label>
+        <div class="col-lg-2">
+            <label class="radio-inline" for="response_window_is_infinite-0">
+                <input type="radio" name="response_window_is_infinite" id="response_window_is_infinite-0" value="1" checked="checked">
+                Yes
+            </label>
+            <label class="radio-inline" for="response_window_is_infinite-1">
+                <input type="radio" name="response_window_is_infinite" id="response_window_is_infinite-1" value="0">
+                No
+            </label>
+        </div>
+
+        <div class="col-lg-8">
+            <input id="response_window" name="response_window" type="text" class="form-control" data-validation-callback-callback="responseWindow" placeholder="d.dd (Response window if not infinite, in seconds)">
+            <small>d.dd (Response window if not infinite, in seconds)</small>
             <p class="help-block"></p>
         </div>
     </div>
