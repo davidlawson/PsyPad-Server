@@ -2,6 +2,8 @@
 
 class Controller_Users extends Controller_Template
 {
+    public $auth_required = TRUE;
+    
     public function action_user()
     {
         $this->template->title = 'User Control Panel';
