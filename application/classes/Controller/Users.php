@@ -14,26 +14,16 @@ class Controller_Users extends Controller_Template
             if (Auth::instance()->check_password($data['old']) === FALSE)
             {
                 $this->template->content->message = "Existing password entered was incorrect";
-                return;
+            }
+            else if ($data['password'] != $data['password_confirm'])
+            {
+                $this->template->content->message = "Passwords do not match";
             }
             else
             {
-                unset($data['old']);
-
-                try
-                {
-                    Auth::instance()->get_user()->update_user($data);
-                    $this->template->content->message = "Password updated successfully";
-                }
-                catch (ORM_Validation_Exception $exception)
-                {
-                    $this->template->content->message = "<ul style=\"margin: 0;\">";
-                    foreach($exception->errors(true)['_external'] as $field => $error)
-                    {
-                        $this->template->content->message .= "<li>".$error."</li>";
-                    }
-                    $this->template->content->message .= "</ul>";
-                }
+                Auth::instance()->get_user()->password = Auth::instance()->hash($data['password']);
+                Auth::instance()->get_user()->save();
+                $this->template->content->message = "Password updated successfully";
             }
         }
     }
