@@ -17,7 +17,7 @@ class Controller_Security extends Controller_Template
             }
             else
             {
-                $this->request->status(403);
+                $this->response->status(403);
                 $this->template->title = 'Login failed';
                 $this->template->content = '<p>Invalid username/password combination, please try again.</p>';
             }
