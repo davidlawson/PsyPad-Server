@@ -27,7 +27,7 @@ class Controller_Users extends Controller_Template
                 }
                 catch (ORM_Validation_Exception $exception)
                 {
-                    $this->template->content->message = "<ul>";
+                    $this->template->content->message = "<ul style=\"margin: 0;\">";
                     foreach($exception->errors(true)['_external'] as $field => $error)
                     {
                         $this->template->content->message .= "<li>".$error."</li>";
