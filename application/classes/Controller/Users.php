@@ -39,16 +39,9 @@ class Controller_Users extends Controller_Template
 
     public function action_users()
     {
-        if ($username = $this->request->param('username'))
-        {
-
-        }
-        else
-        {
-            $this->template->title = 'Users';
-            $this->template->content = View::factory('users/users');
-            $this->template->content->users = ORM::factory('User')->find_all();
-        }
+        $this->template->title = 'Users';
+        $this->template->content = View::factory('users/users');
+        $this->template->content->users = ORM::factory('User')->find_all();
     }
 
 }

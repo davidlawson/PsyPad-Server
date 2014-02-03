@@ -180,7 +180,7 @@ Route::set('user', 'user')
         'action' => 'user'
     ));
 
-Route::set('users', 'users/<username>')
+Route::set('users', 'users')
     ->defaults(array(
         'controller' => 'users',
         'action' => 'users'
