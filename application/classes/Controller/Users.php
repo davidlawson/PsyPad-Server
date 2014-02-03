@@ -3,9 +3,10 @@
 class Controller_Users extends Controller_Template
 {
     public $auth_required = TRUE;
-    
+
     public function action_user()
     {
+        Kohana_Auth_ORM::instance()->force_login('david');
         $this->template->title = 'User Control Panel';
         $this->template->content = View::factory('users/user');
         $this->template->content->user = Auth::instance()->get_user();
@@ -20,6 +21,10 @@ class Controller_Users extends Controller_Template
             else if ($data['password'] != $data['password_confirm'])
             {
                 $this->template->content->message = "Passwords do not match";
+            }
+            else if (strlen($data['password']) < 6)
+            {
+                $this->template->content->message = "Passwords must be greater than 6 characters long";
             }
             else
             {
