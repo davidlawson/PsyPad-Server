@@ -28,9 +28,9 @@ class Controller_Users extends Controller_Template
                 catch (ORM_Validation_Exception $exception)
                 {
                     $this->template->content->message = "<ul>";
-                    foreach($exception->errors() as $error)
+                    foreach($exception->errors(true) as $field => $error)
                     {
-                        $this->template->content->message .= "<li>".print_r($error, true)."</li>";
+                        $this->template->content->message .= "<li>".$error."</li>";
                     }
                     $this->template->content->message .= "</ul>";
                 }
