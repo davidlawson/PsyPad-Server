@@ -1,6 +1,6 @@
 <h1>User Control Panel</h1>
 
-<?php if (isset($message)): ?><p class="alert alert-info"><?php echo $message ?></p><?php endif ?>
+<?php if (isset($message)): ?><div class="alert alert-info"><?php echo $message ?></div><?php endif ?>
 
 <h3>Change Password</h3>
 <form action="" method="post" style="margin-top: 20px;">
