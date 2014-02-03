@@ -19,7 +19,7 @@ class Controller_Users extends Controller_Template
             else
             {
                 unset($data['old']);
-                
+
                 try
                 {
                     Auth::instance()->get_user()->update_user($data);
@@ -27,7 +27,12 @@ class Controller_Users extends Controller_Template
                 }
                 catch (ORM_Validation_Exception $exception)
                 {
-                    $this->template->content->message = $exception->getMessage();
+                    $this->template->content->message = "<ul>";
+                    foreach($exception->errors() as $error)
+                    {
+                        $this->template->content->message .= "<li>".$error."</li>";
+                    }
+                    $this->template->content->message .= "</ul>";
                 }
             }
         }
