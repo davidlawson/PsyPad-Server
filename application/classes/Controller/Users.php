@@ -35,6 +35,8 @@ class Controller_Users extends Controller_Template
         }
     }
 
+    public $secure_actions = array('users' => 'admin');
+
     public function action_users()
     {
         if ($username = $this->request->param('username'))
