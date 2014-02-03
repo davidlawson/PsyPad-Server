@@ -58,7 +58,7 @@ function generate_breadcrumbs($breadcrumbs)
             <?php if (class_exists('Auth')): ?>
                 <?php if (Auth::instance()->logged_in()): ?>
                     <p class="navbar-text pull-right">
-                        Logged in as <?php echo Auth::instance()->get_user()->username ?> &nbsp; &nbsp; <a href="<?php echo URL::site('security/logout') ?>" class="navbar-link">Log out</a>
+                        Logged in as <a href="<?php echo URL::site('user') ?>"><?php echo Auth::instance()->get_user()->username ?></a> &nbsp; &nbsp; <a href="<?php echo URL::site('security/logout') ?>" class="navbar-link">Log out</a>
                     </p>
                 <?php else: ?>
                     <form class="navbar-form pull-right" action="<?php echo URL::site('security/login') ?>" method="post">
