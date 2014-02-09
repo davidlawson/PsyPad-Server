@@ -24,7 +24,11 @@ class Model_ImageSet extends ORM
                 $name = zip_entry_name($zip_entry);
                 $components = explode('/', $name);
                 //$positions["debug"] = print_r($components, TRUE);
-                if (count($components) == 2)
+                if (count($components) == 1)
+                {
+                    $positions[$components[0]] = array($cur_pos, zip_entry_filesize($zip_entry));
+                }
+                else if (count($components) == 2)
                 {
                     $folder = $components[0];
                     $imgname = $components[1];
