@@ -61,8 +61,8 @@
                         $staricase_max_level = $temp->staircase_max_level;
                         $staricase_min_level = $temp->staircase_min_level;
                         $start_time = $exploded[0];
-                        $questions_per_folder = $temp->questions_per_folder; // "1:1" for one question MOCS
-                        // which probably indicates survey
+                        $questions_per_folder = $temp->questions_per_folder; // "1:1" for one question MOCS which probably indicates survey
+                        $num_buttons = $temp->num_buttons;                   // need to handle yes/no differently for 1 button case
                         echo $temp->name . "\n";
                         if ($temp->practice_configuration)
                             echo "Practice: yes\n";
@@ -87,8 +87,8 @@
                 {
                     $reversal_count = array(); // indexed by staircase number
                     $reversal_value = array(); // indexed by staircase number and reversal number
-                    $seen_min = array(); // indexed by staircase number
-                    $not_seen_max = array(); // indexed by staircase number
+                    $seen_min = array();       // indexed by staircase number
+                    $not_seen_max = array();   // indexed by staircase number
                     $min_stim = explode("/", $staricase_min_level); // indexed by staircase number
                     $max_stim = explode("/", $staricase_max_level); // indexed by staircase number
 
@@ -127,6 +127,13 @@
                             }
 
                             if ($exploded[1] == "button_press" && array_key_exists($stair, $max_stim) && // check if max !seen
+                                substr($exploded[2], 0, 1) != $correct_button && $stim == $max_stim[$stair]
+                            )
+                            {
+                                $not_seen_max[$stair]++;
+                            }
+                            if ($exploded[1] == "response_window_timeout" && $num_buttons == "1" && // check if max !seen for 1 button case
+                                array_key_exists($stair, $max_stim) && 
                                 substr($exploded[2], 0, 1) != $correct_button && $stim == $max_stim[$stair]
                             )
                             {
@@ -177,6 +184,10 @@
                                     else
                                         $incorrect_count[$stim]++;
                                 }
+                            }
+                            if ($exploded[1] == "response_window_timeout" && $num_buttons == 1) // incorrect for 1 button case
+                            {
+                                $incorrect_count[$stim]++;
                             }
                         }
                     }
