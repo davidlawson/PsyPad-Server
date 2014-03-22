@@ -72,6 +72,9 @@ class Controller_Template extends Kohana_Controller_Template
 
             $this->template->styles = array_merge( $this->template->styles, $styles );
             $this->template->scripts = array_merge( $this->template->scripts, $scripts );
+
+            $msg = $this->session->get_once('message');
+            if ($msg) $this->template->content->message = $msg;
         }
 
         parent::after();

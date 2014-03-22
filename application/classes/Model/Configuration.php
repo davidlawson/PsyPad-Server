@@ -12,6 +12,11 @@ class Model_Configuration extends ORM
         return URL::site('participants/'.$this->participant->username.'/configurations/'.$this->id);
     }
 
+    public function download_link()
+    {
+        return URL::site('participants/'.$this->participant->username.'/configurations/'.$this->id.'.json');
+    }
+
     public function serialize_configuration()
     {
         $data = array();
@@ -106,6 +111,13 @@ class Model_Configuration extends ORM
         unset($from_data["id"]);
         unset($from_data["participant_id"]);
         $this->values($from_data);
+    }
+
+    public function deserialize($array)
+    {
+        unset($array["id"]);
+        unset($array["participant_id"]);
+        $this->values($array);
     }
 
     public function load_from($data)
