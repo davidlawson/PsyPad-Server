@@ -6,7 +6,7 @@ class Controller_Users extends Controller_Template
 
     public function action_user()
     {
-        Kohana_Auth_ORM::instance()->force_login('david');
+        //Kohana_Auth_ORM::instance()->force_login('david');
         $this->template->title = 'User Control Panel';
         $this->template->content = View::factory('users/user');
         $this->template->content->user = Auth::instance()->get_user();
