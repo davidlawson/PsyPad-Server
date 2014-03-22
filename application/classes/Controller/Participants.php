@@ -360,7 +360,7 @@ class Controller_Participants extends Controller_Template
         try
         {
             $new_configuration = new Model_Configuration();
-            $new_configuration->deserialize(json_decode($fileContent, true));
+            $new_configuration->load_from(json_decode($fileContent, true));
             $new_configuration->participant = $participant;
             $new_configuration->save();
 

@@ -113,15 +113,11 @@ class Model_Configuration extends ORM
         $this->values($from_data);
     }
 
-    public function deserialize($array)
-    {
-        unset($array["id"]);
-        unset($array["participant_id"]);
-        $this->values($array);
-    }
-
     public function load_from($data)
     {
+        unset($data["id"]);
+        unset($data["participant_id"]);
+
         $this->values($data);
 
         if (isset($data["imageset_url"]))
