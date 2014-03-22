@@ -203,6 +203,18 @@ Route::set('images', 'images')
         'action' => 'index'
     ));
 
+Route::set('upload_configuration', 'participants/<username>/upload_configuration')
+    ->defaults(array(
+        'controller' => 'participants',
+        'action' => 'upload_configuration'
+    ));
+
+Route::set('download_configuration', 'participants/<username>/configurations/<configid>.json')
+    ->defaults(array(
+        'controller' => 'participants',
+        'action' => 'download_configuration'
+    ));
+
 Route::set('configurations', 'participants/<username>/configurations(/<configid>)')
     ->defaults(array(
         'controller' => 'participants',

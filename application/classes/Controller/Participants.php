@@ -267,4 +267,108 @@ class Controller_Participants extends Controller_Template
             throw new HTTP_Exception_404();
         }
     }
+
+    # /participants/<username>/configurations/<configid>/download
+    public function action_download_configuration()
+    {
+        $this->auto_render = false;
+
+        if ($username = $this->request->param('username'))
+        {
+            $participant = Auth::instance()->get_user()->participants
+                ->where('username', '=', $username)
+                ->find();
+
+            if ($username == 'default') $participant = Auth::instance()->get_user()->default_participant;
+
+            if ( ! $participant->loaded())
+            {
+                throw new HTTP_Exception_404('Participant does not exist');
+            }
+
+            $configuration = $participant->configurations
+                ->where('id', '=', $this->request->param('configid'))
+                ->find();
+            if ( ! $configuration->loaded())
+            {
+                throw new HTTP_Exception_404('Configuration does not exist');
+            }
+
+            $data = json_encode($configuration->serialize_configuration());
+
+            $this->response->headers("Content-Disposition", "attachment; filename=\"".$this->sanitize_file_name($configuration->name).".json\";" );
+            $this->response->headers('Content-Type', 'application/json');
+            $this->response->headers("Content-Length", strlen($data));
+            $this->response->body($data);
+        }
+        else
+        {
+            throw new HTTP_Exception_404();
+        }
+    }
+
+    # /participants/<username>/upload
+    public function action_upload_configuration()
+    {
+        if ($username = $this->request->param('username'))
+        {
+            $participant = Auth::instance()->get_user()->participants
+                ->where('username', '=', $username)
+                ->find();
+
+            if ($username == 'default') $participant = Auth::instance()->get_user()->default_participant;
+
+            if ( ! $participant->loaded())
+            {
+                throw new HTTP_Exception_404('Participant does not exist');
+            }
+
+            if ($this->request->method() != HTTP_Request::POST || !isset($_FILES['configuration']))
+            {
+                $this->redirect('/participants/'.$participant->username);
+                return;
+            }
+
+            $success = $this->process_configuration_upload($participant, $_FILES['configuration']);
+
+            if ($success) $this->session->set('message', 'Configuration uploaded successfully');
+            else $this->session->set('message', 'Failed to upload configuration');
+
+            $this->redirect('/participants/'.$participant->username);
+        }
+        else
+        {
+            throw new HTTP_Exception_404();
+        }
+    }
+
+    private function sanitize_file_name( $filename )
+    {
+        return preg_replace("([^\w\d\-_~,;:\[\]\(\]]|[\.]{2,})", '', $filename);
+    }
+
+    private function process_configuration_upload($participant, $upload)
+    {
+        if (
+            ! Upload::valid($upload) OR
+            ! Upload::not_empty($upload))
+        {
+            return FALSE;
+        }
+
+        $fileContent = file_get_contents($upload['tmp_name']);
+        try
+        {
+            $new_configuration = new Model_Configuration();
+            $new_configuration->deserialize(json_decode($fileContent, true));
+            $new_configuration->participant = $participant;
+            $new_configuration->save();
+
+            return TRUE;
+        }
+        catch(Exception $ex)
+        {
+            return FALSE;
+        }
+    }
 }

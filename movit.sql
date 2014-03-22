@@ -85,6 +85,8 @@ CREATE TABLE `configurations` (
   `use_specified_seed` tinyint(1) NOT NULL DEFAULT '0',
   `specified_seed` int(11) NOT NULL DEFAULT '0',
   `attempt_facial_recognition` tinyint(1) NOT NULL DEFAULT '0',
+  `response_window` float NOT NULL DEFAULT '2',
+  `response_window_is_infinite` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `participant_id` (`participant_id`),
   KEY `imageset_id` (`imageset_id`),

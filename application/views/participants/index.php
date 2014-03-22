@@ -1,4 +1,7 @@
 <?php if(isset($participant)): ?>
+
+    <?php if (isset($message)): ?><p class="alert alert-success"><?php echo $message ?></p><?php endif ?>
+
     <?php if ($participant->username != 'default'): ?>
         <form action="" method="POST" style="float: right; width: 200px; text-align: right;" onsubmit="return confirm('Are you sure you want to delete this participant?')">
             <button type="submit" name="action" value="delete" class="btn btn-danger">Delete Participant</button>
@@ -8,7 +11,7 @@
     <h2>Configurations</h2>
     <ol>
         <?php foreach($configurations as $configuration): ?>
-            <li><a href="<?php echo $configuration->edit_link() ?>"><?php echo $configuration->name ?></a> [<?php if ($configuration->enabled):?>enabled<?php else: ?>disabled<?php endif; ?>, order=<?php echo $configuration->position ?>]</li>
+            <li><a href="<?php echo $configuration->edit_link() ?>"><?php echo $configuration->name ?></a> [<?php if ($configuration->enabled):?>enabled<?php else: ?>disabled<?php endif; ?>, order=<?php echo $configuration->position ?>, <a href="<?php echo $configuration->download_link() ?>">download</a>]</li>
         <?php endforeach; ?>
         <?php if (count($configurations) == 0): ?>
             <em>No configurations found.</em>
@@ -18,7 +21,7 @@
     <h3>Practice Configurations</h3>
     <ol>
         <?php foreach($practice_configurations as $configuration): ?>
-            <li><a href="<?php echo $configuration->edit_link() ?>"><?php echo $configuration->name ?></a> [<?php if ($configuration->enabled):?>enabled<?php else: ?>disabled<?php endif; ?>, order=<?php echo $configuration->position ?>]</li>
+            <li><a href="<?php echo $configuration->edit_link() ?>"><?php echo $configuration->name ?></a> [<?php if ($configuration->enabled):?>enabled<?php else: ?>disabled<?php endif; ?>, order=<?php echo $configuration->position ?>, <a href="<?php echo $configuration->download_link() ?>">download</a>]</li>
         <?php endforeach; ?>
         <?php if (count($practice_configurations) == 0): ?>
             <em>No practice configurations found.</em>
@@ -26,6 +29,14 @@
     </ol>
 
     <a class="btn btn-default" href="<?php echo URL::site('participants/'.$participant->username.'/configurations/add') ?>">Add configuration</a>
+
+    <h3>Upload Configuration</h3>
+    <form action="<?php echo URL::site('participants/'.$participant->username.'/upload_configuration') ?>" method="POST" enctype="multipart/form-data">
+        <span class="btn btn-default btn-file">
+            <input type="file" name="configuration">
+        </span>
+        <button type="submit" class="btn btn-info">Upload</button>
+    </form>
 
     <h2 style="margin-top: 20px;">Logs</h2>
 
