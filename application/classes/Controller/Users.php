@@ -28,7 +28,7 @@ class Controller_Users extends Controller_Template
             }
             else
             {
-                Auth::instance()->get_user()->password = Auth::instance()->hash($data['password']);
+                Auth::instance()->get_user()->password = $data['password'];
                 Auth::instance()->get_user()->save();
                 $this->template->content->message = "Password updated successfully";
             }
