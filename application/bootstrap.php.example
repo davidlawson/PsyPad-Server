@@ -186,9 +186,10 @@ Route::set('users', 'users')
         'action' => 'users'
     ));
 
-Route::set('export', 'export/<action>')
+Route::set('export', 'export/logs(/<username>)')
     ->defaults(array(
-        'controller' => 'export'
+        'controller' => 'export',
+        'action' => 'logs'
     ));
 
 Route::set('imageset_delete', 'images/<id>/delete')

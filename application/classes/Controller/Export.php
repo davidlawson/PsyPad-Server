@@ -8,12 +8,29 @@ class Controller_Export extends Controller_Template
     public function action_logs()
     {
         $data = "";
+        $users = array();
 
-        $users = Auth::instance()->get_user()->participants->find_all();
+        if ($username = $this->request->param('username'))
+        {
+            $users = array(Auth::instance()->get_user()->participants
+                ->where('username', '=', $username)
+                ->find());
+        }
+        else
+        {
+            $users = Auth::instance()->get_user()->participants->find_all();
+        }
+
+        if (isset($_GET['from_date']))
+        {
+            $from_date = DateTime::createFromFormat('!d/m/Y', $_GET['from_date'])->getTimestamp();
+        }
+
         foreach ($users as $user)
         {
-            $logs = $user->logs
-                ->order_by('log_timestamp', 'asc')
+            $logs = $user->logs;
+            if (isset($from_date)) $logs = $logs->where('log_timestamp', '>', $from_date);
+            $logs = $logs->order_by('log_timestamp', 'asc')
                 ->group_by(array('log_id','log_timestamp'))
                 ->find_all();
             foreach ($logs as $log)

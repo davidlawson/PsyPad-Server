@@ -40,6 +40,13 @@
 
     <h2 style="margin-top: 20px;">Logs</h2>
 
+    <a class="btn btn-default" href="<?php echo URL::site('export/logs/'.$participant->username) ?>">Export Logs</a>
+
+    <form action="<?php echo URL::site('export/logs/'.$participant->username) ?>" method="GET" enctype="multipart/form-data" style="width: 350px; display:inline-block; margin-left: 10px;">
+        <button type="submit" class="btn btn-info">Export logs from:</button>
+        <input class="form-control" type="text" placeholder="DD/MM/YYYY" name="from_date" style="width: 200px; display: inline-block">
+    </form>
+
     <?php if(count($logs) == 0): ?>
         No logs uploaded.
     <?php endif; ?>
@@ -235,5 +242,11 @@
 <?php else: ?>
     <h2>Participant Management</h2>
     <p>Please select a participant to the left.</p>
-    <p><a href="<?php echo URL::site('/export/logs') ?>">Export all logs</a></p>
+
+    <a class="btn btn-default" href="<?php echo URL::site('export/logs') ?>">Export All Logs</a>
+    <form action="<?php echo URL::site('export/logs') ?>" method="GET" enctype="multipart/form-data" style="width: 350px; display:inline-block; margin-left: 10px;">
+        <button type="submit" class="btn btn-info">Export logs from:</button>
+        <input class="form-control" type="text" placeholder="DD/MM/YYYY" name="from_date" style="width: 200px; display: inline-block">
+    </form>
+
 <?php endif; ?>
