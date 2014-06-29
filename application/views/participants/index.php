@@ -45,12 +45,16 @@
     <?php endif; ?>
     <?php foreach($logs as $log): ?>
 
-        <h2><small>Log timestamp: <?php echo date('j/n/Y H:i:s', $log->log_timestamp) ?> (<?php echo $log->log_timestamp ?>)<?php if($log->upload_timestamp): ?>, upload timestamp: <?php echo date('j/n/Y H:i:s', $log->upload_timestamp) ?>
-                <?php endif; ?></small></h2>
+        <h2><small><?php 
+            echo "Log timestamp: "    . date('j/n/Y H:i:s T', $log->log_timestamp); // ."(". $log->log_timestamp .")";
+            echo " upload timestamp: " . date('j/n/Y H:i:s T', $log->upload_timestamp); //  . "(" . $log->upload_timestamp . ")";
+            //echo $log->upload_timestamp - $log->log_timestamp;
+        ?>
+        </small></h2>
         <textarea readonly class="form-control" rows="20" style="display:inline;width:37%;font-family: monospace"><?php
             // Print out each reversal for a staircase
             echo "Summary\n";
-            echo "Test date: " . date('j/n/Y H:i:s', $log->log_timestamp) . "\n";
+            echo "Test date: " . date('j/n/Y H:i:s T', $log->log_timestamp) . "\n";
 
             // First determine if it is a staircase or MOCS
             // and record start and end times
