@@ -14,5 +14,11 @@ class Participant < ActiveRecord::Base
 
   belongs_to :user
   has_many :logs
+  has_many :configurations
+
+  before_save :default_values
+  def default_values
+    self.user_id ||= current_user
+  end
 
 end

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: 762d2b9b376dc41cbc1e5016361b314597913212
+  revision: b3a9f4b3e4051447d011c59649a73f876989a199
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -71,6 +71,7 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    cancancan (1.10.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.5)
@@ -238,6 +239,7 @@ DEPENDENCIES
   activeadmin!
   annotate
   byebug
+  cancancan
   coffee-rails (~> 4.1.0)
   devise
   jbuilder (~> 2.0)

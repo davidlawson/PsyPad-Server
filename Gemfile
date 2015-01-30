@@ -33,6 +33,7 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 gem 'annotate'
 gem 'simple_token_authentication'
+gem 'cancancan'
 
 # https://github.com/kostia/jquery-minicolors-rails
 # http://stackoverflow.com/questions/21703291/how-to-add-colorpicker-in-rails-active-admin

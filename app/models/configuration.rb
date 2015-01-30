@@ -83,6 +83,7 @@
 
 class Configuration < ActiveRecord::Base
 
+  belongs_to :participant
   belongs_to :image_set
 
 end

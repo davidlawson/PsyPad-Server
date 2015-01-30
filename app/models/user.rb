@@ -18,10 +18,23 @@
 #
 
 class User < ActiveRecord::Base
+
+  # https://github.com/gonzalo-bulnes/simple_token_authentication
+  acts_as_token_authenticatable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :registerable and :omniauthable
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :participants
+
+  def admin?
+    role == 'admin'
+  end
+
+  def to_s
+    email
+  end
+
 end
