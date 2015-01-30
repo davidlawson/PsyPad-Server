@@ -34,6 +34,12 @@ gem 'devise'
 gem 'annotate'
 gem 'simple_token_authentication'
 
+# https://github.com/kostia/jquery-minicolors-rails
+# http://stackoverflow.com/questions/21703291/how-to-add-colorpicker-in-rails-active-admin
+gem 'jquery-minicolors-rails'
+
+gem 'paperclip', '~> 4.2'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
