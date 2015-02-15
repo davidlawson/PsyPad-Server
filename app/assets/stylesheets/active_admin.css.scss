@@ -1,3 +1,7 @@
+/*
+*= require jquery.minicolors
+*/
+
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -15,3 +19,105 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+form
+{
+  fieldset > ol > li
+  {
+    &.string > label, &.number > label, &.multiple_numbers > label, &.multiple_strings > label
+    {
+      margin-top: 0.6em;
+    }
+
+    &.radio_boolean, &.radio
+    {
+      fieldset ol
+      {
+        margin-bottom:-0.6em;
+        li
+        {
+          margin:0.1em 1.5em 0.5em 0;
+          float: left;
+          label
+          {
+            float:none;
+            width:100%;
+            input { margin-right:0.4em; }
+          }
+        }
+      }
+    }
+
+    &.check_boxes, &.radio
+    {
+      fieldset ol li label input
+      {
+        margin-right: 0.5em;
+      }
+    }
+
+    &.select
+    {
+      a
+      {
+        margin-left: 1em;
+      }
+
+      select
+      {
+        min-width: 150px;
+      }
+    }
+
+    &.multiple_numbers, &.multiple_strings
+    {
+      input
+      {
+        width: 50px;
+        margin: 0 1em 0 0.5em;
+      }
+    }
+
+    &.two_line label
+    {
+      margin-top: 0;
+    }
+
+    &.two_line.radio_boolean legend > label
+    {
+      margin-top: -0.6em;
+    }
+
+    &.multiple_strings
+    {
+      div.minicolors
+      {
+        margin: 0 1em 0 0.5em;
+      }
+      .minicolors-theme-default .minicolors-input
+      {
+        padding: 5px 10px 3px 30px;
+        margin: 0;
+        width: 50px;
+      }
+    }
+
+    &.multiple_numbers, &.multiple_strings
+    {
+      .field_with_errors
+      {
+        display: inline-block;
+
+        input[type=text], input[type=password], input[type=email], input[type=number], input[type=url], input[type=tel], textarea {
+          border: $border-width solid $error-color;
+        }
+      }
+    }
+  }
+}
+
+.minicolors-theme-default .minicolors-input
+{
+  padding: 5px 10px 3px 30px;
+  width: 200px;
+}

@@ -13,8 +13,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  authentication_token   :string
+#  string                 :string
 #  created_at             :datetime
 #  updated_at             :datetime
+#  role                   :string
 #
 
 class User < ActiveRecord::Base
@@ -28,6 +31,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :participants
+  has_many :image_sets
 
   def admin?
     role == 'admin'

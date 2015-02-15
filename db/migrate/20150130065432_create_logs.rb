@@ -4,8 +4,8 @@ class CreateLogs < ActiveRecord::Migration
 
       t.belongs_to :participant, index: true
 
-      t.datetime :test_date
-      t.text :content
+      t.datetime :test_date, null: false
+      t.text :content, null: false
 
       t.timestamps null: false
     end

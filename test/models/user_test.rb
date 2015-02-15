@@ -13,8 +13,11 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  authentication_token   :string
+#  string                 :string
 #  created_at             :datetime
 #  updated_at             :datetime
+#  role                   :string
 #
 
 require 'test_helper'

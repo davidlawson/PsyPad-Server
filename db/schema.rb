@@ -32,19 +32,13 @@ ActiveRecord::Schema.define(version: 20150130095004) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "configurations", force: :cascade do |t|
-    t.integer  "participant_id"
-    t.string   "name",                                            null: false
+    t.integer  "participant_id",                                                                                                                  null: false
+    t.string   "name",                                                                                                                            null: false
     t.boolean  "enabled",                         default: true
     t.boolean  "is_practice",                     default: false
     t.integer  "position"
-    t.boolean  "monday",                          default: true
-    t.boolean  "tuesday",                         default: true
-    t.boolean  "wednesday",                       default: true
-    t.boolean  "thursday",                        default: true
-    t.boolean  "friday",                          default: true
-    t.boolean  "saturday",                        default: true
-    t.boolean  "sunday",                          default: true
-    t.integer  "image_set_id"
+    t.string   "days_of_week",                    default: "---\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday\n"
+    t.integer  "image_set_id",                                                                                                                    null: false
     t.boolean  "loop_animations",                 default: false
     t.integer  "animation_frame_rate"
     t.boolean  "use_staircase_method",            default: false
@@ -58,56 +52,56 @@ ActiveRecord::Schema.define(version: 20150130095004) do
     t.string   "num_wrong_to_get_easier"
     t.string   "num_correct_to_get_harder"
     t.string   "questions_per_folder"
-    t.string   "background_colour"
-    t.boolean  "show_exit_button"
-    t.integer  "exit_button_x"
-    t.integer  "exit_button_y"
-    t.integer  "exit_button_w"
-    t.integer  "exit_button_h"
-    t.string   "exit_button_bg"
-    t.string   "exit_button_fg"
-    t.integer  "num_buttons"
+    t.string   "background_colour",               default: "#000000"
+    t.boolean  "show_exit_button",                default: true
+    t.integer  "exit_button_x",                   default: 994
+    t.integer  "exit_button_y",                   default: 30
+    t.integer  "exit_button_w",                   default: 30
+    t.integer  "exit_button_h",                   default: 30
+    t.string   "exit_button_bg",                  default: "#6c6c6c"
+    t.string   "exit_button_fg",                  default: "#ffffff"
+    t.integer  "num_buttons",                     default: 1
     t.string   "button1_text"
     t.string   "button2_text"
     t.string   "button3_text"
     t.string   "button4_text"
-    t.float    "button_presentation_delay"
-    t.string   "button1_bg"
-    t.string   "button2_bg"
-    t.string   "button3_bg"
-    t.string   "button4_bg"
-    t.string   "button1_fg"
-    t.string   "button2_fg"
-    t.string   "button3_fg"
-    t.string   "button4_fg"
-    t.integer  "button1_x"
-    t.integer  "button1_y"
-    t.integer  "button1_w"
-    t.integer  "button1_h"
-    t.integer  "button2_x"
-    t.integer  "button2_y"
-    t.integer  "button2_w"
-    t.integer  "button2_h"
-    t.integer  "button3_x"
-    t.integer  "button3_y"
-    t.integer  "button3_w"
-    t.integer  "button3_h"
-    t.integer  "button4_x"
-    t.integer  "button4_y"
-    t.integer  "button4_w"
-    t.integer  "button4_h"
-    t.boolean  "require_next"
-    t.float    "time_between_question_mean"
-    t.float    "time_between_question_plusminus"
-    t.boolean  "infinite_presentation_time"
+    t.float    "button_presentation_delay",       default: 0.0
+    t.string   "button1_bg",                      default: "#6c6c6c"
+    t.string   "button2_bg",                      default: "#6c6c6c"
+    t.string   "button3_bg",                      default: "#6c6c6c"
+    t.string   "button4_bg",                      default: "#6c6c6c"
+    t.string   "button1_fg",                      default: "#ffffff"
+    t.string   "button2_fg",                      default: "#ffffff"
+    t.string   "button3_fg",                      default: "#ffffff"
+    t.string   "button4_fg",                      default: "#ffffff"
+    t.integer  "button1_x",                       default: 237
+    t.integer  "button1_y",                       default: 698
+    t.integer  "button1_w",                       default: 100
+    t.integer  "button1_h",                       default: 40
+    t.integer  "button2_x",                       default: 387
+    t.integer  "button2_y",                       default: 698
+    t.integer  "button2_w",                       default: 100
+    t.integer  "button2_h",                       default: 40
+    t.integer  "button3_x",                       default: 537
+    t.integer  "button3_y",                       default: 698
+    t.integer  "button3_w",                       default: 100
+    t.integer  "button3_h",                       default: 40
+    t.integer  "button4_x",                       default: 687
+    t.integer  "button4_y",                       default: 698
+    t.integer  "button4_w",                       default: 100
+    t.integer  "button4_h",                       default: 40
+    t.boolean  "require_next",                    default: false
+    t.float    "time_between_question_mean",      default: 0.0
+    t.float    "time_between_question_plusminus", default: 0.0
+    t.boolean  "infinite_presentation_time",      default: true
     t.float    "finite_presentation_time"
-    t.boolean  "infinite_response_window"
+    t.boolean  "infinite_response_window",        default: true
     t.float    "finite_response_window"
-    t.boolean  "use_specified_seed"
+    t.boolean  "use_specified_seed",              default: false
     t.string   "specified_seed"
-    t.boolean  "attempt_facial_recognition"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.boolean  "attempt_facial_recognition",      default: false
+    t.datetime "created_at",                                                                                                                      null: false
+    t.datetime "updated_at",                                                                                                                      null: false
   end
 
   add_index "configurations", ["image_set_id"], name: "index_configurations_on_image_set_id", using: :btree
@@ -133,10 +127,13 @@ ActiveRecord::Schema.define(version: 20150130095004) do
   add_index "image_groups", ["image_set_id"], name: "index_image_groups_on_image_set_id", using: :btree
 
   create_table "image_sets", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "image_sets", ["user_id"], name: "index_image_sets_on_user_id", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.integer  "image_group_id"
@@ -150,8 +147,8 @@ ActiveRecord::Schema.define(version: 20150130095004) do
 
   create_table "logs", force: :cascade do |t|
     t.integer  "participant_id"
-    t.datetime "test_date"
-    t.text     "content"
+    t.datetime "test_date",      null: false
+    t.text     "content",        null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -179,9 +176,10 @@ ActiveRecord::Schema.define(version: 20150130095004) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "authentication_token"
+    t.string   "string"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "authentication_token"
     t.string   "role"
   end
 

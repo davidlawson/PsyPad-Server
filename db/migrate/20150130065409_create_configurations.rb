@@ -2,22 +2,24 @@ class CreateConfigurations < ActiveRecord::Migration
   def change
     create_table :configurations do |t|
 
-      t.belongs_to :participant, index: true
+      t.belongs_to :participant, index: true, null: false
 
       t.string :name, null: false
       t.boolean :enabled, default: true
       t.boolean :is_practice, default: false
       t.integer :position
 
-      t.boolean :monday,    default: true
-      t.boolean :tuesday,   default: true
-      t.boolean :wednesday, default: true
-      t.boolean :thursday,  default: true
-      t.boolean :friday,    default: true
-      t.boolean :saturday,  default: true
-      t.boolean :sunday,    default: true
+      t.string :days_of_week, default:
+            "---\n" +
+            "- monday\n" +
+            "- tuesday\n" +
+            "- wednesday\n" +
+            "- thursday\n" +
+            "- friday\n" +
+            "- saturday\n" +
+            "- sunday\n"
 
-      t.belongs_to :image_set, index: true
+      t.belongs_to :image_set, index: true, null: false
       t.boolean :loop_animations, default: false
       t.integer :animation_frame_rate
 
@@ -34,69 +36,69 @@ class CreateConfigurations < ActiveRecord::Migration
 
       t.string :questions_per_folder
 
-      t.string :background_colour
-      t.boolean :show_exit_button
-      t.integer :exit_button_x
-      t.integer :exit_button_y
-      t.integer :exit_button_w
-      t.integer :exit_button_h
-      t.string :exit_button_bg
-      t.string :exit_button_fg
+      t.string :background_colour, default: '#000000'
+      t.boolean :show_exit_button, default: true
+      t.integer :exit_button_x, default: 994
+      t.integer :exit_button_y, default: 30
+      t.integer :exit_button_w, default: 30
+      t.integer :exit_button_h, default: 30
+      t.string :exit_button_bg, default: '#6c6c6c'
+      t.string :exit_button_fg, default: '#ffffff'
 
-      t.integer :num_buttons
+      t.integer :num_buttons, default: 1
 
       t.string :button1_text
       t.string :button2_text
       t.string :button3_text
       t.string :button4_text
 
-      t.float :button_presentation_delay
+      t.float :button_presentation_delay, default: 0
 
-      t.string :button1_bg
-      t.string :button2_bg
-      t.string :button3_bg
-      t.string :button4_bg
+      t.string :button1_bg, default: '#6c6c6c'
+      t.string :button2_bg, default: '#6c6c6c'
+      t.string :button3_bg, default: '#6c6c6c'
+      t.string :button4_bg, default: '#6c6c6c'
 
-      t.string :button1_fg
-      t.string :button2_fg
-      t.string :button3_fg
-      t.string :button4_fg
+      t.string :button1_fg, default: '#ffffff'
+      t.string :button2_fg, default: '#ffffff'
+      t.string :button3_fg, default: '#ffffff'
+      t.string :button4_fg, default: '#ffffff'
 
-      t.integer :button1_x
-      t.integer :button1_y
-      t.integer :button1_w
-      t.integer :button1_h
+      t.integer :button1_x, default: 237
+      t.integer :button1_y, default: 698
+      t.integer :button1_w, default: 100
+      t.integer :button1_h, default: 40
 
-      t.integer :button2_x
-      t.integer :button2_y
-      t.integer :button2_w
-      t.integer :button2_h
+      t.integer :button2_x, default: 387
+      t.integer :button2_y, default: 698
+      t.integer :button2_w, default: 100
+      t.integer :button2_h, default: 40
 
-      t.integer :button3_x
-      t.integer :button3_y
-      t.integer :button3_w
-      t.integer :button3_h
+      t.integer :button3_x, default: 537
+      t.integer :button3_y, default: 698
+      t.integer :button3_w, default: 100
+      t.integer :button3_h, default: 40
 
-      t.integer :button4_x
-      t.integer :button4_y
-      t.integer :button4_w
-      t.integer :button4_h
+      t.integer :button4_x, default: 687
+      t.integer :button4_y, default: 698
+      t.integer :button4_w, default: 100
+      t.integer :button4_h, default: 40
 
-      t.boolean :require_next
+      t.boolean :require_next, default: false
 
-      t.float :time_between_question_mean
-      t.float :time_between_question_plusminus
+      t.float :time_between_question_mean, default: 0
+      t.float :time_between_question_plusminus, default: 0
 
-      t.boolean :infinite_presentation_time
+      t.boolean :infinite_presentation_time, default: true
       t.float :finite_presentation_time
 
-      t.boolean :infinite_response_window
+      t.boolean :infinite_response_window, default: true
       t.float :finite_response_window
 
-      t.boolean :use_specified_seed
+      t.boolean :use_specified_seed, default: false
       t.string :specified_seed
 
-      t.boolean :attempt_facial_recognition
+      t.boolean :attempt_facial_recognition, default: false
 
       t.timestamps null: false
 

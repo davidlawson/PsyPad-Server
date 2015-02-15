@@ -29,7 +29,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 gem 'unicorn'
 
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', git: 'https://github.com/davidlawson/activeadmin'
 gem 'devise'
 gem 'annotate'
 gem 'simple_token_authentication'
@@ -38,6 +38,8 @@ gem 'cancancan'
 # https://github.com/kostia/jquery-minicolors-rails
 # http://stackoverflow.com/questions/21703291/how-to-add-colorpicker-in-rails-active-admin
 gem 'jquery-minicolors-rails'
+
+gem 'enumerize'
 
 gem 'paperclip', '~> 4.2'
 

@@ -8,13 +8,7 @@
 #  enabled                         :boolean          default("true")
 #  is_practice                     :boolean          default("false")
 #  position                        :integer
-#  monday                          :boolean          default("true")
-#  tuesday                         :boolean          default("true")
-#  wednesday                       :boolean          default("true")
-#  thursday                        :boolean          default("true")
-#  friday                          :boolean          default("true")
-#  saturday                        :boolean          default("true")
-#  sunday                          :boolean          default("true")
+#  days_of_week                    :string           default("---\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday\n")
 #  image_set_id                    :integer
 #  loop_animations                 :boolean          default("false")
 #  animation_frame_rate            :integer
@@ -29,28 +23,28 @@
 #  num_wrong_to_get_easier         :string
 #  num_correct_to_get_harder       :string
 #  questions_per_folder            :string
-#  background_colour               :string
-#  show_exit_button                :boolean
-#  exit_button_x                   :integer
-#  exit_button_y                   :integer
-#  exit_button_w                   :integer
-#  exit_button_h                   :integer
-#  exit_button_bg                  :string
-#  exit_button_fg                  :string
-#  num_buttons                     :integer
+#  background_colour               :string           default("#000000")
+#  show_exit_button                :boolean          default("true")
+#  exit_button_x                   :integer          default("994")
+#  exit_button_y                   :integer          default("30")
+#  exit_button_w                   :integer          default("30")
+#  exit_button_h                   :integer          default("30")
+#  exit_button_bg                  :string           default("#6c6c6c")
+#  exit_button_fg                  :string           default("#ffffff")
+#  num_buttons                     :integer          default("1")
 #  button1_text                    :string
 #  button2_text                    :string
 #  button3_text                    :string
 #  button4_text                    :string
-#  button_presentation_delay       :float
-#  button1_bg                      :string
-#  button2_bg                      :string
-#  button3_bg                      :string
-#  button4_bg                      :string
-#  button1_fg                      :string
-#  button2_fg                      :string
-#  button3_fg                      :string
-#  button4_fg                      :string
+#  button_presentation_delay       :float            default("0.0")
+#  button1_bg                      :string           default("#6c6c6c")
+#  button2_bg                      :string           default("#6c6c6c")
+#  button3_bg                      :string           default("#6c6c6c")
+#  button4_bg                      :string           default("#6c6c6c")
+#  button1_fg                      :string           default("#ffffff")
+#  button2_fg                      :string           default("#ffffff")
+#  button3_fg                      :string           default("#ffffff")
+#  button4_fg                      :string           default("#ffffff")
 #  button1_x                       :integer
 #  button1_y                       :integer
 #  button1_w                       :integer
@@ -67,16 +61,16 @@
 #  button4_y                       :integer
 #  button4_w                       :integer
 #  button4_h                       :integer
-#  require_next                    :boolean
-#  time_between_question_mean      :float
-#  time_between_question_plusminus :float
-#  infinite_presentation_time      :boolean
+#  require_next                    :boolean          default("false")
+#  time_between_question_mean      :float            default("0.0")
+#  time_between_question_plusminus :float            default("0.0")
+#  infinite_presentation_time      :boolean          default("true")
 #  finite_presentation_time        :float
-#  infinite_response_window        :boolean
+#  infinite_response_window        :boolean          default("true")
 #  finite_response_window          :float
-#  use_specified_seed              :boolean
+#  use_specified_seed              :boolean          default("false")
 #  specified_seed                  :string
-#  attempt_facial_recognition      :boolean
+#  attempt_facial_recognition      :boolean          default("false")
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #

@@ -28,6 +28,14 @@ ActiveAdmin.register Participant do
     column 'Admin User', :user if current_user.admin?
     column :username
     column :enabled
+    column :configurations do |participant|
+      count = participant.configurations.count
+      link_to '%d Configuration'.pluralize(count) % count, admin_participant_configurations_path(participant)
+    end
+    column :logs do |participant|
+      count = participant.logs.count
+      link_to '%d Log'.pluralize(count) % count, admin_participant_logs_path(participant)
+    end
     column :created_at
     column :updated_at
     actions
@@ -42,7 +50,6 @@ ActiveAdmin.register Participant do
   show do |participant|
     panel 'Participant Details' do
       attributes_table_for participant do
-        row :id
         if current_user.admin?
           row 'Admin User' do
             participant.user
@@ -50,6 +57,45 @@ ActiveAdmin.register Participant do
         end
         row :username
         row :enabled
+      end
+    end
+
+    panel 'Configurations' do
+      if participant.configurations.count > 0
+        table_for participant.configurations do
+          column do |configuration|
+            link_to configuration.name, admin_participant_configuration_path(participant, configuration)
+          end
+        end
+      end
+
+      span do
+        link_to 'Add Configuration', new_admin_participant_configuration_path(participant), class: 'button'
+      end
+
+      span do
+        link_to 'View Configurations', admin_participant_configurations_path(participant), class: 'button'
+      end
+    end
+
+    panel 'Logs' do
+      if participant.logs.count > 0
+        table_for participant.logs do
+          column :id do |log|
+            link_to log.id, admin_participant_log_path(participant, log)
+          end
+          column :test_date
+          column :log_upload_date do |log|
+            log.created_at
+          end
+          column do |log|
+            link_to 'View Log', admin_participant_log_path(participant, log)
+          end
+        end
+      end
+
+      span do
+        link_to 'View Logs', admin_participant_logs_path(participant), class: 'button'
       end
     end
 
@@ -61,10 +107,6 @@ ActiveAdmin.register Participant do
     end
 
     active_admin_comments
-  end
-
-  sidebar 'Configurations', only: [:show, :edit] do
-    link_to 'View Configurations', admin_participant_configurations_path(participant), class: 'button'
   end
 
   controller do

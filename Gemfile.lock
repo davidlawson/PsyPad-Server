@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/activeadmin/activeadmin.git
-  revision: b3a9f4b3e4051447d011c59649a73f876989a199
+  remote: https://github.com/davidlawson/activeadmin
+  revision: 932a71dbc0f7aedd3dba3b84c319c9f11e5c84a1
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -63,8 +63,8 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (4.1.1)
-      sass (~> 3.3)
+    bourbon (4.2.0)
+      sass (~> 3.4)
       thor
     builder (3.2.2)
     byebug (3.5.1)
@@ -93,6 +93,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    enumerize (0.9.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.2.2)
     formtastic (3.1.3)
@@ -100,7 +102,7 @@ GEM
     formtastic_i18n (0.1.1)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
-    has_scope (0.6.0.rc)
+    has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hike (1.2.3)
@@ -123,7 +125,7 @@ GEM
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.2)
-    kaminari (0.16.2)
+    kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
@@ -242,6 +244,7 @@ DEPENDENCIES
   cancancan
   coffee-rails (~> 4.1.0)
   devise
+  enumerize
   jbuilder (~> 2.0)
   jquery-minicolors-rails
   jquery-rails
