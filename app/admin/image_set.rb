@@ -24,7 +24,7 @@ ActiveAdmin.register ImageSet do
 
   index do
     selectable_column
-    column 'ID', :id
+    id_column
     column 'Admin User', :user if current_user.admin?
     column :name
     column :image_groups do |image_set|

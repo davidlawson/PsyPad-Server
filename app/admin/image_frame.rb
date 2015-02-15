@@ -29,7 +29,7 @@ ActiveAdmin.register ImageFrame do
 
   index do
     selectable_column
-    column 'ID', :id
+    id_column
     column 'File Name', :frame_file_name
     column 'File Size' do |image_frame|
       '%.2f KB' % (image_frame.frame_file_size / 1024)
@@ -42,6 +42,9 @@ ActiveAdmin.register ImageFrame do
   show do |image_frame|
     panel 'Image Frame Details' do
       attributes_table_for image_frame do
+        row :image_set
+        row :image_group
+        row :image
         row :frame_file_name, label: 'File Name'
         row 'File Size' do
           '%.2f KB' % (image_frame.frame_file_size / 1024)

@@ -28,7 +28,7 @@ ActiveAdmin.register Image do
 
   index do
     selectable_column
-    column 'ID', :id
+    id_column
     column :name
     column :animated
     column :image_frames do |image|
@@ -43,9 +43,10 @@ ActiveAdmin.register Image do
   show do |image|
     panel 'Image Details' do
       attributes_table_for image do
+        row :image_set
         row :image_group
         row :name
-        row :animated
+        bool_row :animated
       end
     end
 

@@ -25,7 +25,7 @@ ActiveAdmin.register ImageGroup do
 
   index do
     selectable_column
-    column 'ID', :id
+    id_column
     column :name
     column :images do |image_group|
       count = image_group.images.count

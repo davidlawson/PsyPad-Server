@@ -56,16 +56,18 @@ ActiveAdmin.register Participant do
           end
         end
         row :username
-        row :enabled
+        bool_row :enabled
       end
     end
 
     panel 'Configurations' do
       if participant.configurations.count > 0
         table_for participant.configurations do
-          column do |configuration|
+          column :name do |configuration|
             link_to configuration.name, admin_participant_configuration_path(participant, configuration)
           end
+          column :enabled
+          column :is_practice
         end
       end
 
@@ -81,9 +83,7 @@ ActiveAdmin.register Participant do
     panel 'Logs' do
       if participant.logs.count > 0
         table_for participant.logs do
-          column :id do |log|
-            link_to log.id, admin_participant_log_path(participant, log)
-          end
+          id_column
           column :test_date
           column :log_upload_date do |log|
             log.created_at

@@ -21,7 +21,7 @@ ActiveAdmin.register Log do
 
   index do
     selectable_column
-    column 'ID', :id
+    id_column
     column :test_date
     column 'Log upload date', :created_at
     actions

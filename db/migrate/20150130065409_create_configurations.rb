@@ -5,9 +5,9 @@ class CreateConfigurations < ActiveRecord::Migration
       t.belongs_to :participant, index: true, null: false
 
       t.string :name, null: false
-      t.boolean :enabled, default: true
-      t.boolean :is_practice, default: false
-      t.integer :position
+      t.boolean :enabled, default: true, null: false
+      t.boolean :is_practice, default: false, null: false
+      t.integer :position, default: 0, null: false
 
       t.string :days_of_week, default:
             "---\n" +
@@ -17,13 +17,13 @@ class CreateConfigurations < ActiveRecord::Migration
             "- thursday\n" +
             "- friday\n" +
             "- saturday\n" +
-            "- sunday\n"
+            "- sunday\n", null: false
 
       t.belongs_to :image_set, index: true, null: false
-      t.boolean :loop_animations, default: false
+      t.boolean :loop_animations, default: false, null: false
       t.integer :animation_frame_rate
 
-      t.boolean :use_staircase_method, default: false
+      t.boolean :use_staircase_method, default: false, null: false
       t.integer :number_of_staircases
       t.string :start_level
       t.string :number_of_reversals
@@ -36,8 +36,8 @@ class CreateConfigurations < ActiveRecord::Migration
 
       t.string :questions_per_folder
 
-      t.string :background_colour, default: '#000000'
-      t.boolean :show_exit_button, default: true
+      t.string :background_colour, default: '#000000', null: false
+      t.boolean :show_exit_button, default: true, null: false
       t.integer :exit_button_x, default: 994
       t.integer :exit_button_y, default: 30
       t.integer :exit_button_w, default: 30
@@ -52,7 +52,7 @@ class CreateConfigurations < ActiveRecord::Migration
       t.string :button3_text
       t.string :button4_text
 
-      t.float :button_presentation_delay, default: 0
+      t.float :button_presentation_delay, default: 0, null: false
 
       t.string :button1_bg, default: '#6c6c6c'
       t.string :button2_bg, default: '#6c6c6c'
@@ -84,21 +84,21 @@ class CreateConfigurations < ActiveRecord::Migration
       t.integer :button4_w, default: 100
       t.integer :button4_h, default: 40
 
-      t.boolean :require_next, default: false
+      t.boolean :require_next, default: false, null: false
 
-      t.float :time_between_question_mean, default: 0
-      t.float :time_between_question_plusminus, default: 0
+      t.float :time_between_question_mean, default: 0, null: false
+      t.float :time_between_question_plusminus, default: 0, null: false
 
-      t.boolean :infinite_presentation_time, default: true
+      t.boolean :infinite_presentation_time, default: true, null: false
       t.float :finite_presentation_time
 
-      t.boolean :infinite_response_window, default: true
+      t.boolean :infinite_response_window, default: true, null: false
       t.float :finite_response_window
 
-      t.boolean :use_specified_seed, default: false
+      t.boolean :use_specified_seed, default: false, null: false
       t.string :specified_seed
 
-      t.boolean :attempt_facial_recognition, default: false
+      t.boolean :attempt_facial_recognition, default: false, null: false
 
       t.timestamps null: false
 

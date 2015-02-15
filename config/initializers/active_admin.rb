@@ -239,3 +239,20 @@ ActiveAdmin::ResourceController.class_eval do
     @current_ability ||= Ability.new(current_user)
   end
 end
+
+module ActiveAdmin
+  module Views
+    class TableFor
+      def bool_column(*args, &block)
+        attribute = args[0]
+        column(*args, block){ |model| status_tag (block || model[attribute]) ? 'YES' : 'NO' }
+      end
+    end
+    class AttributesTable
+      def bool_row(*args, &block)
+        attribute = args[0]
+        row(*args, block){ |model| status_tag (block || model[attribute]) ? 'YES' : 'NO' }
+      end
+    end
+  end
+end

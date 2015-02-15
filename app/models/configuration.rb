@@ -92,6 +92,9 @@ class Configuration < ActiveRecord::Base
 
   enumerize :num_buttons, in: [1, 2, 3, 4]
 
+  scope :non_practice_configurations, -> { where(is_practice: false) }
+  scope :practice_configurations, -> { where(is_practice: true) }
+
   validates_presence_of :name
   validates_presence_of :image_set
 

@@ -20,4 +20,12 @@ class ImageFrame < ActiveRecord::Base
   validates_attachment :frame, :presence => true,
                        :content_type => { :content_type => 'image/png' }
 
+  def image_group
+    image.image_group
+  end
+
+  def image_set
+    image_group.image_set
+  end
+
 end
