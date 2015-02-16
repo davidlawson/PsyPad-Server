@@ -9,7 +9,7 @@ class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def method
-
+    render inline: current_user.email
   end
 
 end

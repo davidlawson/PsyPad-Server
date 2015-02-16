@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   scope :api do
     devise_for :users, controllers: { sessions: 'sessions' }, as: 'api', only: :sessions
+    get 'method' => 'api#method'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
