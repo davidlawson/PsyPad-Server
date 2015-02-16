@@ -89,4 +89,6 @@ Rails.application.configure do
   #     }
   # }
 
+  config.image_set_directory = '/tmp/'
+
 end

@@ -20,5 +20,6 @@ class ImageSet < ActiveRecord::Base
 
   belongs_to :user
   validates_presence_of :user
+  validates_presence_of :directory
 
 end

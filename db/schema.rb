@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20150216064914) do
   create_table "image_sets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
+    t.string   "directory"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "background_image_path"
