@@ -1,0 +1,32 @@
+if warnings.count > 0
+  panel 'Warnings' do
+
+    pre warnings.join("\n")
+
+  end
+end
+
+panel 'Imported Files' do
+
+  table do
+    thead do
+      tr do
+        ['File name', 'File size'].each &method(:th)
+      end
+    end
+
+    tbody do
+      imported.each do |file|
+        tr do
+          td file[:name]
+          td file[:size].to_s + ' bytes'
+        end
+      end
+    end
+  end
+
+end
+
+# not working?
+# link_to 'View New Image Set', admin_image_set_path(image_set), class: 'button'
+# link_to 'Return to Image Sets', admin_image_sets_path, class: 'button'

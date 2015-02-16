@@ -4,7 +4,9 @@ class CreateImageFrames < ActiveRecord::Migration
 
       t.belongs_to :image
 
-      t.attachment :frame
+      t.string :frame_name
+      t.string :frame_path
+      t.integer :frame_size
 
       t.timestamps null: false
     end

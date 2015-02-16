@@ -13,7 +13,7 @@
 class Image < ActiveRecord::Base
 
   belongs_to :image_group
-  has_many :image_frames
+  has_many :image_frames, dependent: :destroy
 
   def image_set
     image_group.image_set

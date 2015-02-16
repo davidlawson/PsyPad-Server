@@ -3,16 +3,16 @@
 # Table name: configurations
 #
 #  id                              :integer          not null, primary key
-#  participant_id                  :integer
+#  participant_id                  :integer          not null
 #  name                            :string           not null
-#  enabled                         :boolean          default("true")
-#  is_practice                     :boolean          default("false")
-#  position                        :integer
-#  days_of_week                    :string           default("---\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday\n")
-#  image_set_id                    :integer
-#  loop_animations                 :boolean          default("false")
+#  enabled                         :boolean          default("true"), not null
+#  is_practice                     :boolean          default("false"), not null
+#  position                        :integer          default("0"), not null
+#  days_of_week                    :string           default("---\n- monday\n- tuesday\n- wednesday\n- thursday\n- friday\n- saturday\n- sunday\n"), not null
+#  image_set_id                    :integer          not null
+#  loop_animations                 :boolean          default("false"), not null
 #  animation_frame_rate            :integer
-#  use_staircase_method            :boolean          default("false")
+#  use_staircase_method            :boolean          default("false"), not null
 #  number_of_staircases            :integer
 #  start_level                     :string
 #  number_of_reversals             :string
@@ -23,8 +23,8 @@
 #  num_wrong_to_get_easier         :string
 #  num_correct_to_get_harder       :string
 #  questions_per_folder            :string
-#  background_colour               :string           default("#000000")
-#  show_exit_button                :boolean          default("true")
+#  background_colour               :string           default("#000000"), not null
+#  show_exit_button                :boolean          default("true"), not null
 #  exit_button_x                   :integer          default("994")
 #  exit_button_y                   :integer          default("30")
 #  exit_button_w                   :integer          default("30")
@@ -36,7 +36,7 @@
 #  button2_text                    :string
 #  button3_text                    :string
 #  button4_text                    :string
-#  button_presentation_delay       :float            default("0.0")
+#  button_presentation_delay       :float            default("0.0"), not null
 #  button1_bg                      :string           default("#6c6c6c")
 #  button2_bg                      :string           default("#6c6c6c")
 #  button3_bg                      :string           default("#6c6c6c")
@@ -45,32 +45,32 @@
 #  button2_fg                      :string           default("#ffffff")
 #  button3_fg                      :string           default("#ffffff")
 #  button4_fg                      :string           default("#ffffff")
-#  button1_x                       :integer
-#  button1_y                       :integer
-#  button1_w                       :integer
-#  button1_h                       :integer
-#  button2_x                       :integer
-#  button2_y                       :integer
-#  button2_w                       :integer
-#  button2_h                       :integer
-#  button3_x                       :integer
-#  button3_y                       :integer
-#  button3_w                       :integer
-#  button3_h                       :integer
-#  button4_x                       :integer
-#  button4_y                       :integer
-#  button4_w                       :integer
-#  button4_h                       :integer
-#  require_next                    :boolean          default("false")
-#  time_between_question_mean      :float            default("0.0")
-#  time_between_question_plusminus :float            default("0.0")
-#  infinite_presentation_time      :boolean          default("true")
+#  button1_x                       :integer          default("237")
+#  button1_y                       :integer          default("698")
+#  button1_w                       :integer          default("100")
+#  button1_h                       :integer          default("40")
+#  button2_x                       :integer          default("387")
+#  button2_y                       :integer          default("698")
+#  button2_w                       :integer          default("100")
+#  button2_h                       :integer          default("40")
+#  button3_x                       :integer          default("537")
+#  button3_y                       :integer          default("698")
+#  button3_w                       :integer          default("100")
+#  button3_h                       :integer          default("40")
+#  button4_x                       :integer          default("687")
+#  button4_y                       :integer          default("698")
+#  button4_w                       :integer          default("100")
+#  button4_h                       :integer          default("40")
+#  require_next                    :boolean          default("false"), not null
+#  time_between_question_mean      :float            default("0.0"), not null
+#  time_between_question_plusminus :float            default("0.0"), not null
+#  infinite_presentation_time      :boolean          default("true"), not null
 #  finite_presentation_time        :float
-#  infinite_response_window        :boolean          default("true")
+#  infinite_response_window        :boolean          default("true"), not null
 #  finite_response_window          :float
-#  use_specified_seed              :boolean          default("false")
+#  use_specified_seed              :boolean          default("false"), not null
 #  specified_seed                  :string
-#  attempt_facial_recognition      :boolean          default("false")
+#  attempt_facial_recognition      :boolean          default("false"), not null
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
 #

@@ -2,23 +2,27 @@
 #
 # Table name: image_frames
 #
-#  id                 :integer          not null, primary key
-#  image_id           :integer
-#  frame_file_name    :string
-#  frame_content_type :string
-#  frame_file_size    :integer
-#  frame_updated_at   :datetime
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id         :integer          not null, primary key
+#  image_id   :integer
+#  frame_name :string
+#  frame_path :string
+#  frame_size :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 class ImageFrame < ActiveRecord::Base
 
   belongs_to :image
 
-  has_attached_file :frame
-  validates_attachment :frame, :presence => true,
-                       :content_type => { :content_type => 'image/png' }
+  before_save do |record|
+    record.frame_name = File.basename(record.frame_path)
+  end
+
+  def data_uri
+    base64 = Base64.encode64(File.read(frame_path)).gsub(/\s+/, "")
+    "data:image/png;base64,#{Rack::Utils.escape(base64)}"
+  end
 
   def image_group
     image.image_group

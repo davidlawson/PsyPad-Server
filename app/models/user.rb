@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :participants
-  has_many :image_sets
+  has_many :participants, dependent: :destroy
+  has_many :image_sets, dependent: :destroy
 
   def admin?
     role == 'admin'

@@ -23,6 +23,8 @@ ActiveAdmin.register ImageGroup do
   filter :created_at
   filter :updated_at
 
+  config.sort_order = 'name_asc'
+
   index do
     selectable_column
     id_column

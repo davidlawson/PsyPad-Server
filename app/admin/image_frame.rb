@@ -22,17 +22,19 @@ ActiveAdmin.register ImageFrame do
 
   permit_params :frame
 
-  filter :frame_file_name
-  filter :frame_file_size
+  filter :frame_name
+  filter :frame_size
   filter :created_at
   filter :updated_at
+
+  config.sort_order = 'frame_name_asc'
 
   index do
     selectable_column
     id_column
-    column 'File Name', :frame_file_name
+    column 'File Name', :frame_name
     column 'File Size' do |image_frame|
-      '%.2f KB' % (image_frame.frame_file_size / 1024)
+      image_frame.frame_size.to_s + ' bytes'
     end
     column :created_at
     column :updated_at
@@ -45,12 +47,12 @@ ActiveAdmin.register ImageFrame do
         row :image_set
         row :image_group
         row :image
-        row :frame_file_name, label: 'File Name'
+        row :frame_name, label: 'File Name'
         row 'File Size' do
-          '%.2f KB' % (image_frame.frame_file_size / 1024)
+          image_frame.frame_size.to_s + ' bytes'
         end
         row :frame do
-          image_tag image_frame.frame.url
+          image_tag image_frame.data_uri
         end
       end
     end
@@ -69,7 +71,7 @@ ActiveAdmin.register ImageFrame do
 
     f.inputs 'Details' do
 
-      f.input :frame, hint: f.object.frame.present? ? image_tag(f.object.frame.url) : 'No image uploaded'
+      f.input :frame, hint: f.object.frame_path.present? ? image_tag(f.object.data_uri) : 'No image uploaded'
 
     end
 

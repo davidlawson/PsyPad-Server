@@ -35,6 +35,8 @@ gem 'annotate'
 gem 'simple_token_authentication'
 gem 'cancancan'
 
+gem 'ransack'
+
 # https://github.com/kostia/jquery-minicolors-rails
 # http://stackoverflow.com/questions/21703291/how-to-add-colorpicker-in-rails-active-admin
 gem 'jquery-minicolors-rails'
@@ -42,6 +44,8 @@ gem 'jquery-minicolors-rails'
 gem 'enumerize'
 
 gem 'paperclip', '~> 4.2'
+
+gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130095004) do
+ActiveRecord::Schema.define(version: 20150216064914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,12 +109,11 @@ ActiveRecord::Schema.define(version: 20150130095004) do
 
   create_table "image_frames", force: :cascade do |t|
     t.integer  "image_id"
-    t.string   "frame_file_name"
-    t.string   "frame_content_type"
-    t.integer  "frame_file_size"
-    t.datetime "frame_updated_at"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "frame_name"
+    t.string   "frame_path"
+    t.integer  "frame_size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "image_groups", force: :cascade do |t|
@@ -129,8 +128,10 @@ ActiveRecord::Schema.define(version: 20150130095004) do
   create_table "image_sets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "background_image_path"
+    t.integer  "background_image_size"
   end
 
   add_index "image_sets", ["user_id"], name: "index_image_sets_on_user_id", using: :btree

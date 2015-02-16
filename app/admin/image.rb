@@ -26,6 +26,8 @@ ActiveAdmin.register Image do
   filter :created_at
   filter :updated_at
 
+  config.sort_order = 'name_asc'
+
   index do
     selectable_column
     id_column
@@ -53,7 +55,7 @@ ActiveAdmin.register Image do
     panel 'Image Frames' do
       table_for image.image_frames do
         column :name do |frame|
-          link_to frame.frame_file_name, admin_image_set_image_group_image_image_frame_path(image_set, image_group, image, frame)
+          link_to frame.frame_name, admin_image_set_image_group_image_image_frame_path(image_set, image_group, image, frame)
         end
         column :created_at
         column :updated_at
