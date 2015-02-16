@@ -18,7 +18,7 @@ ActiveAdmin.register User do
   filter :created_at
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs 'Admin Details' do
       f.input :email
       f.input :password
       f.input :password_confirmation
@@ -30,8 +30,8 @@ ActiveAdmin.register User do
 
     def update
       if params[:user][:password].blank?
-        params[:user].delete("password")
-        params[:user].delete("password_confirmation")
+        params[:user].delete('password')
+        params[:user].delete('password_confirmation')
       end
       super
     end
