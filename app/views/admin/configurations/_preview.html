@@ -1,0 +1,258 @@
+<style type="text/css">
+  #preview
+  {
+    display: none;
+    width: 1024px;
+    height: 768px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }
+
+  #previewToggle
+  {
+    width: 120px;
+    height: 35px;
+    line-height: 37px;
+    text-align: center;
+    font-size: 12px;
+    position: fixed;
+    bottom: 788px;
+    right: 20px;
+    background-color: #dddddd;
+    cursor: pointer;
+    text-decoration: underline;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+  }
+
+  #exit_button
+  {
+    position: absolute;
+    display: none;
+    vertical-align: middle;
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 14px; /* actually 15 */
+  }
+
+  #button1, #button2, #button3, #button4
+  {
+    display: none;
+    position: absolute;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px; /* actually 19 */
+    font-weight: bold;
+    text-align: center;
+  }
+</style>
+
+<div id="previewToggle">
+  Hide Preview
+</div>
+<div id="preview">
+  <div id="exit_button">X</div>
+  <div id="button1"></div>
+  <div id="button2"></div>
+  <div id="button3"></div>
+  <div id="button4"></div>
+</div>
+
+<script type="text/javascript">
+
+  function updatePreview()
+  {
+    var preview = $("#preview");
+    preview.show();
+
+    // Background colour
+    var bgColor = $("#configuration_background_colour").val();
+    preview.css('background-color', bgColor);
+
+    // Exit button
+    var exitButton = $("#exit_button");
+
+    var showExit = $("#configuration_show_exit_button_true:checked").length > 0;
+    var exitX = parseInt($("#exit_button_x").val());
+    var exitY = parseInt($("#exit_button_y").val());
+    var exitW = parseInt($("#exit_button_w").val());
+    var exitH = parseInt($("#exit_button_h").val());
+    var exitFG = $("#exit_button_fg").val();
+    var exitBG = $("#exit_button_bg").val();
+
+    exitButton.css('display', showExit ? 'block' : 'none');
+    exitButton.css('left', exitX);
+    exitButton.css('top', exitY);
+    exitButton.css('width', exitW);
+    exitButton.css('height', exitH);
+    exitButton.css('line-height', exitH + 'px');
+    exitButton.css('background-color', exitBG);
+    exitButton.css('color', exitFG);
+
+    // Buttons
+    var button1 = $("#button1");
+    var button2 = $("#button2");
+    var button3 = $("#button3");
+    var button4 = $("#button4");
+
+    var numButtons;
+    if ($("#configuration_num_buttons_1:checked").length > 0)
+      numButtons = 1;
+    else if ($("#configuration_num_buttons_2:checked").length > 0)
+      numButtons = 2;
+    else if ($("#configuration_num_buttons_3:checked").length > 0)
+      numButtons = 3;
+    else
+      numButtons = 4;
+
+    button1.css('display', numButtons >= 1 ? 'block' : 'none');
+    button2.css('display', numButtons >= 2 ? 'block' : 'none');
+    button3.css('display', numButtons >= 3 ? 'block' : 'none');
+    button4.css('display', numButtons >= 4 ? 'block' : 'none');
+
+    var button1Text = $("#button1_text").val();
+    var button2Text = $("#button2_text").val();
+    var button3Text = $("#button3_text").val();
+    var button4Text = $("#button4_text").val();
+
+    var button1BG = $("#button1_bg").val();
+    var button2BG = $("#button2_bg").val();
+    var button3BG = $("#button3_bg").val();
+    var button4BG = $("#button4_bg").val();
+
+    var button1FG = $("#button1_fg").val();
+    var button2FG = $("#button2_fg").val();
+    var button3FG = $("#button3_fg").val();
+    var button4FG = $("#button4_fg").val();
+
+    var button1X = parseInt($("#button1_x").val());
+    var button1Y = parseInt($("#button1_y").val());
+    var button1W = parseInt($("#button1_w").val());
+    var button1H = parseInt($("#button1_h").val());
+
+    var button2X = parseInt($("#button2_x").val());
+    var button2Y = parseInt($("#button2_y").val());
+    var button2W = parseInt($("#button2_w").val());
+    var button2H = parseInt($("#button2_h").val());
+
+    var button3X = parseInt($("#button3_x").val());
+    var button3Y = parseInt($("#button3_y").val());
+    var button3W = parseInt($("#button3_w").val());
+    var button3H = parseInt($("#button3_h").val());
+
+    var button4X = parseInt($("#button4_x").val());
+    var button4Y = parseInt($("#button4_y").val());
+    var button4W = parseInt($("#button4_w").val());
+    var button4H = parseInt($("#button4_h").val());
+
+    button1.text(button1Text);
+    button2.text(button2Text);
+    button3.text(button3Text);
+    button4.text(button4Text);
+
+    button1.css('background-color', button1BG);
+    button2.css('background-color', button2BG);
+    button3.css('background-color', button3BG);
+    button4.css('background-color', button4BG);
+
+    button1.css('color', button1FG);
+    button2.css('color', button2FG);
+    button3.css('color', button3FG);
+    button4.css('color', button4FG);
+
+    button1.css('left',   button1X);
+    button1.css('top',    button1Y);
+    button1.css('width',  button1W);
+    button1.css('height', button1H);
+    button1.css('line-height', button1H + 'px');
+
+    button2.css('left',   button2X);
+    button2.css('top',    button2Y);
+    button2.css('width',  button2W);
+    button2.css('height', button2H);
+    button2.css('line-height', button2H + 'px');
+
+    button3.css('left',   button3X);
+    button3.css('top',    button3Y);
+    button3.css('width',  button3W);
+    button3.css('height', button3H);
+    button3.css('line-height', button3H + 'px');
+
+    button4.css('left',   button4X);
+    button4.css('top',    button4Y);
+    button4.css('width',  button4W);
+    button4.css('height', button4H);
+    button4.css('line-height', button4H + 'px');
+  }
+
+  updatePreview();
+
+  $("#previewToggle").click(function ()
+  {
+    var preview = $("#preview");
+    var toggle = $("#previewToggle");
+
+    var visible = (preview.css('display') == 'block');
+
+    if (visible)
+    {
+      preview.hide();
+      $("#previewToggle").css('bottom', 0);
+      $("#previewToggle").text('Show Preview');
+    }
+    else
+    {
+      preview.show();
+      toggle.css('bottom', 788);
+      toggle.text('Hide Preview');
+    }
+  });
+
+  $.each([
+    $("#configuration_background_colour"),
+    $("#configuration_show_exit_button_true"),
+    $("#configuration_show_exit_button_false"),
+    $("#exit_button_x"),
+    $("#exit_button_y"),
+    $("#exit_button_w"),
+    $("#exit_button_h"),
+    $("#exit_button_fg"),
+    $("#exit_button_bg"),
+    $("#configuration_num_buttons_1"),
+    $("#configuration_num_buttons_2"),
+    $("#configuration_num_buttons_3"),
+    $("#configuration_num_buttons_4"),
+    $("#button1_text"),
+    $("#button2_text"),
+    $("#button3_text"),
+    $("#button4_text"),
+    $("#button1_bg"),
+    $("#button2_bg"),
+    $("#button3_bg"),
+    $("#button4_bg"),
+    $("#button1_fg"),
+    $("#button2_fg"),
+    $("#button3_fg"),
+    $("#button4_fg"),
+    $("#button1_x"),
+    $("#button1_y"),
+    $("#button1_w"),
+    $("#button1_h"),
+    $("#button2_x"),
+    $("#button2_y"),
+    $("#button2_w"),
+    $("#button2_h"),
+    $("#button3_x"),
+    $("#button3_y"),
+    $("#button3_w"),
+    $("#button3_h"),
+    $("#button4_x"),
+    $("#button4_y"),
+    $("#button4_w"),
+    $("#button4_h")
+  ], function () { this.change(updatePreview); this.on('input', updatePreview); });
+
+</script>

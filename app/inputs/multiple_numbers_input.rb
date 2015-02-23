@@ -7,7 +7,9 @@ class MultipleNumbersInput
 
     fields = ''.html_safe
     for text, field in options[:fields]
-      fields << text.html_safe << builder.number_field(field, input_html_options)
+      options = input_html_options
+      options[:id] = field
+      fields << text.html_safe << builder.number_field(field, options)
     end
 
     input_wrapping do

@@ -5,6 +5,7 @@
 #  id                    :integer          not null, primary key
 #  user_id               :integer
 #  name                  :string
+#  directory             :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  background_image_path :string

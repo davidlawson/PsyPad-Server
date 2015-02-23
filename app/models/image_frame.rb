@@ -19,6 +19,10 @@ class ImageFrame < ActiveRecord::Base
     record.frame_name = File.basename(record.frame_path)
   end
 
+  before_destroy do |record|
+    FileUtils.rm_rf record.frame_path
+  end
+
   def data_uri
     base64 = Base64.encode64(File.read(frame_path)).gsub(/\s+/, "")
     "data:image/png;base64,#{Rack::Utils.escape(base64)}"

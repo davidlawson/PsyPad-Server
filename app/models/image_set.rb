@@ -5,6 +5,7 @@
 #  id                    :integer          not null, primary key
 #  user_id               :integer
 #  name                  :string
+#  directory             :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  background_image_path :string
@@ -21,5 +22,9 @@ class ImageSet < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :user
   validates_presence_of :directory
+
+  before_destroy do |record|
+    FileUtils.rm_rf record.directory
+  end
 
 end
