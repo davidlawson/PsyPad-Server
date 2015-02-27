@@ -49,6 +49,6 @@ Rails.application.configure do
   #     }
   # }
 
-  config.image_set_directory = '/tmp/'
+  config.image_set_directory = '/Users/david/Developer/Turpin/uploads/'
 
 end

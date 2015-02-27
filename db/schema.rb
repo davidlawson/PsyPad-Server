@@ -32,8 +32,11 @@ ActiveRecord::Schema.define(version: 20150216064914) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "configurations", force: :cascade do |t|
-    t.integer  "participant_id",                                                                                                                  null: false
+    t.integer  "user_id"
+    t.integer  "participant_id"
+    t.string   "type",                            default: "Configuration",                                                                       null: false
     t.string   "name",                                                                                                                            null: false
+    t.string   "title"
     t.boolean  "enabled",                         default: true,                                                                                  null: false
     t.boolean  "is_practice",                     default: false,                                                                                 null: false
     t.integer  "position",                        default: 0,                                                                                     null: false
@@ -106,6 +109,7 @@ ActiveRecord::Schema.define(version: 20150216064914) do
 
   add_index "configurations", ["image_set_id"], name: "index_configurations_on_image_set_id", using: :btree
   add_index "configurations", ["participant_id"], name: "index_configurations_on_participant_id", using: :btree
+  add_index "configurations", ["user_id"], name: "index_configurations_on_user_id", using: :btree
 
   create_table "image_frames", force: :cascade do |t|
     t.integer  "image_id"

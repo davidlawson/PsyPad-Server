@@ -1,19 +1,38 @@
+configuration = resource
+
 panel 'General Settings' do
+
   attributes_table_for configuration do
-    row :participant
+
+    if configuration.instance_of?(GalleryConfiguration)
+      row :user do
+        if current_user.admin?
+          link_to configuration.user, admin_user_path(configuration.user)
+        else
+          configuration.user
+        end
+      end
+    else
+      row :participant do
+        link_to configuration.participant, admin_participant_path(configuration.participant)
+      end
+    end
+
     row :name
+    row :title
     bool_row :enabled
     bool_row('Is Practice Configuration') { configuration.is_practice }
     row('Order') { configuration.position }
+
     row :days_of_week do
       configuration.days_of_week.values.map{|x| x.capitalize}.to_sentence(last_word_connector: ' & ')
     end
   end
 end
 
-panel 'Image Sequence' do
+panel 'Image Set' do
   attributes_table_for configuration do
-    row('Image sequence') { configuration.image_set }
+    row('Image set') { configuration.image_set }
     bool_row :loop_animations
     row :animation_frame_rate
   end

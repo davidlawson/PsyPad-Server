@@ -21,10 +21,30 @@ class ImageSet < ActiveRecord::Base
 
   belongs_to :user
   validates_presence_of :user
+  validates_presence_of :name
   validates_presence_of :directory
+
+  before_validation do |record|
+    if new_record?
+      unless record.directory.present?
+        dir = Rails.application.config.image_set_directory + SecureRandom.urlsafe_base64
+        FileUtils.mkdir_p dir
+        record.directory = dir
+      end
+    end
+  end
 
   before_destroy do |record|
     FileUtils.rm_rf record.directory
+  end
+
+  # this is shown in <select>s
+  def display_name
+    s = name
+    if user == User.first
+      s = '[Shared] ' + s
+    end
+    s
   end
 
 end

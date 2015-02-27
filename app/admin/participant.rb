@@ -1,17 +1,20 @@
 ActiveAdmin.register Participant do
 
-  permit_params :user_id, :username, :enabled
-
   permit_params do
     permitted = [:username, :enabled]
     permitted << :user_id if current_user.admin?
     permitted
   end
 
+  before_create do |participant|
+    participant.user = current_user
+  end
+
   scope_to :current_user, unless: proc{ current_user.admin? }
 
   index do
     selectable_column
+    id_column
     column 'Admin User', :user if current_user.admin?
     column :username
     column :enabled
@@ -70,7 +73,9 @@ ActiveAdmin.register Participant do
     panel 'Logs' do
       if participant.logs.count > 0
         table_for participant.logs do
-          id_column
+          column 'ID' do |log|
+            link_to log.id, resource_path(log)
+          end
           column :test_date
           column :log_upload_date do |log|
             log.created_at
@@ -94,16 +99,6 @@ ActiveAdmin.register Participant do
     end
 
     active_admin_comments
-  end
-
-  controller do
-
-    def new
-      @participant = Participant.new
-      @participant.user = current_user
-      new!
-    end
-
   end
 
   form do |f|

@@ -78,10 +78,15 @@
 #  updated_at                      :datetime         not null
 #
 
-require 'test_helper'
+class GalleryConfiguration < Configuration
 
-class ConfigurationTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # this is shown in <select>s
+  def display_name
+    s = name
+    if user == User.first
+      s = '[Shared] ' + s
+    end
+    s
+  end
+
 end

@@ -3,8 +3,11 @@
 # Table name: configurations
 #
 #  id                              :integer          not null, primary key
-#  participant_id                  :integer          not null
+#  user_id                         :integer
+#  participant_id                  :integer
+#  type                            :string           default("Configuration"), not null
 #  name                            :string           not null
+#  title                           :string
 #  enabled                         :boolean          default("true"), not null
 #  is_practice                     :boolean          default("false"), not null
 #  position                        :integer          default("0"), not null
@@ -78,7 +81,13 @@
 class Configuration < ActiveRecord::Base
   extend Enumerize
 
+  # gallery configurations
+  belongs_to :user
+
+  # participant configurations
   belongs_to :participant
+
+  # has_one (many-to-one)
   belongs_to :image_set
 
   serialize :days_of_week, Array
@@ -94,6 +103,79 @@ class Configuration < ActiveRecord::Base
 
   scope :non_practice_configurations, -> { where(is_practice: false) }
   scope :practice_configurations, -> { where(is_practice: true) }
+
+  def self.permitted_params
+    [
+        :name,
+        :title,
+        :enabled,
+        :is_practice,
+        :position,
+        :days_of_week,
+        :image_set_id,
+        :loop_animations,
+        :animation_frame_rate,
+        :use_staircase_method,
+        :number_of_staircases,
+        :start_level,
+        :number_of_reversals,
+        :hits_to_finish,
+        :minimum_level,
+        :maximum_level,
+        :delta_values,
+        :num_wrong_to_get_easier,
+        :num_correct_to_get_harder,
+        :questions_per_folder,
+        :background_colour,
+        :show_exit_button,
+        :exit_button_x,
+        :exit_button_y,
+        :exit_button_w,
+        :exit_button_h,
+        :exit_button_bg,
+        :exit_button_fg,
+        :num_buttons,
+        :button1_text,
+        :button2_text,
+        :button3_text,
+        :button4_text,
+        :button_presentation_delay,
+        :button1_bg,
+        :button2_bg,
+        :button3_bg,
+        :button4_bg,
+        :button1_fg,
+        :button2_fg,
+        :button3_fg,
+        :button4_fg,
+        :button1_x,
+        :button1_y,
+        :button1_w,
+        :button1_h,
+        :button2_x,
+        :button2_y,
+        :button2_w,
+        :button2_h,
+        :button3_x,
+        :button3_y,
+        :button3_w,
+        :button3_h,
+        :button4_x,
+        :button4_y,
+        :button4_w,
+        :button4_h,
+        :require_next,
+        :time_between_question_mean,
+        :time_between_question_plusminus,
+        :infinite_presentation_time,
+        :finite_presentation_time,
+        :infinite_response_window,
+        :finite_response_window,
+        :use_specified_seed,
+        :specified_seed,
+        :attempt_facial_recognition
+    ]
+  end
 
   validates_presence_of :name
   validates_presence_of :image_set

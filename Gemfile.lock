@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/davidlawson/activeadmin
-  revision: 932a71dbc0f7aedd3dba3b84c319c9f11e5c84a1
+  revision: 159c5cf787eba381cdca0082984df6fb90d0458c
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -63,7 +63,7 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (4.2.0)
+    bourbon (4.2.1)
       sass (~> 3.4)
       thor
     builder (3.2.2)
@@ -82,7 +82,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.9.0)
+    coffee-script-source (1.9.1)
     columnize (0.9.0)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
@@ -96,11 +96,11 @@ GEM
     enumerize (0.9.0)
       activesupport (>= 3.2)
     erubis (2.7.0)
-    execjs (2.2.2)
+    execjs (2.3.0)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.1.1)
-    globalid (0.3.0)
+    globalid (0.3.3)
       activesupport (>= 4.1.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
@@ -188,7 +188,7 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     rubyzip (1.1.7)
-    sass (3.4.10)
+    sass (3.4.12)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)

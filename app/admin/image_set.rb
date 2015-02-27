@@ -3,11 +3,21 @@ require 'tempfile'
 
 ActiveAdmin.register ImageSet do
 
-  permit_params :name, image_groups_attributes: [ :id, :name, :_destroy ]
+  permit_params :name #, image_groups_attributes: [ :id, :name, :_destroy ]
 
-  scope_to :current_user, unless: proc{ current_user.admin? }
+  controller do
+    def scoped_collection
+      collection = end_of_association_chain
+      collection = collection.where(user: [User.first, current_user].uniq) unless current_user.admin?
+      collection
+    end
+  end
 
-  filter :user, if: proc{ current_user.admin? }
+  before_create do |image_set|
+    image_set.user = current_user
+  end
+
+  filter :user, collection: proc { current_user.admin? ? User.all : [User.first, current_user].uniq }
   filter :name
   filter :created_at
   filter :updated_at
@@ -15,7 +25,7 @@ ActiveAdmin.register ImageSet do
   index do
     selectable_column
     id_column
-    column 'Admin User', :user if current_user.admin?
+    column :user
     column :name
     column :image_groups do |image_set|
       count = image_set.image_groups.count
@@ -31,11 +41,7 @@ ActiveAdmin.register ImageSet do
   show do |image_set|
     panel 'Image Set Details' do
       attributes_table_for image_set do
-        if current_user.admin?
-          row 'Admin User' do
-            image_set.user
-          end
-        end
+        row :user
         row :name
         row :created_at
         row :updated_at
@@ -101,8 +107,8 @@ ActiveAdmin.register ImageSet do
 
   end
 
-  action_item only: :show do
-    link_to 'Download Image Set', download_admin_image_set_path(image_set)
+  action_item :download, only: :show do
+    link_to 'Download Image Set', action: :download
   end
 
   action_item :import, only: :index do

@@ -5,19 +5,21 @@
     width: 1024px;
     height: 768px;
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
   }
 
   #previewToggle
   {
+    z-index: 1000;
     width: 120px;
     height: 35px;
     line-height: 37px;
     text-align: center;
     font-size: 12px;
     position: fixed;
-    bottom: 788px;
+    bottom: 768px;
     right: 20px;
     background-color: #dddddd;
     cursor: pointer;
@@ -69,13 +71,13 @@
     preview.show();
 
     // Background colour
-    var bgColor = $("#configuration_background_colour").val();
+    var bgColor = $("[id$=background_colour]").val();
     preview.css('background-color', bgColor);
 
     // Exit button
     var exitButton = $("#exit_button");
 
-    var showExit = $("#configuration_show_exit_button_true:checked").length > 0;
+    var showExit = $("[id$=show_exit_button_true]:checked").length > 0;
     var exitX = parseInt($("#exit_button_x").val());
     var exitY = parseInt($("#exit_button_y").val());
     var exitW = parseInt($("#exit_button_w").val());
@@ -99,11 +101,11 @@
     var button4 = $("#button4");
 
     var numButtons;
-    if ($("#configuration_num_buttons_1:checked").length > 0)
+    if ($("[id$=num_buttons_1]:checked").length > 0)
       numButtons = 1;
-    else if ($("#configuration_num_buttons_2:checked").length > 0)
+    else if ($("[id$=num_buttons_2]:checked").length > 0)
       numButtons = 2;
-    else if ($("#configuration_num_buttons_3:checked").length > 0)
+    else if ($("[id$=num_buttons_3]:checked").length > 0)
       numButtons = 3;
     else
       numButtons = 4;
@@ -206,25 +208,25 @@
     else
     {
       preview.show();
-      toggle.css('bottom', 788);
+      toggle.css('bottom', 768);
       toggle.text('Hide Preview');
     }
   });
 
   $.each([
-    $("#configuration_background_colour"),
-    $("#configuration_show_exit_button_true"),
-    $("#configuration_show_exit_button_false"),
+    $("[id$=background_colour]"),
+    $("[id$=show_exit_button_true]"),
+    $("[id$=show_exit_button_false]"),
     $("#exit_button_x"),
     $("#exit_button_y"),
     $("#exit_button_w"),
     $("#exit_button_h"),
     $("#exit_button_fg"),
     $("#exit_button_bg"),
-    $("#configuration_num_buttons_1"),
-    $("#configuration_num_buttons_2"),
-    $("#configuration_num_buttons_3"),
-    $("#configuration_num_buttons_4"),
+    $("[id$=num_buttons_1]"),
+    $("[id$=num_buttons_2]"),
+    $("[id$=num_buttons_3]"),
+    $("[id$=num_buttons_4]"),
     $("#button1_text"),
     $("#button2_text"),
     $("#button3_text"),

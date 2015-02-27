@@ -21,4 +21,8 @@ class Participant < ActiveRecord::Base
     self.user_id ||= current_user
   end
 
+  def to_s
+    username
+  end
+
 end

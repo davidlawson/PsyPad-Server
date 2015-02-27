@@ -1,9 +1,12 @@
-active_admin_form_for [:admin, :participant, resource], url: admin_participant_configuration_path(resource.participant, resource) do |f|
+path = resource.instance_of?(GalleryConfiguration) ? [:admin, resource] : [:admin, :participant, resource]
+options = resource.id ? { url: resource_path } : {}
+active_admin_form_for path, options do |f|
 
   f.semantic_errors *f.object.errors.keys
 
   f.inputs 'General Settings' do
-    f.input :name, hint: 'This will appear to participants before starting the test'
+    f.input :name
+    f.input :title, hint: 'This will appear to participants before starting the test'
     f.input :enabled, as: :radio_boolean
     f.input :is_practice, as: :radio_boolean, label: 'Is practice configuration'
     f.input :position, label: 'Order', hint: 'Assign each test a different order number to determine sequence of tests (does not need to be consecutive)'
@@ -11,12 +14,13 @@ active_admin_form_for [:admin, :participant, resource], url: admin_participant_c
     f.input :days_of_week, as: :check_boxes, label: 'Days of week this<br>configuration is enabled'.html_safe
   end
 
-  f.inputs 'Image Sequences' do
+  f.inputs 'Image Sets' do
     f.input :image_set,
             as: :select_link,
             link_url: admin_image_sets_path,
-            link_text: 'Manage image sequences',
-            label: 'Image sequence'
+            link_text: 'Manage image sets',
+            label: 'Image set',
+            collection: ImageSet.where(user: [User.first, current_user].uniq)
     f.input :loop_animations, as: :radio_boolean
     f.input :animation_frame_rate, hint: 'Milliseconds per frame = <b>frame rate</b> / 60'.html_safe
   end
@@ -131,6 +135,6 @@ active_admin_form_for [:admin, :participant, resource], url: admin_participant_c
 
   f.actions
 
-  f.render 'preview'
+  f.render 'admin/configurations/preview'
 
 end

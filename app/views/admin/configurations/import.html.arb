@@ -1,0 +1,22 @@
+active_admin_form_for 'import' do |f|
+
+  panel 'Import From Gallery' do
+    para 'Select the gallery configurations you want to import:'
+
+    table_for configurations do
+      column '', class: 'col-selectable' do |resource|
+        check_box_tag 'configurations[]', resource.id, false, id: 'configuration_%d' % resource.id
+      end
+      column :name
+      column :title
+      column :image_set
+      column :created_at
+      column :updated_at
+    end
+  end
+
+  actions do
+    action :submit, label: 'Import From Gallery'
+    cancel_link
+  end
+end

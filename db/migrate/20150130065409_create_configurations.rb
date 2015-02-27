@@ -2,9 +2,13 @@ class CreateConfigurations < ActiveRecord::Migration
   def change
     create_table :configurations do |t|
 
-      t.belongs_to :participant, index: true, null: false
+      t.belongs_to :user, index: true
+      t.belongs_to :participant, index: true
+
+      t.string :type, default: Configuration, null: false
 
       t.string :name, null: false
+      t.string :title
       t.boolean :enabled, default: true, null: false
       t.boolean :is_practice, default: false, null: false
       t.integer :position, default: 0, null: false

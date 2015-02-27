@@ -1,78 +1,13 @@
 ActiveAdmin.register Configuration do
 
-  permit_params :name,
-                :enabled,
-                :is_practice,
-                :position,
-                :days_of_week,
-                :image_set_id,
-                :loop_animations,
-                :animation_frame_rate,
-                :use_staircase_method,
-                :number_of_staircases,
-                :start_level,
-                :number_of_reversals,
-                :hits_to_finish,
-                :minimum_level,
-                :maximum_level,
-                :delta_values,
-                :num_wrong_to_get_easier,
-                :num_correct_to_get_harder,
-                :questions_per_folder,
-                :background_colour,
-                :show_exit_button,
-                :exit_button_x,
-                :exit_button_y,
-                :exit_button_w,
-                :exit_button_h,
-                :exit_button_bg,
-                :exit_button_fg,
-                :num_buttons,
-                :button1_text,
-                :button2_text,
-                :button3_text,
-                :button4_text,
-                :button_presentation_delay,
-                :button1_bg,
-                :button2_bg,
-                :button3_bg,
-                :button4_bg,
-                :button1_fg,
-                :button2_fg,
-                :button3_fg,
-                :button4_fg,
-                :button1_x,
-                :button1_y,
-                :button1_w,
-                :button1_h,
-                :button2_x,
-                :button2_y,
-                :button2_w,
-                :button2_h,
-                :button3_x,
-                :button3_y,
-                :button3_w,
-                :button3_h,
-                :button4_x,
-                :button4_y,
-                :button4_w,
-                :button4_h,
-                :require_next,
-                :time_between_question_mean,
-                :time_between_question_plusminus,
-                :infinite_presentation_time,
-                :finite_presentation_time,
-                :infinite_response_window,
-                :finite_response_window,
-                :use_specified_seed,
-                :specified_seed,
-                :attempt_facial_recognition
+  permit_params *Configuration.permitted_params
 
   belongs_to :participant
   navigation_menu :default
   menu false
 
   filter :name
+  filter :title
   filter :enabled
   filter :is_practice
   filter :image_set
@@ -85,7 +20,9 @@ ActiveAdmin.register Configuration do
 
   index do
     selectable_column
+    id_column
     column :name
+    column :title
     column :enabled
     column :is_practice
     column :image_set
@@ -93,17 +30,81 @@ ActiveAdmin.register Configuration do
     column :created_at
     column :updated_at
     actions defaults: true do |configuration|
-      link_to 'Clone', clone_admin_participant_configuration_path(participant, configuration)
+      (link_to 'Duplicate', duplicate_admin_participant_configuration_path(participant, configuration), class: 'member_link') <<
+      (link_to 'Save to Gallery', archive_admin_participant_configuration_path(participant, configuration), class: 'member_link')
     end
   end
 
-  member_action :clone, method: :get do
+  member_action :duplicate, method: :get do
     @configuration = resource.dup
     render :new, layout: false
   end
 
-  action_item :only => :show do
-    link_to 'Clone Configuration', clone_admin_participant_configuration_path(participant, configuration)
+  action_item only: :show do
+    link_to 'Duplicate Configuration', duplicate_admin_participant_configuration_path(participant, configuration)
+  end
+
+  member_action :archive, method: [:get, :post] do
+
+    unless request.post?
+      @page_title = "Save #{resource.name} to Gallery"
+      configurations = GalleryConfiguration.where(user: current_user).all
+      render 'archive', locals: { configurations: configurations }
+      return
+    end
+
+    to_archive = resource
+    dest_configuration = params[:configuration]
+
+    unless dest_configuration == 'new'
+      to_remove = Configuration.find(dest_configuration)
+      to_remove.delete
+    end
+
+    new_config = to_archive.dup
+    new_config.type = GalleryConfiguration
+    new_config.participant = nil
+    new_config.user = current_user
+    new_config.save
+
+    redirect_to admin_participant_configurations_path(resource.participant), notice: 'Successfully saved configuration to gallery'
+
+  end
+
+  action_item only: :show do
+    link_to 'Save to Gallery', action: :archive
+  end
+
+  collection_action :import, method: [:get, :post] do
+
+    unless request.post?
+      @page_title = 'Import From Gallery'
+      configurations = current_user.admin? ? GalleryConfiguration.all : GalleryConfiguration.where(user: [User.first, current_user].uniq)
+      render 'import', locals: { configurations: configurations }
+      return
+    end
+
+    unless params[:configurations]
+      redirect_to import_admin_participant_configurations_path(parent), notice: 'No configurations selected to import'
+      return
+    end
+
+    configurations = params[:configurations].map { |id| GalleryConfiguration.find(id) }
+
+    configurations.each do |configuration|
+      new = configuration.dup
+      new.user = nil
+      new.participant = parent
+      new.type = Configuration
+      new.save
+    end
+
+    redirect_to admin_participant_configurations_path(parent), notice: '%d configurations imported' % configurations.count
+
+  end
+
+  action_item :import, only: :index do
+    link_to 'Import From Gallery', action: :import
   end
 
   # /app/views/admin/configurations/_form.html.arb

@@ -22,4 +22,4 @@
 en:
   hello: "Hello world"
   active_admin:
-    clone_model: "Clone %{model}"
+    duplicate_model: "Duplicate %{model}"

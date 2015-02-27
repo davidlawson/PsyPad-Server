@@ -3,8 +3,11 @@
 # Table name: configurations
 #
 #  id                              :integer          not null, primary key
-#  participant_id                  :integer          not null
+#  user_id                         :integer
+#  participant_id                  :integer
+#  type                            :string           default("Configuration"), not null
 #  name                            :string           not null
+#  title                           :string
 #  enabled                         :boolean          default("true"), not null
 #  is_practice                     :boolean          default("false"), not null
 #  position                        :integer          default("0"), not null
