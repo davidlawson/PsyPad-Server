@@ -78,17 +78,8 @@
 #  updated_at                      :datetime         not null
 #
 
-class GalleryConfiguration < Configuration
+class ParticipantConfiguration < Configuration
 
-  belongs_to :user, required: true
-
-  # this is shown in <select>s
-  def display_name
-    s = name
-    if user == User.first
-      s = '[Shared] ' + s
-    end
-    s
-  end
+  belongs_to :participant, required: true
 
 end

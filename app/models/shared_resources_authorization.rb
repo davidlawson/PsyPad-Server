@@ -14,7 +14,9 @@ class SharedResourcesAuthorization < ActiveAdmin::AuthorizationAdapter
 
     # the first user holds shared image sets and gallery configurations
     shared_user = User.first
-#todo do we need Configuration s here as well???
+
+    # todo do we need ParticipantConfigurations here as well?
+
     # hidden
     if action == :read
 

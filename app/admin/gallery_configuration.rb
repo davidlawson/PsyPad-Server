@@ -45,7 +45,7 @@ ActiveAdmin.register GalleryConfiguration do
     render 'admin/configurations/show'
   end
 
-  # TODO export to participants
+  # TODO export to participants ()with overwrite)
 
   member_action :duplicate, method: :get do
     @gallery_configuration = resource.dup

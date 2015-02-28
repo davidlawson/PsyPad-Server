@@ -1,7 +1,8 @@
 active_admin_form_for 'import' do |f|
 
-  panel 'Import From Gallery' do
-    para 'Select the gallery configurations you want to import:'
+  f.inputs 'Import From Gallery' do
+
+    f.li 'Select the gallery configurations you want to import to <i>'.html_safe + participant + '</i>:'.html_safe
 
     table_for configurations do
       column '', class: 'col-selectable' do |resource|
@@ -13,6 +14,15 @@ active_admin_form_for 'import' do |f|
       column :created_at
       column :updated_at
     end
+
+    f.li do
+      f.text_node 'Would you like to overwrite existing configurations with the same name?'
+      f.br
+      f.em 'Warning: this action is irreversible!'
+    end
+
+    f.input :overwrite, as: :radio, label: 'Overwrite existing configurations', collection: [['Yes', '1'], ['No', '0', { checked: true }]]
+
   end
 
   actions do

@@ -12,7 +12,7 @@
 
 class Participant < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to :user, required: true
   has_many :logs, dependent: :destroy
   has_many :configurations, dependent: :destroy
 

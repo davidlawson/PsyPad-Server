@@ -18,6 +18,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  role                   :string
+#  affiliation            :string
 #
 
 class User < ActiveRecord::Base

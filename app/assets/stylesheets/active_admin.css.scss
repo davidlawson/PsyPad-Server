@@ -122,18 +122,17 @@ form
   width: 200px;
 }
 
-td.col-selectable-radio
-{
-  width: 15px;
-}
-
-table.new-configuration-table
-{
-  margin-bottom: 0;
-  margin-top: 10px;
-}
-
-table.overwrite-configuration-table
-{
-  margin-top: 0;
+form.formtastic table {
+  padding: 0 15px 0 15px;
+  th {
+    padding-top: 10px;
+    background: none;
+    color: $primary-color;
+    @include no-shadow;
+    @include text-shadow;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ccc;
+  }
+  tr.odd td { background: darken($table-stripe-color, 3%); }
+  tr.even td { background: $table-stripe-color; }
 }

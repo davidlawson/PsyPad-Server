@@ -12,7 +12,7 @@
 
 class Image < ActiveRecord::Base
 
-  belongs_to :image_group
+  belongs_to :image_group, required: true
   has_many :image_frames, dependent: :destroy
 
   def image_set

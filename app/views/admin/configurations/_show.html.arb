@@ -4,6 +4,8 @@ panel 'General Settings' do
 
   attributes_table_for configuration do
 
+    row :id
+
     if configuration.instance_of?(GalleryConfiguration)
       row :user do
         if current_user.admin?

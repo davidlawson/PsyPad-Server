@@ -13,7 +13,7 @@
 
 class ImageFrame < ActiveRecord::Base
 
-  belongs_to :image
+  belongs_to :image, required: true
 
   before_save do |record|
     record.frame_name = File.basename(record.frame_path)

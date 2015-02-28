@@ -12,9 +12,8 @@
 
 class Log < ActiveRecord::Base
 
-  belongs_to :participant
+  belongs_to :participant, required: true
 
-  validates_presence_of :participant_id
   validates_presence_of :test_date
   validates_presence_of :content
 

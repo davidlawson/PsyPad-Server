@@ -5,7 +5,7 @@ class CreateConfigurations < ActiveRecord::Migration
       t.belongs_to :user, index: true
       t.belongs_to :participant, index: true
 
-      t.string :type, default: Configuration, null: false
+      t.string :type, null: false
 
       t.string :name, null: false
       t.string :title

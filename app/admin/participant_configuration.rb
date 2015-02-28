@@ -1,4 +1,4 @@
-ActiveAdmin.register Configuration do
+ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
 
   permit_params *Configuration.permitted_params
 
@@ -46,24 +46,23 @@ ActiveAdmin.register Configuration do
 
   member_action :archive, method: [:get, :post] do
 
+    to_overwrite = GalleryConfiguration.where(user: current_user, name: resource.name)
+
     unless request.post?
       @page_title = "Save #{resource.name} to Gallery"
-      configurations = GalleryConfiguration.where(user: current_user).all
-      render 'archive', locals: { configurations: configurations }
+      render 'archive', locals: { to_overwrite: to_overwrite }
       return
     end
 
     to_archive = resource
-    dest_configuration = params[:configuration]
 
-    unless dest_configuration == 'new'
-      to_remove = Configuration.find(dest_configuration)
-      to_remove.delete
+    if params[:archive][:overwrite] == '1'
+      to_overwrite.delete_all
     end
 
     new_config = to_archive.dup
-    new_config.type = GalleryConfiguration
     new_config.participant = nil
+    new_config = new_config.becomes! GalleryConfiguration
     new_config.user = current_user
     new_config.save
 
@@ -77,29 +76,40 @@ ActiveAdmin.register Configuration do
 
   collection_action :import, method: [:get, :post] do
 
+    participant = parent
+
     unless request.post?
       @page_title = 'Import From Gallery'
       configurations = current_user.admin? ? GalleryConfiguration.all : GalleryConfiguration.where(user: [User.first, current_user].uniq)
-      render 'import', locals: { configurations: configurations }
+      render 'import', locals: { configurations: configurations, participant: participant }
       return
     end
 
     unless params[:configurations]
-      redirect_to import_admin_participant_configurations_path(parent), notice: 'No configurations selected to import'
+      redirect_to import_admin_participant_configurations_path(participant), notice: 'No configurations selected to import'
       return
     end
 
     configurations = params[:configurations].map { |id| GalleryConfiguration.find(id) }
 
+    overwrite = params[:import][:overwrite] == '1'
+
+    if overwrite
+      configurations.each do |configuration|
+        participant.configurations.where(name: configuration.name).delete_all
+      end
+    end
+
     configurations.each do |configuration|
       new = configuration.dup
       new.user = nil
-      new.participant = parent
-      new.type = Configuration
+      new = new.becomes! ParticipantConfiguration
+      new.participant = participant
       new.save
     end
 
-    redirect_to admin_participant_configurations_path(parent), notice: '%d configurations imported' % configurations.count
+    count = configurations.count
+    redirect_to admin_participant_configurations_path(participant), notice: '%d configuration'.pluralize(count) % count + ' imported'
 
   end
 

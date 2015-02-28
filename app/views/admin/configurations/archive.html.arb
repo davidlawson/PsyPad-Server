@@ -1,26 +1,37 @@
 active_admin_form_for 'archive' do |f|
 
-  panel 'Save to Gallery' do
-    para 'Select a gallery configuration to overwrite, or save as a new configuration:'
+  f.inputs 'Save to Gallery' do
 
-    table class: 'new-configuration-table' do
-      tr do
-        td class: 'col-selectable-radio' do
-          radio_button_tag :configuration, 'new'
+    f.li 'You are about to save <i>'.html_safe + resource.name + '</i> to the Configuration Gallery.'.html_safe
+
+    if to_overwrite.count > 0
+
+      f.li do
+        f.text_node 'Would you like to overwrite existing gallery configurations with the same name?'
+        f.br
+        f.em 'Warning: this action is irreversible!'
+      end
+
+      f.input :overwrite, as: :radio, label: 'Overwrite existing configurations', collection: [['Yes', '1'], ['No', '0', { checked: true }]]
+
+      f.li 'If so, this will overwrite the following configurations:'
+
+      table_for to_overwrite do
+        column :id do |resource|
+          link_to resource.id, admin_gallery_configuration_path(resource)
         end
-        td 'Save as new configuration'
+        column :name
+        column :title
+        column :image_set
+        column :created_at
+        column :updated_at
       end
-    end
 
-    table_for configurations, class: 'overwrite-configuration-table' do
-      column '', class: 'col-selectable-radio' do |resource|
-        radio_button_tag :configuration, resource[:id]
-      end
-      column :name
-      column :title
-      column :image_set
-      column :created_at
-      column :updated_at
+    else
+
+      f.li 'If there is a gallery configuration with the same name as the one you are saving, you will
+            be presented with the option to overwrite it.'
+
     end
   end
 

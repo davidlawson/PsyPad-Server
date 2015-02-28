@@ -11,7 +11,7 @@
 
 class ImageGroup < ActiveRecord::Base
 
-  belongs_to :image_set
+  belongs_to :image_set, required: true
   has_many :images, dependent: :destroy
 
 end

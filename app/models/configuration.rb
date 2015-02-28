@@ -81,14 +81,8 @@
 class Configuration < ActiveRecord::Base
   extend Enumerize
 
-  # gallery configurations
-  belongs_to :user
-
-  # participant configurations
-  belongs_to :participant
-
   # has_one (many-to-one)
-  belongs_to :image_set
+  belongs_to :image_set, required: true
 
   serialize :days_of_week, Array
   enumerize :days_of_week, in: [:monday,
@@ -178,7 +172,6 @@ class Configuration < ActiveRecord::Base
   end
 
   validates_presence_of :name
-  validates_presence_of :image_set
 
   validates :number_of_staircases, if: :use_staircase_method, presence: true, numericality: { greater_than: 0 }
   validates :start_level, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
@@ -191,6 +184,9 @@ class Configuration < ActiveRecord::Base
   validates :num_correct_to_get_harder, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
 
   validates :questions_per_folder, unless: :use_staircase_method, presence: true, colon_comma_separated: true
+
+  # TODO validate questions_per_folder based on selected image set
+  # TODO also sanity validate staircase values
 
   validates :background_colour, hex_color: true, presence: true
 
