@@ -15,8 +15,7 @@ You'll also need to install Postgres ([Postgres.app](http://postgresapp.com/) is
 You can then clone this repository (`git clone https://github.com/davidlawson/PsyPad-Server`) and run the following commands to get started:
 
 ```
-git clone https://github.com/davidlawson/PsyPad-Server
-cd PsyPad-Server
+cd <PsyPad-Server location>
 bundle install
 rake db:create
 rake db:migrate
