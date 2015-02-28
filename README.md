@@ -8,7 +8,7 @@ Open source Ruby on Rails 4 application used to manage participants, configurati
 
 This application was developed using Ruby 2.1.2. 
 
-On OS X you can [install RVM](https://rvm.io/rvm/install) and then run `rvm install 2.1.2; rvm use --default 2.1.2`.
+To obtain Ruby 2.1.2 on OS X you can [install RVM](https://rvm.io/rvm/install) and then run `rvm install 2.1.2; rvm use --default 2.1.2` on the command line.
 
 You'll also need to install Postgres ([Postgres.app](http://postgresapp.com/) is good for OS X users).
 
