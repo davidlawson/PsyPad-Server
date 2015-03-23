@@ -1,4 +1,4 @@
-class SessionsController < Devise::SessionsController
+class API::SessionsController < Devise::SessionsController
 
   respond_to :json
 
@@ -9,19 +9,19 @@ class SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    self.resource = warden.authenticate!(scope: resource_name, store: false)
-    if user_signed_in?
-      current_user.authentication_token = nil
-      current_user.save
+    self.resource = warden.authenticate!(scope: :user, store: false)
+    if api_user_signed_in?
+      current_api_user.authentication_token = nil
+      current_api_user.save
     end
   end
 
   # DELETE /resource/sign_out
   # resets the authentication token, effectively logging out the user
   def destroy
-    if user_signed_in?
-      current_user.authentication_token = nil
-      current_user.save
+    if api_user_signed_in?
+      current_api_user.authentication_token = nil
+      current_api_user.save
     else
       render 'failure', status: 401
     end

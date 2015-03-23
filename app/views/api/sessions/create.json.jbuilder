@@ -1,0 +1,2 @@
+json.success true
+json.auth_token current_user.authentication_token

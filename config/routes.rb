@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   namespace :api do
-    devise_for :users, controllers: { sessions: 'sessions' }, as: 'api', only: :sessions
+    devise_for :users, controllers: { sessions: 'api/sessions', registrations: 'api/registrations' },
+               only: [:sessions, :registrations]
     get 'imageset/:id' => 'images#export'
   end
 
