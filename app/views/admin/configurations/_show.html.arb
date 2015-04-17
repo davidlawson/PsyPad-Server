@@ -22,6 +22,8 @@ panel 'General Settings' do
 
     row :name
     row :title
+    row :description
+
     bool_row :enabled
     bool_row('Is Practice Configuration') { configuration.is_practice }
     row('Order') { configuration.position }

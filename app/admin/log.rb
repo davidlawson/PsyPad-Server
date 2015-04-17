@@ -18,8 +18,14 @@ ActiveAdmin.register Log do
   filter :created_at, label: 'Log upload date'
   filter :content
 
-  before_build do |log|
-    log.test_date = Time.current
+  controller do
+
+    def new
+      @log = Log.new
+      @log.test_date = Time.current
+      new!
+    end
+
   end
 
   form do |f|

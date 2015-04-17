@@ -1,4 +1,4 @@
-ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
+ActiveAdmin.register ParticipantConfiguration do
 
   permit_params *Configuration.permitted_params
 
@@ -30,8 +30,8 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
     column :created_at
     column :updated_at
     actions defaults: true do |configuration|
-      (link_to 'Duplicate', duplicate_admin_participant_configuration_path(participant, configuration), class: 'member_link') <<
-      (link_to 'Save to Gallery', archive_admin_participant_configuration_path(participant, configuration), class: 'member_link')
+      (link_to 'Duplicate', duplicate_admin_participant_participant_configuration_path(participant, configuration), class: 'member_link') <<
+      (link_to 'Save to Gallery', archive_admin_participant_participant_configuration_path(participant, configuration), class: 'member_link')
     end
   end
 
@@ -41,7 +41,7 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
   end
 
   action_item only: :show do
-    link_to 'Duplicate Configuration', duplicate_admin_participant_configuration_path(participant, configuration)
+    link_to 'Duplicate Configuration', duplicate_admin_participant_participant_configuration_path(participant, participant_configuration)
   end
 
   member_action :archive, method: [:get, :post] do
@@ -50,13 +50,13 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
 
     unless request.post?
       @page_title = "Save #{resource.name} to Gallery"
-      render 'archive', locals: { to_overwrite: to_overwrite }
+      render 'admin/configurations/archive', locals: { to_overwrite: to_overwrite }
       return
     end
 
     to_archive = resource
 
-    if params[:archive][:overwrite] == '1'
+    if params[:archive] && params[:archive][:overwrite] == '1'
       to_overwrite.delete_all
     end
 
@@ -66,7 +66,7 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
     new_config.user = current_user
     new_config.save
 
-    redirect_to admin_participant_configurations_path(resource.participant), notice: 'Successfully saved configuration to gallery'
+    redirect_to admin_participant_participant_configurations_path(resource.participant), notice: 'Successfully saved configuration to gallery'
 
   end
 
@@ -81,7 +81,7 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
     unless request.post?
       @page_title = 'Import From Gallery'
       configurations = current_user.admin? ? GalleryConfiguration.all : GalleryConfiguration.where(user: [User.first, current_user].uniq)
-      render 'import', locals: { configurations: configurations, participant: participant }
+      render 'admin/configurations/import', locals: { configurations: configurations, participant: participant }
       return
     end
 
@@ -96,7 +96,7 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
 
     if overwrite
       configurations.each do |configuration|
-        participant.configurations.where(name: configuration.name).delete_all
+        participant.participant_configurations.where(name: configuration.name).delete_all
       end
     end
 
@@ -109,7 +109,7 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
     end
 
     count = configurations.count
-    redirect_to admin_participant_configurations_path(participant), notice: '%d configuration'.pluralize(count) % count + ' imported'
+    redirect_to admin_participant_participant_configurations_path(participant), notice: '%d configuration'.pluralize(count) % count + ' imported'
 
   end
 
@@ -118,11 +118,11 @@ ActiveAdmin.register ParticipantConfiguration, as: 'Configuration' do
   end
 
   # /app/views/admin/configurations/_form.html.arb
-  form partial: 'form'
+  form partial: 'admin/configurations/form'
 
   # /app/views/admin/configurations/_show.html.arb
   show do
-    render 'show'
+    render 'admin/configurations/show'
   end
 
 end

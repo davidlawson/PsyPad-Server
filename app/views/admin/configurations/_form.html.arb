@@ -1,5 +1,7 @@
 path = resource.instance_of?(GalleryConfiguration) ? [:admin, resource] : [:admin, :participant, resource]
-options = resource.id ? { url: resource_path } : {}
+#TODO duplicate action doesn't work here!
+options = resource.id ? { url: resource_path } : { }
+options[:as] = resource.instance_of?(GalleryConfiguration) ? 'gallery_configuration' : 'participant_configuration'
 active_admin_form_for path, options do |f|
 
   f.semantic_errors *f.object.errors.keys
@@ -7,6 +9,7 @@ active_admin_form_for path, options do |f|
   f.inputs 'General Settings' do
     f.input :name
     f.input :title, hint: 'This will appear to participants before starting the test'
+    f.input :description, hint: 'For your notes'
     f.input :enabled, as: :radio_boolean
     f.input :is_practice, as: :radio_boolean, label: 'Is practice configuration'
     f.input :position, label: 'Order', hint: 'Assign each test a different order number to determine sequence of tests (does not need to be consecutive)'

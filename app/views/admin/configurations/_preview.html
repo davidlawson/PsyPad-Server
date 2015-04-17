@@ -19,7 +19,7 @@
     text-align: center;
     font-size: 12px;
     position: fixed;
-    bottom: 768px;
+    bottom: 0px;
     right: 20px;
     background-color: #dddddd;
     cursor: pointer;
@@ -53,7 +53,7 @@
 </style>
 
 <div id="previewToggle">
-  Hide Preview
+  Show Preview
 </div>
 <div id="preview">
   <div id="exit_button">X</div>
@@ -68,7 +68,6 @@
   function updatePreview()
   {
     var preview = $("#preview");
-    preview.show();
 
     // Background colour
     var bgColor = $("[id$=background_colour]").val();
@@ -189,8 +188,6 @@
     button4.css('height', button4H);
     button4.css('line-height', button4H + 'px');
   }
-
-  updatePreview();
 
   $("#previewToggle").click(function ()
   {

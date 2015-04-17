@@ -46,4 +46,8 @@ class ImageSet < ActiveRecord::Base
     s
   end
 
+  def url
+    Rails.application.routes.url_helpers.api_export_imageset_path(self) + '?' + self.updated_at.to_i.to_s
+  end
+
 end

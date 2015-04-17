@@ -5,7 +5,7 @@
 #  id             :integer          not null, primary key
 #  image_group_id :integer
 #  name           :string           not null
-#  animated       :boolean          default("false")
+#  animated       :boolean          default(FALSE)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

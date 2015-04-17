@@ -4,9 +4,16 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   namespace :api do
+
     devise_for :users, controllers: { sessions: 'api/sessions', registrations: 'api/registrations' },
                only: [:sessions, :registrations]
-    get 'imageset/:id' => 'images#export'
+
+    get 'imageset/:id' => 'images#export', as: :export_imageset
+
+    resources :configurations, only: [:index, :show]
+
+    resources :participants, only: [:index, :show]
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

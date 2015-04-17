@@ -6,8 +6,14 @@ ActiveAdmin.register Participant do
     permitted
   end
 
-  before_create do |participant|
-    participant.user = current_user
+  controller do
+
+    def new
+      @participant = Participant.new
+      @participant.user = current_user
+      new!
+    end
+
   end
 
   scope_to :current_user, unless: proc{ current_user.admin? }
@@ -19,8 +25,8 @@ ActiveAdmin.register Participant do
     column :username
     column :enabled
     column :configurations do |participant|
-      count = participant.configurations.count
-      link_to '%d Configuration'.pluralize(count) % count, admin_participant_configurations_path(participant)
+      count = participant.participant_configurations.count
+      link_to '%d Configuration'.pluralize(count) % count, admin_participant_participant_configurations_path(participant)
     end
     column :logs do |participant|
       count = participant.logs.count
@@ -51,10 +57,10 @@ ActiveAdmin.register Participant do
     end
 
     panel 'Configurations' do
-      if participant.configurations.count > 0
-        table_for participant.configurations do
+      if participant.participant_configurations.count > 0
+        table_for participant.participant_configurations do
           column :name do |configuration|
-            link_to configuration.name, admin_participant_configuration_path(participant, configuration)
+            link_to configuration.name, admin_participant_participant_configuration_path(participant, configuration)
           end
           column :enabled
           column :is_practice
@@ -62,11 +68,15 @@ ActiveAdmin.register Participant do
       end
 
       span do
-        link_to 'Add Configuration', new_admin_participant_configuration_path(participant), class: 'button'
+        link_to 'Add Configuration', new_admin_participant_participant_configuration_path(participant), class: 'button'
       end
 
       span do
-        link_to 'View Configurations', admin_participant_configurations_path(participant), class: 'button'
+        link_to 'View Configurations', admin_participant_participant_configurations_path(participant), class: 'button'
+      end
+
+      span do
+        link_to 'Import From Gallery', import_admin_participant_participant_configurations_path(participant), class: 'button'
       end
     end
 

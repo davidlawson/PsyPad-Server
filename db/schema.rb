@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227020207) do
+ActiveRecord::Schema.define(version: 20150416023605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150227020207) do
   create_table "configurations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "participant_id"
-    t.string   "type",                            default: "Configuration",                                                                       null: false
+    t.string   "type",                                                                                                                            null: false
     t.string   "name",                                                                                                                            null: false
     t.string   "title"
     t.boolean  "enabled",                         default: true,                                                                                  null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20150227020207) do
     t.boolean  "attempt_facial_recognition",      default: false,                                                                                 null: false
     t.datetime "created_at",                                                                                                                      null: false
     t.datetime "updated_at",                                                                                                                      null: false
+    t.string   "description"
   end
 
   add_index "configurations", ["image_set_id"], name: "index_configurations_on_image_set_id", using: :btree
@@ -132,7 +133,7 @@ ActiveRecord::Schema.define(version: 20150227020207) do
   create_table "image_sets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "directory"
+    t.string   "directory",             null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.string   "background_image_path"

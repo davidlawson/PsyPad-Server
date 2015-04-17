@@ -12,9 +12,17 @@ class API::ImagesController < API::BaseController
     response.headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
     response.headers['Content-Transfer-Encoding'] = 'binary'
 
-    image_set.image_groups.each do |image_group|
-      image_group.images.each do |image|
-        image.image_frames.each do |image_frame|
+    if image_set.background_image_path.present?
+      File.open(image_set.background_image_path, 'rb') do |file|
+        while (chunk = file.read(16384))
+          response.stream.write chunk
+        end
+      end
+    end
+
+    image_set.image_groups.order(name: :asc).each do |image_group|
+      image_group.images.order(name: :asc).each do |image|
+        image.image_frames.order(frame_name: :asc).each do |image_frame|
           File.open(image_frame.frame_path, 'rb') do |file|
             while (chunk = file.read(16384))
               response.stream.write chunk
