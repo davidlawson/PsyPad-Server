@@ -1,6 +1,10 @@
 ActiveAdmin.register User do
 
-  permit_params :email, :password, :password_confirmation, :affiliation
+  permit_params do
+    params = [:email, :password, :password_confirmation, :affiliation]
+    params << :role if current_user.admin?
+    params
+  end
 
   index do
     selectable_column
@@ -24,6 +28,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :affiliation
+      f.input :role, as: :select, collection: [['None', ''], ['Admin', 'admin']] if current_user.admin?
     end
     f.actions
   end

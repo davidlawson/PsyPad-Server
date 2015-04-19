@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  root to: redirect('/admin')
+
   namespace :api do
 
     devise_for :users, controllers: { sessions: 'api/sessions', registrations: 'api/registrations' },

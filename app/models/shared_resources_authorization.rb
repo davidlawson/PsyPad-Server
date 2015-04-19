@@ -8,6 +8,10 @@ class SharedResourcesAuthorization < ActiveAdmin::AuthorizationAdapter
     # admins can do anything
     return true if user.admin?
 
+    if subject.class == User && subject == user
+      return true
+    end
+
     if subject.class == User || subject == User
       return user.admin?
     end
