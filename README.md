@@ -21,6 +21,16 @@ rake db:create
 rake db:migrate
 ```
 
-Start the server with `rails s`.
+You will need to set the following environment variables:
+
+* `RECAPTCHA_PUBLIC` (https://www.google.com/recaptcha)
+* `RECAPTCHA_PRIVATE` (https://www.google.com/recaptcha)
+* `SECRET_KEY_BASE` (run `rake secret` to generate)
+* `MAILER_HOST` (domain name to send emails from)
+* `MAILER_FROM` (email `From` address)
+* `MAILER_REPLY_TO` (email `Reply-To` address)
+* `IMAGE_SET_DIRECTORY` (directory to save uploaded image sets to)
+
+You can then start the server with `rails s`.
 
 If you want to host the server online, I recommend using [Heroku](https://www.heroku.com/) which has a generous free tier that should suit most purposes.

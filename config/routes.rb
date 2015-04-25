@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users, ActiveAdmin::Devise.config
+  default_config = ActiveAdmin::Devise.config
+  default_config[:controllers][:registrations] = 'admin/registrations'
+  default_config[:controllers][:passwords] = 'admin/passwords'
+  devise_for :users, default_config  
   ActiveAdmin.routes(self)
 
   root to: redirect('/admin')

@@ -65,7 +65,12 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set this to host of application
-  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: ENV['MAILER_HOST'] }
+
+  config.action_mailer.default_options = {
+    from: ENV['MAILER_FROM'],
+    reply_to: ENV['MAILER_REPLY_TO']
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -89,6 +94,6 @@ Rails.application.configure do
   #     }
   # }
 
-  config.image_set_directory = '/Users/david/Developer/Turpin/uploads/'
+  config.image_set_directory = ENV['IMAGE_SET_DIRECTORY']
 
 end

@@ -47,6 +47,8 @@ gem 'paperclip', '~> 4.2'
 
 gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version
 
+gem 'recaptcha', require: 'recaptcha/rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
