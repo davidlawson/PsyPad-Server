@@ -23,8 +23,8 @@ rake db:migrate
 
 You will need to set the following environment variables:
 
-* `RECAPTCHA_PUBLIC` (https://www.google.com/recaptcha)
-* `RECAPTCHA_PRIVATE` (https://www.google.com/recaptcha)
+* `RECAPTCHA_PUBLIC_KEY` (https://www.google.com/recaptcha)
+* `RECAPTCHA_PRIVATE_KEY` (https://www.google.com/recaptcha)
 * `SECRET_KEY_BASE` (run `rake secret` to generate)
 * `MAILER_HOST` (domain name to send emails from)
 * `MAILER_FROM` (email `From` address)
