@@ -5,6 +5,8 @@ ActiveAdmin.register ImageSet do
 
   permit_params :name #, image_groups_attributes: [ :id, :name, :_destroy ]
 
+  actions :all, except: [:new]
+
   controller do
     def scoped_collection
       collection = end_of_association_chain
