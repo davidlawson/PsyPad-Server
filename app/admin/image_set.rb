@@ -13,6 +13,10 @@ ActiveAdmin.register ImageSet do
     end
   end
 
+  scope :all, default: true
+  scope :public_image_sets
+  scope :private_image_sets
+
   before_create do |image_set|
     image_set.user = current_user
   end

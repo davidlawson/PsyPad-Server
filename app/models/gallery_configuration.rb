@@ -83,6 +83,9 @@ class GalleryConfiguration < Configuration
 
   belongs_to :user, required: true
 
+  scope :public_configurations, -> { where(user: User.first) }
+  scope :private_configurations, -> { where.not(user: User.first) }
+
   # this is shown in <select>s
   def display_name
     s = name

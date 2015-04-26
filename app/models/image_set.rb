@@ -20,6 +20,10 @@ class ImageSet < ActiveRecord::Base
   accepts_nested_attributes_for :image_groups, allow_destroy: true
 
   belongs_to :user, required: true
+
+  scope :public_image_sets, -> { where(user: User.first) }
+  scope :private_image_sets, -> { where.not(user: User.first) }
+
   validates_presence_of :name
   validates_presence_of :directory
 

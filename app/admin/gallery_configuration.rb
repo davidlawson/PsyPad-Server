@@ -16,6 +16,10 @@ ActiveAdmin.register GalleryConfiguration do
 
   permit_params *Configuration.permitted_params
 
+  scope :all, default: true
+  scope :public_configurations
+  scope :private_configurations
+
   filter :user, collection: proc { current_user.admin? ? User.all : [User.first, current_user].uniq }
   filter :name
   filter :title
