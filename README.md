@@ -12,14 +12,7 @@ To obtain Ruby 2.1.2 on OS X you can [install RVM](https://rvm.io/rvm/install) a
 
 You'll also need to install Postgres ([Postgres.app](http://postgresapp.com/) is good for OS X users).
 
-You can then clone this repository (`git clone https://github.com/davidlawson/PsyPad-Server`) and run the following commands to get started:
-
-```
-cd <PsyPad-Server location>
-bundle install
-rake db:create
-rake db:migrate
-```
+You can then clone this repository (`git clone https://github.com/davidlawson/PsyPad-Server`).
 
 You will need to set the following environment variables:
 
@@ -30,6 +23,15 @@ You will need to set the following environment variables:
 * `MAILER_FROM` (email `From` address)
 * `MAILER_REPLY_TO` (email `Reply-To` address)
 * `IMAGE_SET_DIRECTORY` (directory to save uploaded image sets to)
+
+You can then run the following commands to set up the server:
+
+```
+cd <PsyPad-Server location>
+bundle install
+rake db:create
+rake db:migrate
+```
 
 You can then start the server with `rails s`.
 
