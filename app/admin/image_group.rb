@@ -20,8 +20,12 @@ ActiveAdmin.register ImageGroup do
     id_column
     column :name
     column 'Preview' do |image_group|
-      image_frame = image_group.images.first.image_frames.first
-      image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+      image_frame = image_group.images.first.image_frames.first rescue nil
+      if image_frame
+        image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+      else
+        em 'No preview'
+      end
     end
     column :images do |image_group|
       count = image_group.images.count
@@ -41,8 +45,10 @@ ActiveAdmin.register ImageGroup do
       count = image_group.images.count
       f.input 'Images', as: :output, html: link_to('%d Image'.pluralize(count) % count, admin_image_set_image_group_images_path(image_set, image_group))
 
-      image_frame = image_group.images.first.image_frames.first
-      f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+      image_frame = image_group.images.first.image_frames.first rescue nil
+      if image_frame
+        f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+      end
 
     end
 

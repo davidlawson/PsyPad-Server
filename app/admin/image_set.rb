@@ -34,8 +34,12 @@ ActiveAdmin.register ImageSet do
     column 'Owner', :user
     column :name
     column 'Preview' do |image_set|
-      image_frame = image_set.image_groups.first.images.first.image_frames.first
-      image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+      image_frame = image_set.image_groups.first.images.first.image_frames.first rescue nil
+      if image_frame
+        image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+      else
+        em 'No preview'
+      end
     end
     column :image_groups do |image_set|
       count = image_set.image_groups.count
@@ -58,8 +62,10 @@ ActiveAdmin.register ImageSet do
       count = image_set.image_groups.count
       f.input 'Image Groups', as: :output, html: link_to('%d Image Group'.pluralize(count) % count, admin_image_set_image_groups_path(image_set))
 
-      image_frame = image_set.image_groups.first.images.first.image_frames.first
-      f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+      image_frame = image_set.image_groups.first.images.first.image_frames.first rescue nil
+      if image_frame
+        f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+      end
 
     end
 

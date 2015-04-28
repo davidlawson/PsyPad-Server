@@ -22,8 +22,12 @@ ActiveAdmin.register Image do
     id_column
     column :name
     column 'Preview' do |image|
-      image_frame = image.image_frames.first
-      image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+      image_frame = image.image_frames.first rescue nil
+      if image_frame
+        image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+      else
+        em 'No preview'
+      end
     end
     column :animated
     column :image_frames do |image|
@@ -45,8 +49,10 @@ ActiveAdmin.register Image do
       count = image.image_frames.count
       f.input 'Image Frames', as: :output, html: link_to('%d Image Frame'.pluralize(count) % count, admin_image_set_image_group_image_image_frames_path(image_set, image_group, image))
 
-      image_frame = image.image_frames.first
-      f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+      image_frame = image.image_frames.first rescue nil
+      if image_frame
+        f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+      end
     end
 
     f.inputs 'Timestamps' do
