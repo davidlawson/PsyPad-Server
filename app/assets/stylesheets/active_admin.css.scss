@@ -136,3 +136,7 @@ form.formtastic table {
   tr.odd td { background: darken($table-stripe-color, 3%); }
   tr.even td { background: $table-stripe-color; }
 }
+
+img.frame-preview {
+  border: 1px solid #ccc;
+}

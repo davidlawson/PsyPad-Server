@@ -2,6 +2,8 @@ ActiveAdmin.register GalleryConfiguration do
 
   menu label: 'Configuration Gallery'
 
+  actions :all, except: [:show]
+
   controller do
     def scoped_collection
       collection = end_of_association_chain
@@ -30,7 +32,7 @@ ActiveAdmin.register GalleryConfiguration do
   index title: 'Configuration Gallery' do
     selectable_column
     id_column
-    column :user
+    column 'Owner', :user
     column :name
     column :title
     column :image_set
@@ -44,12 +46,7 @@ ActiveAdmin.register GalleryConfiguration do
   # /app/views/admin/configurations/_form.html.arb
   form partial: 'admin/configurations/form'
 
-  # /app/views/admin/configurations/_show.html.arb
-  show do
-    render 'admin/configurations/show'
-  end
-
-  # TODO export to participants ()with overwrite)
+  # TODO export to participants (with overwrite)
 
   member_action :duplicate, method: :get do
     @gallery_configuration = resource.dup

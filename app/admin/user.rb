@@ -28,9 +28,31 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :affiliation
-      f.input :role, as: :select, collection: [['None', ''], ['Admin', 'admin']] if current_user.admin?
+      f.input :role, as: :select, collection: [['Admin', 'admin']] if current_user.admin?
     end
     f.actions
+  end
+
+  show do |user|
+
+    panel 'User Details' do
+      attributes_table_for user do
+        row :email
+        row :affiliation
+      end
+    end
+
+    panel 'User Tracking' do
+      attributes_table_for user do
+        row :current_sign_in_at
+        row :last_sign_in_at
+        row :current_sign_in_ip
+        row :last_sign_in_ip
+        row :created_at
+        row :updated_at
+      end
+    end
+
   end
 
   controller do

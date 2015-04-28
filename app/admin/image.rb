@@ -6,6 +6,8 @@ ActiveAdmin.register Image do
   navigation_menu :default
   menu false
 
+  actions :all, except: [:show]
+
   permit_params :name, :animated
 
   filter :name
@@ -19,6 +21,10 @@ ActiveAdmin.register Image do
     selectable_column
     id_column
     column :name
+    column 'Preview' do |image|
+      image_frame = image.image_frames.first
+      image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+    end
     column :animated
     column :image_frames do |image|
       count = image.image_frames.count
@@ -29,44 +35,6 @@ ActiveAdmin.register Image do
     actions
   end
 
-  show do |image|
-    panel 'Image Details' do
-      attributes_table_for image do
-        row :image_set
-        row :image_group
-        row :name
-        bool_row :animated
-      end
-    end
-
-    panel 'Image Frames' do
-      table_for image.image_frames do
-        column :name do |frame|
-          link_to frame.frame_name, admin_image_set_image_group_image_image_frame_path(image_set, image_group, image, frame)
-        end
-        column :created_at
-        column :updated_at
-      end
-
-      span do
-        link_to 'Add Image Frame', new_admin_image_set_image_group_image_image_frame_path(image_set, image_group, image), class: 'button'
-      end
-
-      span do
-        link_to 'View Image Frames', admin_image_set_image_group_image_image_frames_path(image_set, image_group, image), class: 'button'
-      end
-    end
-
-    panel 'Timestamps' do
-      attributes_table_for image_group do
-        row :created_at
-        row :updated_at
-      end
-    end
-
-    active_admin_comments
-  end
-
   form do |f|
 
     f.inputs 'Details' do
@@ -74,15 +42,19 @@ ActiveAdmin.register Image do
       f.input :name
       f.input :animated
 
+      count = image.image_frames.count
+      f.input 'Image Frames', as: :output, html: link_to('%d Image Frame'.pluralize(count) % count, admin_image_set_image_group_image_image_frames_path(image_set, image_group, image))
+
+      image_frame = image.image_frames.first
+      f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
     end
 
-    # f.inputs 'Image Frames' do
-    #
-    #   f.has_many :image_frames, heading: false, allow_destroy: true do |a|
-    #     a.input :name
-    #   end
-    #
-    # end
+    f.inputs 'Timestamps' do
+
+      f.input :created_at, as: :output
+      f.input :updated_at, as: :output
+
+    end
 
     f.actions
 

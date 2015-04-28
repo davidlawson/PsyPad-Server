@@ -3,9 +3,9 @@ require 'tempfile'
 
 ActiveAdmin.register ImageSet do
 
-  permit_params :name #, image_groups_attributes: [ :id, :name, :_destroy ]
+  permit_params :name, :user_id
 
-  actions :all, except: [:new]
+  actions :all, except: [:new, :show]
 
   controller do
     def scoped_collection
@@ -31,8 +31,12 @@ ActiveAdmin.register ImageSet do
   index do
     selectable_column
     id_column
-    column :user
+    column 'Owner', :user
     column :name
+    column 'Preview' do |image_set|
+      image_frame = image_set.image_groups.first.images.first.image_frames.first
+      image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+    end
     column :image_groups do |image_set|
       count = image_set.image_groups.count
       link_to '%d Image Group'.pluralize(count) % count, admin_image_set_image_groups_path(image_set)
@@ -44,37 +48,6 @@ ActiveAdmin.register ImageSet do
     end
   end
 
-  show do |image_set|
-    panel 'Image Set Details' do
-      attributes_table_for image_set do
-        row :user
-        row :name
-        row :created_at
-        row :updated_at
-      end
-    end
-
-    panel 'Image Groups' do
-      table_for image_set.image_groups do
-        column :name do |image_group|
-          link_to image_group.name, admin_image_set_image_group_path(image_set, image_group)
-        end
-        column :created_at
-        column :updated_at
-      end
-
-      span do
-        link_to 'Add Image Group', new_admin_image_set_image_group_path(image_set), class: 'button'
-      end
-
-      span do
-        link_to 'View Image Groups', admin_image_set_image_groups_path(image_set), class: 'button'
-      end
-    end
-
-    active_admin_comments
-  end
-
   form do |f|
 
     f.inputs 'Details' do
@@ -82,15 +55,20 @@ ActiveAdmin.register ImageSet do
       f.input :user if current_user.admin?
       f.input :name
 
+      count = image_set.image_groups.count
+      f.input 'Image Groups', as: :output, html: link_to('%d Image Group'.pluralize(count) % count, admin_image_set_image_groups_path(image_set))
+
+      image_frame = image_set.image_groups.first.images.first.image_frames.first
+      f.input 'Preview', as: :output, html: image_tag(image_frame.thumbnail_data_uri, class: 'frame-preview')
+
     end
 
-    # f.inputs 'Image Groups' do
-    #
-    #   f.has_many :image_groups, heading: false, allow_destroy: true do |a|
-    #     a.input :name
-    #   end
-    #
-    # end
+    f.inputs 'Timestamps' do
+
+      f.input :created_at, as: :output
+      f.input :updated_at, as: :output
+
+    end
 
     f.actions
 
@@ -223,6 +201,11 @@ ActiveAdmin.register ImageSet do
             warnings << 'Ignored file (invalid directory structure): ' + filename
 
           end
+        end
+
+        if imported.count == 0
+          image_set.destroy
+          warnings.unshift 'Nothing valid was imported, not creating an image set on the server.'
         end
 
         render 'admin/image_set/imported', locals: { warnings: warnings, imported: imported, image_set: image_set }

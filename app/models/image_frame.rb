@@ -15,12 +15,21 @@ class ImageFrame < ActiveRecord::Base
 
   belongs_to :image, required: true
 
+  validates_presence_of :frame_path
+
   before_save do |record|
     record.frame_name = File.basename(record.frame_path)
   end
 
   before_destroy do |record|
     FileUtils.rm_rf record.frame_path
+  end
+
+  def thumbnail_data_uri(max_width=100)
+    image = MiniMagick::Image.open(frame_path)
+    image.resize max_width.to_s + '>'
+    base64 = Base64.encode64(image.to_blob).gsub(/\s+/, "")
+    "data:image/png;base64,#{Rack::Utils.escape(base64)}"
   end
 
   def data_uri

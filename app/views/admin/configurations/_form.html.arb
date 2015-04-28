@@ -7,6 +7,12 @@ active_admin_form_for path, options do |f|
   f.semantic_errors *f.object.errors.keys
 
   f.inputs 'General Settings' do
+    if f.object.instance_of?(GalleryConfiguration)
+      f.input 'Owner', as: :output, html: f.object.user.to_s
+    else
+      f.input 'Participant', as: :output, html: link_to(f.object.participant, admin_participant_path(f.object.participant))
+    end
+
     f.input :name
     f.input :title, hint: 'This will appear to participants before starting the test'
     f.input :description, hint: 'For your notes'
@@ -134,6 +140,13 @@ active_admin_form_for path, options do |f|
     f.input :specified_seed
 
     f.input :attempt_facial_recognition, as: :radio_boolean
+  end
+
+  f.inputs 'Timestamps' do
+
+    f.input :created_at, as: :output
+    f.input :updated_at, as: :output
+
   end
 
   f.actions

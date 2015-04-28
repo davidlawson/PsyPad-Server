@@ -6,6 +6,8 @@ ActiveAdmin.register Participant do
     permitted
   end
 
+  actions :all, except: [:show]
+
   controller do
 
     def new
@@ -43,74 +45,6 @@ ActiveAdmin.register Participant do
   filter :created_at
   filter :updated_at
 
-  show do |participant|
-    panel 'Participant Details' do
-      attributes_table_for participant do
-        if current_user.admin?
-          row 'Admin User' do
-            participant.user
-          end
-        end
-        row :username
-        bool_row :enabled
-      end
-    end
-
-    panel 'Configurations' do
-      if participant.participant_configurations.count > 0
-        table_for participant.participant_configurations do
-          column :name do |configuration|
-            link_to configuration.name, admin_participant_participant_configuration_path(participant, configuration)
-          end
-          column :enabled
-          column :is_practice
-        end
-      end
-
-      span do
-        link_to 'Add Configuration', new_admin_participant_participant_configuration_path(participant), class: 'button'
-      end
-
-      span do
-        link_to 'View Configurations', admin_participant_participant_configurations_path(participant), class: 'button'
-      end
-
-      span do
-        link_to 'Import From Gallery', import_admin_participant_participant_configurations_path(participant), class: 'button'
-      end
-    end
-
-    panel 'Logs' do
-      if participant.logs.count > 0
-        table_for participant.logs do
-          column 'ID' do |log|
-            link_to log.id, resource_path(log)
-          end
-          column :test_date
-          column :log_upload_date do |log|
-            log.created_at
-          end
-          column do |log|
-            link_to 'View Log', admin_participant_log_path(participant, log)
-          end
-        end
-      end
-
-      span do
-        link_to 'View Logs', admin_participant_logs_path(participant), class: 'button'
-      end
-    end
-
-    panel 'Timestamps' do
-      attributes_table_for participant do
-        row :created_at
-        row :updated_at
-      end
-    end
-
-    active_admin_comments
-  end
-
   form do |f|
 
     f.inputs do
@@ -118,6 +52,19 @@ ActiveAdmin.register Participant do
       f.input :user if current_user.admin?
       f.input :username
       f.input :enabled
+
+      config_count = participant.participant_configurations.count
+      f.input 'Configurations', as: :output, html: link_to('%d Configuration'.pluralize(config_count) % config_count, admin_participant_participant_configurations_path(participant))
+
+      log_count = participant.logs.count
+      f.input 'Logs', as: :output, html: link_to('%d Log'.pluralize(log_count) % log_count, admin_participant_logs_path(participant))
+
+    end
+
+    f.inputs 'Timestamps' do
+
+      f.input :created_at, as: :output
+      f.input :updated_at, as: :output
 
     end
 

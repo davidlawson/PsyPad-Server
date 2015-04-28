@@ -3,8 +3,11 @@ ActiveAdmin.register ParticipantConfiguration do
   permit_params *Configuration.permitted_params
 
   belongs_to :participant
+
   navigation_menu :default
   menu false
+
+  actions :all, except: [:show]
 
   filter :name
   filter :title
@@ -119,10 +122,5 @@ ActiveAdmin.register ParticipantConfiguration do
 
   # /app/views/admin/configurations/_form.html.arb
   form partial: 'admin/configurations/form'
-
-  # /app/views/admin/configurations/_show.html.arb
-  show do
-    render 'admin/configurations/show'
-  end
 
 end

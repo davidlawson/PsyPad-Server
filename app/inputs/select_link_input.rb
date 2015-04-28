@@ -5,7 +5,7 @@ class SelectLinkInput < Formtastic::Inputs::SelectInput
   end
 
   def link
-    template.link_to options[:link_text], options[:link_url], class: 'button'
+    template.link_to options[:link_text], options[:link_url], class: 'button', target: '_blank'
   end
 
   def as

@@ -7,7 +7,9 @@ ActiveAdmin.register ImageFrame do
   navigation_menu :default
   menu false
 
-  permit_params :frame
+  actions :all, except: [:show]
+
+  permit_params :frame_name
 
   filter :frame_name
   filter :frame_size
@@ -19,6 +21,9 @@ ActiveAdmin.register ImageFrame do
   index do
     selectable_column
     id_column
+    column 'Preview' do |image_frame|
+      image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
+    end
     column 'File Name', :frame_name
     column 'File Size' do |image_frame|
       image_frame.frame_size.to_s + ' bytes'
@@ -28,48 +33,23 @@ ActiveAdmin.register ImageFrame do
     actions
   end
 
-  show do |image_frame|
-    panel 'Image Frame Details' do
-      attributes_table_for image_frame do
-        row :image_set
-        row :image_group
-        row :image
-        row :frame_name, label: 'File Name'
-        row 'File Size' do
-          image_frame.frame_size.to_s + ' bytes'
-        end
-        row :frame do
-          image_tag image_frame.data_uri
-        end
-      end
-    end
-
-    panel 'Timestamps' do
-      attributes_table_for image_frame do
-        row :created_at
-        row :updated_at
-      end
-    end
-
-    active_admin_comments
-  end
-
   form do |f|
 
     f.inputs 'Details' do
 
-      f.input :frame, hint: f.object.frame_path.present? ? image_tag(f.object.data_uri) : 'No image uploaded'
+      f.input :frame_name
+
+      f.input 'Image frame', as: :output, html: image_tag(image_frame.data_uri, class: 'frame-preview')
+      f.input :frame_size, as: :output, html: image_frame.frame_size.to_s + ' bytes'
 
     end
 
-    # f.inputs 'Images' do
-    #
-    #   f.has_many :images, heading: false, allow_destroy: true do |a|
-    #     a.input :name
-    #     a.input :animated
-    #   end
-    #
-    # end
+    f.inputs 'Timestamps' do
+
+      f.input :created_at, as: :output
+      f.input :updated_at, as: :output
+
+    end
 
     f.actions
 

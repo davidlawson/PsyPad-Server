@@ -90,7 +90,7 @@ class GalleryConfiguration < Configuration
   def display_name
     s = name
     if user == User.first
-      s = '[Shared] ' + s
+      s = '[Public] ' + s
     end
     s
   end
