@@ -5,7 +5,7 @@ ActiveAdmin.register ImageGroup do
   navigation_menu :default
   menu false
 
-  actions :all, except: [:show]
+  actions :all, except: [:show, :new]
 
   permit_params :name
 
