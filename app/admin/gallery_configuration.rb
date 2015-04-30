@@ -11,12 +11,16 @@ ActiveAdmin.register GalleryConfiguration do
       collection
     end
   end
-
+  
   before_create do |gallery_configuration|
     gallery_configuration.user = current_user
   end
 
-  permit_params *Configuration.permitted_params
+  permit_params do
+    params = GalleryConfiguration.permitted_params
+    params << :user_id if current_user.admin?
+    params
+  end
 
   scope :all, default: true
   scope :public_configurations

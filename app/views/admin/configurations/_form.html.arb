@@ -8,7 +8,11 @@ active_admin_form_for path, options do |f|
 
   f.inputs 'General Settings' do
     if f.object.instance_of?(GalleryConfiguration)
-      f.input 'Owner', as: :output, html: f.object.user.to_s
+      if current_user.admin?
+        f.input :user, label: 'Owner'
+      else
+        f.input 'Owner', as: :output, html: f.object.user.to_s
+      end
     else
       f.input 'Participant', as: :output, html: link_to(f.object.participant, admin_participant_path(f.object.participant))
     end

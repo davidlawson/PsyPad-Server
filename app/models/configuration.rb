@@ -183,7 +183,7 @@ class Configuration < ActiveRecord::Base
   validates :hits_to_finish, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
   validates :minimum_level, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
   validates :maximum_level, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
-  validates :delta_values, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
+  validates :delta_values, if: :use_staircase_method, presence: true, slash_comma_separated: { slash: :number_of_staircases, comma: :number_of_reversals }
   validates :num_wrong_to_get_easier, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
   validates :num_correct_to_get_harder, if: :use_staircase_method, presence: true, slash_separated: { count: :number_of_staircases }
 
