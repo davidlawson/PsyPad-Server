@@ -189,7 +189,27 @@ class Configuration < ActiveRecord::Base
 
   validates :questions_per_folder, unless: :use_staircase_method, presence: true, colon_comma_separated: true
 
-  # TODO validate questions_per_folder based on selected image set
+  validate :valid_questions_per_folder, unless: :use_staircase_method
+
+  def valid_questions_per_folder
+
+    not_found = []
+
+    questions_per_folder.split(',').each do |item|
+
+      level = item.split(':').first
+      if image_set.image_groups.find_by_name(level).nil?
+        not_found << level
+      end
+
+    end
+
+    if not_found.count > 0
+      errors[:questions_per_folder] << 'contains levels not in the selected image set: ' + not_found.join(', ')
+    end
+
+  end
+
   # TODO also sanity validate staircase values
 
   validates :background_colour, hex_color: true, presence: true
