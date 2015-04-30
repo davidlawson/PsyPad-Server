@@ -24,7 +24,7 @@ ActiveAdmin.register ImageFrame do
     column 'Preview' do |image_frame|
       image_tag image_frame.thumbnail_data_uri, class: 'frame-preview'
     end
-    column 'File Name', :frame_name
+    column 'Frame Name', :frame_name
     column 'File Size' do |image_frame|
       image_frame.frame_size.to_s + ' bytes'
     end
