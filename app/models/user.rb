@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   has_many :participants, dependent: :destroy
   has_many :image_sets, dependent: :destroy
+  has_many :logs, dependent: :destroy
 
   def admin?
     role == 'admin'

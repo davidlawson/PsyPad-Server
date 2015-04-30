@@ -92,7 +92,7 @@ ActiveAdmin.register ImageSet do
       # TODO this isn't streaming (I think)
       send_file archive_path, stream: true
     else
-      redirect_to admin_image_set_path(resource), notice: 'Failed to download image set'
+      redirect_to admin_image_sets_path, notice: 'Failed to download image set'
     end
 
   end
@@ -116,7 +116,13 @@ ActiveAdmin.register ImageSet do
       return
     end
 
+    unless params[:import][:name]
+      redirect_to import_admin_image_sets_path, notice: 'No name entered'
+      return
+    end
+
     file = params[:import][:archive]
+    name = params[:import][:name]
 
     # if file.is_a?(StringIO)
     #   temp_file = Tempfile.new('import')
@@ -143,7 +149,7 @@ ActiveAdmin.register ImageSet do
       return
     end
 
-    image_set = ImageSet.create(name: file.original_filename, user: current_user, directory: dir)
+    image_set = ImageSet.create(name: name, user: current_user, directory: dir)
 
     warnings = []
     imported = []
@@ -211,7 +217,7 @@ ActiveAdmin.register ImageSet do
 
         if imported.count == 0
           image_set.destroy
-          warnings.unshift 'Nothing valid was imported, not creating an image set on the server.'
+          warnings.unshift "Nothing valid was imported, not creating an image set on the server.\n"
         end
 
         render 'admin/image_set/imported', locals: { warnings: warnings, imported: imported, image_set: image_set }

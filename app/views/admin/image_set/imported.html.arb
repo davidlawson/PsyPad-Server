@@ -27,6 +27,6 @@ panel 'Imported Files' do
 
 end
 
-# not working?
-# link_to 'View New Image Set', admin_image_set_path(image_set), class: 'button'
-# link_to 'Return to Image Sets', admin_image_sets_path, class: 'button'
+div do
+  link_to 'Return to Image Sets', admin_image_sets_path, class: 'button'
+end

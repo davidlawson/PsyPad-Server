@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
     resources :participants, only: [:index, :show]
 
+    post 'upload_logs' => 'logs#upload'
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
