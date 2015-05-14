@@ -14,6 +14,7 @@ ActiveAdmin.register Log, as: 'DemoModeLog' do
   index do
     selectable_column
     id_column
+    column :configuration_name
     column :test_date
     column 'Log upload date', :created_at
     actions

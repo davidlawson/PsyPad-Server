@@ -18,4 +18,16 @@ class Log < ActiveRecord::Base
   validates_presence_of :test_date
   validates_presence_of :content
 
+  def parsed_content
+    content.scan(/([^|]+)\|([^|]+)\|([^\n]+)/)
+  end
+
+  def parsed_configuration
+    JSON.parse(parsed_content[0][2]) rescue nil
+  end
+
+  def configuration_name
+    parsed_configuration['name'] rescue nil
+  end
+
 end
