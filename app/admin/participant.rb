@@ -54,10 +54,14 @@ ActiveAdmin.register Participant do
       f.input :enabled
 
       config_count = participant.participant_configurations.count
-      f.input 'Configurations', as: :output, html: link_to('%d Configuration'.pluralize(config_count) % config_count, admin_participant_participant_configurations_path(participant))
+      if participant.id
+        f.input 'Configurations', as: :output, html: link_to('%d Configuration'.pluralize(config_count) % config_count, admin_participant_participant_configurations_path(participant))
+      end
 
       log_count = participant.logs.count
-      f.input 'Logs', as: :output, html: link_to('%d Log'.pluralize(log_count) % log_count, admin_participant_logs_path(participant))
+      if participant.id
+        f.input 'Logs', as: :output, html: link_to('%d Log'.pluralize(log_count) % log_count, admin_participant_logs_path(participant))
+      end
 
     end
 

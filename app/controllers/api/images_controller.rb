@@ -4,7 +4,7 @@ class API::ImagesController < API::BaseController
 
   def export
 
-    image_set = current_user.image_sets.find(params[:id])
+    image_set = ImageSet.where(user: [current_user, User.first]).find(params[:id])
 
     filename = image_set.name + '.combined'
 

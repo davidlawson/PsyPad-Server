@@ -33,7 +33,7 @@ ActiveAdmin.register Log do
     end
 
     panel 'Log Content' do
-        pre log.content
+        pre log.content, class: 'log-content'
     end
   end
 

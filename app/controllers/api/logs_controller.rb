@@ -32,6 +32,8 @@ class API::LogsController < API::BaseController
 
     end
 
+    render json: { success: true }, status: 200
+
   end
 
 end

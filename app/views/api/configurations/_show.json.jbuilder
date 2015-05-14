@@ -117,3 +117,5 @@ json.use_specified_seed @configuration.use_specified_seed
 json.specified_seed @configuration.specified_seed
 
 json.attempt_facial_recognition @configuration.attempt_facial_recognition
+
+@configuration = nil
