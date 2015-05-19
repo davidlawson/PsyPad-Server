@@ -39,7 +39,7 @@ ActiveAdmin.register ParticipantConfiguration do
   end
 
   member_action :duplicate, method: :get do
-    @configuration = resource.dup
+    @participant_configuration = resource.dup
     render :new, layout: false
   end
 

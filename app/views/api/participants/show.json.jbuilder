@@ -1,1 +1,1 @@
-json.configurations @participant.participant_configurations, partial: 'api/configurations/show', as: :configuration
+json.configurations @participant.participant_configurations.order(position: :asc), partial: 'api/configurations/show', as: :configuration
