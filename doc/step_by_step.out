@@ -1,0 +1,40 @@
+\BOOKMARK [1][-]{section.1}{Before starting}{}% 1
+\BOOKMARK [1][-]{section.2}{Demo mode}{}% 2
+\BOOKMARK [1][-]{section.3}{Gallery}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Public gallery}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Private gallery}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Participant mode}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Pre-downloading participant configurations}{section.4}% 7
+\BOOKMARK [1][-]{section.5}{Internet connection}{}% 8
+\BOOKMARK [1][-]{section.6}{Adding and configuring participants}{}% 9
+\BOOKMARK [2][-]{subsection.6.1}{Participant list}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.2}{Participant log list}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.3}{Participant configuration list}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.4}{Importing configurations from the gallery}{section.6}% 13
+\BOOKMARK [2][-]{subsection.6.5}{Exporting configurations to the gallery}{section.6}% 14
+\BOOKMARK [1][-]{section.7}{Creating your own test configurations}{}% 15
+\BOOKMARK [2][-]{subsection.7.1}{Things to consider for your test configurations}{section.7}% 16
+\BOOKMARK [2][-]{subsection.7.2}{Submitting to the public gallery}{section.7}% 17
+\BOOKMARK [1][-]{section.8}{Image Stimuli}{}% 18
+\BOOKMARK [2][-]{subsection.8.1}{Single frame images}{section.8}% 19
+\BOOKMARK [2][-]{subsection.8.2}{Multiframe images \(movies\)}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.3}{Background Image}{section.8}% 21
+\BOOKMARK [2][-]{subsection.8.4}{Gamma correction and Auto-brightness}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.5}{Ramping}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.6}{Timing}{section.8}% 24
+\BOOKMARK [2][-]{subsection.8.7}{Uploading the images}{section.8}% 25
+\BOOKMARK [1][-]{section.9}{Test configuration options}{}% 26
+\BOOKMARK [2][-]{subsection.9.1}{MOCS}{section.9}% 27
+\BOOKMARK [2][-]{subsection.9.2}{Staircase}{section.9}% 28
+\BOOKMARK [1][-]{section.10}{Session Configurations}{}% 29
+\BOOKMARK [1][-]{section.11}{Server Setup}{}% 30
+\BOOKMARK [2][-]{subsection.11.1}{The PsyPad.net.au Server}{section.11}% 31
+\BOOKMARK [2][-]{subsection.11.2}{Your Own Server}{section.11}% 32
+\BOOKMARK [2][-]{subsection.11.3}{Communication with iPad}{section.11}% 33
+\BOOKMARK [3][-]{subsubsection.11.3.1}{Automatic session transfer from Server to iPad}{subsection.11.3}% 34
+\BOOKMARK [3][-]{subsubsection.11.3.2}{Log file transfer from iPad to Server}{subsection.11.3}% 35
+\BOOKMARK [1][-]{section.12}{Handling Logfiles}{}% 36
+\BOOKMARK [1][-]{section.13}{Checking test results on the iPad}{}% 37
+\BOOKMARK [1][-]{section.14}{iPad Settings}{}% 38
+\BOOKMARK [1][-]{section.15}{Upcoming features}{}% 39
+\BOOKMARK [1][-]{section.16}{Known Bugs}{}% 40
