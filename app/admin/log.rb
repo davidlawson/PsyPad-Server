@@ -33,8 +33,12 @@ ActiveAdmin.register Log do
       end
     end
 
+    panel 'Log Analysis' do
+      pre log.text_analysis, class: 'log-content'
+    end
+
     panel 'Log Content' do
-        pre log.content, class: 'log-content'
+      pre log.content, class: 'log-content'
     end
   end
 
