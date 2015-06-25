@@ -174,7 +174,7 @@ ActiveAdmin.setup do |config|
   # config.csv_options = { col_sep: ';' }
   #
   # Force the use of quotes
-  # config.csv_options = { force_quotes: true }
+  config.csv_options = { force_quotes: true }
 
   # == Menu System
   #

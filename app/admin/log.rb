@@ -42,4 +42,13 @@ ActiveAdmin.register Log do
     end
   end
 
+  csv do
+    column :id
+    column :test_date
+    column :content
+    column :text_analysis
+    column('Upload date') { |log| log.created_at }
+    column :updated_at
+  end
+
 end
