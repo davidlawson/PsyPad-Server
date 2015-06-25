@@ -5,7 +5,7 @@
 #  id                              :integer          not null, primary key
 #  user_id                         :integer
 #  participant_id                  :integer
-#  type                            :string           default("Configuration"), not null
+#  type                            :string           not null
 #  name                            :string           not null
 #  title                           :string
 #  enabled                         :boolean          default(TRUE), not null

@@ -5,7 +5,7 @@
 #  id                              :integer          not null, primary key
 #  user_id                         :integer
 #  participant_id                  :integer
-#  type                            :string           default("Configuration"), not null
+#  type                            :string           not null
 #  name                            :string           not null
 #  title                           :string
 #  enabled                         :boolean          default(TRUE), not null
@@ -192,6 +192,8 @@ class Configuration < ActiveRecord::Base
   validate :valid_questions_per_folder, unless: :use_staircase_method
 
   def valid_questions_per_folder
+
+    return if image_set.nil?
 
     not_found = []
 

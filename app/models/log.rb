@@ -8,6 +8,7 @@
 #  content        :text             not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  user_id        :integer
 #
 
 class Log < ActiveRecord::Base
@@ -65,7 +66,7 @@ class Log < ActiveRecord::Base
       out << "Practice: no\n"
     end
 
-    if lines.last[1] == 'exit_test'
+    if lines.last[1] == 'exit_test' || lines.last[1] == 'test_finished'
       end_time = lines.last[0].to_i
     end
 
@@ -184,7 +185,7 @@ class Log < ActiveRecord::Base
         out << "Level Correct Incorrect Correct(%%)\n"
         correct_count.keys.sort.each do |i| # put in numeric order of level (key in correct_count[])
           if correct_count[i] + incorrect_count[i] > 0
-            out << sprintf("%5d %6d %8d %8.1f%%\n", i, correct_count[i], incorrect_count[i], correct_count[i] / (correct_count[i] + incorrect_count[i]) * 100)
+            out << sprintf("%5d %6d %8d %8.1f%%\n", i, correct_count[i], incorrect_count[i], correct_count[i] / (correct_count[i] + incorrect_count[i]).to_f * 100)
           else
             out << sprintf("%5d %6d %8d ???\n", i, correct_count[i], incorrect_count[i])
           end

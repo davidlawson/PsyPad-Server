@@ -7,13 +7,16 @@ ActiveAdmin.register Log, as: 'DemoModeLog' do
   controller do
     def scoped_collection
       collection = end_of_association_chain
-      collection.where(user: current_user, participant: nil)
+      collection = collection.where(participant: nil)
+      collection = collection.where(user: current_user) unless current_user.admin?
+      collection
     end
   end
 
   index do
     selectable_column
     id_column
+    column :user if current_user.admin?
     column :configuration_name
     column :test_date
     column 'Log upload date', :created_at
