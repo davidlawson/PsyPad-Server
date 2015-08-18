@@ -130,7 +130,7 @@ class Log < ActiveRecord::Base
       end
 
       reversal_count.each_with_index do |value, i|
-        out << "Staircase: #{i}\n"
+        out << "Staircase: #{i + 1}\n"
         out << "\tNot seen max: #{not_seen_max[i]}\n"
         out << "\tSeen min: #{seen_min[i]}\n"
 
