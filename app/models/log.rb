@@ -110,14 +110,13 @@ class Log < ActiveRecord::Base
           reversal_count[stair] += 1
         end
 
-
-        if line[1] == 'button_press' && min_stim.include?(stair) && # check if min seen
-            line[2][0] == correct_button && stim == min_stim[stair]
+        if line[1] == 'button_press' && #min_stim.include?(stair) && # check if min seen
+            line[2][0].to_i == correct_button.to_i && stim.to_i == min_stim[stair].to_i
           seen_min[stair] += 1
         end
 
-        if line[1] == 'button_press' && max_stim.include?(stair) && # check if max !seen
-            line[2][0] != correct_button && stim == max_stim[stair]
+        if line[1] == 'button_press' && # max_stim.include?(stair) && # check if max !seen
+            line[2][0].to_i != correct_button.to_i && stim.to_i == max_stim[stair].to_i
           not_seen_max[stair] += 1
         end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150426130940) do
+ActiveRecord::Schema.define(version: 20151004055751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 20150426130940) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "image_frames", ["image_id"], name: "index_image_frames_on_image_id", using: :btree
+
   create_table "image_groups", force: :cascade do |t|
     t.integer  "image_set_id"
     t.string   "name",         null: false
@@ -138,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150426130940) do
     t.datetime "updated_at",            null: false
     t.string   "background_image_path"
     t.integer  "background_image_size"
+    t.string   "title_image_path"
+    t.integer  "title_image_size"
   end
 
   add_index "image_sets", ["user_id"], name: "index_image_sets_on_user_id", using: :btree

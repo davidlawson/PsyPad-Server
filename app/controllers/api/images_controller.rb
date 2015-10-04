@@ -20,6 +20,14 @@ class API::ImagesController < API::BaseController
       end
     end
 
+    if image_set.title_image_path.present?
+      File.open(image_set.title_image_path, 'rb') do |file|
+        while (chunk = file.read(16384))
+          response.stream.write chunk
+        end
+      end
+    end
+
     image_set.image_groups.order(name: :asc).each do |image_group|
       image_group.images.order(name: :asc).each do |image|
         image.image_frames.order(frame_name: :asc).each do |image_frame|

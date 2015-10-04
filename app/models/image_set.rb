@@ -10,6 +10,8 @@
 #  updated_at            :datetime         not null
 #  background_image_path :string
 #  background_image_size :integer
+#  title_image_path      :string
+#  title_image_size      :integer
 #
 
 class ImageSet < ActiveRecord::Base
