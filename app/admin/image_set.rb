@@ -172,16 +172,22 @@ ActiveAdmin.register ImageSet do
 
           if components.count == 1
 
-            if components[0] != 'background.png'
-              warnings << 'Unexpected image in root of archive, only accepts "background.png"'
+            if components[0] != 'background.png' && components[0] != 'title.png'
+              warnings << 'Unexpected image in root of archive, only accepts "background.png" and "title.png"'
               next
             end
 
-            image_set.background_image_path = filename
-            image_set.background_image_size = File.size(filename)
+            if components[0] == 'background.png'
+              image_set.background_image_path = filename
+              image_set.background_image_size = File.size(filename)
+            else
+              image_set.title_image_path = filename
+              image_set.title_image_size = File.size(filename)
+            end
+
             image_set.save
 
-            imported << { name: components.join('/'), size: image_set.background_image_size }
+            imported << { name: components.join('/'), size: File.size(filename) }
 
           elsif components.count == 2
 
