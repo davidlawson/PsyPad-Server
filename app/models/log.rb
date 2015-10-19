@@ -19,6 +19,13 @@ class Log < ActiveRecord::Base
   validates_presence_of :test_date
   validates_presence_of :content
 
+  #after_save do |log|
+    # code
+    #email = (log.participant && log.participant.user.email) || log.user.email
+    #IO.write("/home/ubuntu/newserver/scripts/#{log.user_id}_#{log.participant_id}.txt", log.content)
+    #a=`/home/ubuntu/newserver/scripts/logArrived.sh #{log.user_id} #{log.participant_id} #{email}`
+  #end
+
   def parsed_content
     content.scan(/([^|]+)\|([^|]+)\|([^\n]+)\n/m)
   end
@@ -110,14 +117,13 @@ class Log < ActiveRecord::Base
           reversal_count[stair] += 1
         end
 
-
-        if line[1] == 'button_press' && min_stim.include?(stair) && # check if min seen
-            line[2][0] == correct_button && stim == min_stim[stair]
+        if line[1] == 'button_press' && #min_stim.include?(stair) && # check if min seen
+            line[2][0].to_i == correct_button.to_i && stim.to_i == min_stim[stair].to_i
           seen_min[stair] += 1
         end
 
-        if line[1] == 'button_press' && max_stim.include?(stair) && # check if max !seen
-            line[2][0] != correct_button && stim == max_stim[stair]
+        if line[1] == 'button_press' && # max_stim.include?(stair) && # check if max !seen
+            line[2][0].to_i != correct_button.to_i && stim.to_i == max_stim[stair].to_i
           not_seen_max[stair] += 1
         end
 

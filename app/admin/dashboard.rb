@@ -5,8 +5,8 @@ ActiveAdmin.register_page "Dashboard" do
   content title: proc{ I18n.t("active_admin.dashboard") } do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do
-        span 'Welcome to the PsyPad server.'
-        small 'todo: add stuff to this page'
+        span 'Welcome to the PsyPad 2.0 server.'
+        small 'As of August 2015, this server supports the PsyPad 2.0 iPad app.'
       end
     end
 
