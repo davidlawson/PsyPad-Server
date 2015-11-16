@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   has_many :image_sets, dependent: :destroy
   has_many :logs, dependent: :destroy
 
+  belongs_to :default_participant, class_name: 'Participant'
+
   def admin?
     role == 'admin'
   end

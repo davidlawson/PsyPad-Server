@@ -2,7 +2,7 @@ class API::ExternalController < ApplicationController
 
   protect_from_forgery with: :null_session
 
-  #respond_to :json
+  respond_to :json
   skip_before_filter :verify_authenticity_token
 
   def create_participant
@@ -17,6 +17,11 @@ class API::ExternalController < ApplicationController
       return
     end
 
+    unless user.default_participant.nil?
+      render json: { error: 'Default participant not selected in PsyPad server admin' }, status: 500
+      return
+    end
+
     unless user.participants.find_by_username(participant_username).nil?
       render json: { error: 'Participant username already taken' }, status: 500
       return
@@ -25,6 +30,7 @@ class API::ExternalController < ApplicationController
     p = Participant.new
     p.user = user
     p.username = participant_username
+    p.participant_configurations = user.default_participant.participant_configurations
     p.save
 
     render json: { success: true }, status: 200
