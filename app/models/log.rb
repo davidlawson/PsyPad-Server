@@ -19,6 +19,13 @@ class Log < ActiveRecord::Base
   validates_presence_of :test_date
   validates_presence_of :content
 
+  #after_save do |log|
+    # code
+    #email = (log.participant && log.participant.user.email) || log.user.email
+    #IO.write("/home/ubuntu/newserver/scripts/#{log.user_id}_#{log.participant_id}.txt", log.content)
+    #a=`/home/ubuntu/newserver/scripts/logArrived.sh #{log.user_id} #{log.participant_id} #{email}`
+  #end
+
   def parsed_content
     content.scan(/([^|]+)\|([^|]+)\|([^\n]+)\n/m)
   end
