@@ -120,9 +120,7 @@ class Log < ActiveRecord::Base
           not_seen_max[stair] += 1
         end
 
-        if line[1] == 'response_window_timeout' && num_buttons == '1' && # check if max !seen for 1 button case
-            max_stim.include?(stair) &&
-            line[2][0] != correct_button && stim == max_stim[stair]
+        if line[1] == 'response_window_timeout' && stim == max_stim[stair].to_i # check if max !seen for 1 button case # max_stim.include?(stair) &&
           not_seen_max[stair] += 1
         end
 
