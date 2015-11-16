@@ -30,7 +30,7 @@ ActiveAdmin.register User do
       f.input :password_confirmation
       f.input :affiliation
       f.input :hook_url
-      f.input :default_participant
+      f.input :default_participant, collection: current_user.participants
       f.input :role, as: :select, collection: [['Admin', 'admin']] if current_user.admin?
     end
     f.actions
