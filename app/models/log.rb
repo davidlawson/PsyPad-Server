@@ -19,17 +19,24 @@ class Log < ActiveRecord::Base
   validates_presence_of :test_date
   validates_presence_of :content
 
-  def send_to_external_server(url)
+  def send_to_external_server(user_id, tries = 10, try_in = 1)
 
-    success = false
+    url = User.find(user_id).hook_url
+    return if url.nil?
 
-    until success
-      resp = Net::HTTP.post_form(URI(url), { event: 'log', participant: participant.username, content: content })
-      success = (resp.code == 200)
-      unless success
-        logger.error "Failed to send log to external server (#{url})"
-        sleep 10
+    resp = Net::HTTP.post_form(URI(url), { event: 'log', participant: participant.username, content: content })
+    success = (resp.code == 200)
+
+    if success
+      logger.info "Sent log to external server (#{url})"
+    else
+      if tries == 0
+        logger.error "Giving up sending log to external server (#{url})"
+      else
+        logger.error "Failed to send log to external server (#{url}), trying again in #{try_in} minute(s)"
+        self.delay(run_at: try_in.minutes.from_now).send_to_external_server(user_id, tries - 1, try_in * 2)
       end
+
     end
 
   end
