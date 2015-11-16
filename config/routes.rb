@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
     post 'upload_logs' => 'logs#upload'
 
+    post 'external/create_participant' => 'external#create_participant'
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

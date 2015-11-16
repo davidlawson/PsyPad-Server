@@ -36,7 +36,6 @@ class Log < ActiveRecord::Base
         logger.error "Failed to send log to external server (#{url}), trying again in #{try_in} minute(s)"
         self.delay(run_at: try_in.minutes.from_now).send_to_external_server(user_id, tries - 1, try_in * 2)
       end
-
     end
 
   end
