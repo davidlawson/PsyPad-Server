@@ -35,4 +35,9 @@ rake db:migrate
 
 You can then start the server with `rails s`.
 
+In order to process the post-log-upload hook_url sending, you will need to run:
+```
+RAILS_ENV=production bin/delayed_job start
+```
+
 If you want to host the server online, I recommend using [Heroku](https://www.heroku.com/) which has a generous free tier that should suit most purposes.

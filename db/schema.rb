@@ -206,6 +206,7 @@ ActiveRecord::Schema.define(version: 20151116023425) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "authentication_token"
+    t.string   "string"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
