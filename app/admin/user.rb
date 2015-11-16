@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
 
   permit_params do
-    params = [:email, :password, :password_confirmation, :affiliation]
+    params = [:email, :password, :password_confirmation, :affiliation, :hook_url]
     params << :role if current_user.admin?
     params
   end
@@ -11,6 +11,7 @@ ActiveAdmin.register User do
     id_column
     column :email
     column :affiliation
+    column :hook_url
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -28,6 +29,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :affiliation
+      f.input :hook_url
       f.input :role, as: :select, collection: [['Admin', 'admin']] if current_user.admin?
     end
     f.actions
@@ -39,6 +41,7 @@ ActiveAdmin.register User do
       attributes_table_for user do
         row :email
         row :affiliation
+        row :hook_url
       end
     end
 

@@ -19,12 +19,20 @@ class Log < ActiveRecord::Base
   validates_presence_of :test_date
   validates_presence_of :content
 
-  #after_save do |log|
-    # code
-    #email = (log.participant && log.participant.user.email) || log.user.email
-    #IO.write("/home/ubuntu/newserver/scripts/#{log.user_id}_#{log.participant_id}.txt", log.content)
-    #a=`/home/ubuntu/newserver/scripts/logArrived.sh #{log.user_id} #{log.participant_id} #{email}`
-  #end
+  def send_to_external_server(url)
+
+    success = false
+
+    until success
+      resp = Net::HTTP.post_form(URI(url), { event: 'log', participant: participant.username, content: content })
+      success = (resp.code == 200)
+      unless success
+        logger.error "Failed to send log to external server (#{url})"
+        sleep 10
+      end
+    end
+
+  end
 
   def parsed_content
     content.scan(/([^|]+)\|([^|]+)\|([^\n]+)\n/m)

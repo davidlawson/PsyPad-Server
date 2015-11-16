@@ -30,6 +30,10 @@ class API::LogsController < API::BaseController
 
       log.save
 
+      unless current_user.hook_url.nil?
+        log.delay.send_to_external_server(current_user.hook_url)
+      end
+
     end
 
     render json: { success: true }, status: 200

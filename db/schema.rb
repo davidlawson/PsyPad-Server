@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004055751) do
+ActiveRecord::Schema.define(version: 20151116023425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,22 @@ ActiveRecord::Schema.define(version: 20151004055751) do
   add_index "configurations", ["participant_id"], name: "index_configurations_on_participant_id", using: :btree
   add_index "configurations", ["user_id"], name: "index_configurations_on_user_id", using: :btree
 
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "image_frames", force: :cascade do |t|
     t.integer  "image_id"
     t.string   "frame_name"
@@ -190,11 +206,11 @@ ActiveRecord::Schema.define(version: 20151004055751) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "authentication_token"
-    t.string   "string"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
     t.string   "affiliation"
+    t.string   "hook_url"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", using: :btree
