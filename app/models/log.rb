@@ -25,7 +25,7 @@ class Log < ActiveRecord::Base
     return if url.nil?
 
     resp = Net::HTTP.post_form(URI(url), { event: 'log', participant: participant.username, content: content })
-    success = (resp.code == 200)
+    success = (resp.code == '200')
 
     if success
       logger.info "Sent log to external server (#{url})"
