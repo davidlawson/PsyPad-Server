@@ -17,7 +17,7 @@ class API::ExternalController < ApplicationController
       return
     end
 
-    unless user.default_participant.nil?
+    if user.default_participant.nil?
       render json: { error: 'Default participant not selected in PsyPad server admin' }, status: 500
       return
     end
@@ -30,8 +30,13 @@ class API::ExternalController < ApplicationController
     p = Participant.new
     p.user = user
     p.username = participant_username
-    p.participant_configurations = user.default_participant.participant_configurations
     p.save
+
+    user.default_participant.participant_configurations.each do |config|
+      new_config = config.dup
+      new_config.participant = p
+      new_config.save
+    end
 
     render json: { success: true }, status: 200
 
