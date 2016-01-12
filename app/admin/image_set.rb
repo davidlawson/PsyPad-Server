@@ -163,8 +163,8 @@ ActiveAdmin.register ImageSet do
 
         Dir["#{dir}/**/*"].each do |filename|
 
-          unless filename.end_with?('.png')
-            warnings << 'Ignored file (not a .png): ' + filename unless File.directory?(filename)
+          unless filename.end_with?('.png') || filename.ends_with?('.wav')
+            warnings << 'Ignored file (not a .png or .wav): ' + filename unless File.directory?(filename)
             next
           end
 
@@ -172,17 +172,23 @@ ActiveAdmin.register ImageSet do
 
           if components.count == 1
 
-            if components[0] != 'background.png' && components[0] != 'title.png'
-              warnings << 'Unexpected image in root of archive, only accepts "background.png" and "title.png"'
+            if components[0] != 'background.png' && components[0] != 'title.png' && components[0] != 'correct.wav' && components[0] != 'incorrect.wav'
+              warnings << 'Unexpected file in root of archive: "' + components[0] + '", only accepts "background.png", "title.png", "correct.wav" and "incorrect.wav"'
               next
             end
 
             if components[0] == 'background.png'
               image_set.background_image_path = filename
               image_set.background_image_size = File.size(filename)
-            else
+            elsif components[0] == 'title.png'
               image_set.title_image_path = filename
               image_set.title_image_size = File.size(filename)
+            elsif components[0] == 'correct.wav'
+              image_set.correct_wav_path = filename
+              image_set.correct_wav_size = File.size(filename)
+            elsif components[0] == 'incorrect.wav'  
+              image_set.incorrect_wav_path = filename
+              image_set.incorrect_wav_size = File.size(filename)
             end
 
             image_set.save

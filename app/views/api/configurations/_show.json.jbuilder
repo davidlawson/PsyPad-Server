@@ -32,6 +32,18 @@ json.image_set_data do
     offset += @configuration.image_set.title_image_size
   end
 
+  if @configuration.image_set.correct_wav_path.present?
+    json.t_l @configuration.image_set.correct_wav_size
+    json.t_s offset
+    offset += @configuration.image_set.correct_wav_size
+  end
+
+  if @configuration.image_set.incorrect_wav_path.present?
+    json.t_l @configuration.image_set.incorrect_wav_size
+    json.t_s offset
+    offset += @configuration.image_set.incorrect_wav_size
+  end
+
   json.g @configuration.image_set.image_groups.order(name: :asc) do |group|
     json.n group.name
     json.i group.images.order(name: :asc) do |image|
