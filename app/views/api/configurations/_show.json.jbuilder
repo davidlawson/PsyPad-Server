@@ -33,14 +33,14 @@ json.image_set_data do
   end
 
   if @configuration.image_set.correct_wav_path.present?
-    json.t_l @configuration.image_set.correct_wav_size
-    json.t_s offset
+    json.c_l @configuration.image_set.correct_wav_size
+    json.c_s offset
     offset += @configuration.image_set.correct_wav_size
   end
 
   if @configuration.image_set.incorrect_wav_path.present?
-    json.t_l @configuration.image_set.incorrect_wav_size
-    json.t_s offset
+    json.i_l @configuration.image_set.incorrect_wav_size
+    json.i_s offset
     offset += @configuration.image_set.incorrect_wav_size
   end
 
