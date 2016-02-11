@@ -172,8 +172,8 @@ ActiveAdmin.register ImageSet do
 
           if components.count == 1
 
-            if components[0] != 'background.png' && components[0] != 'title.png' && components[0] != 'correct.wav' && components[0] != 'incorrect.wav'
-              warnings << 'Unexpected file in root of archive: "' + components[0] + '", only accepts "background.png", "title.png", "correct.wav" and "incorrect.wav"'
+            if components[0] != 'background.png' && components[0] != 'title.png' && components[0] != 'correct.wav' && components[0] != 'incorrect.wav' && components[0] != 'on.wav' && components[0] != 'off.wav' && components[0] != 'timeout.wav'
+              warnings << 'Unexpected file in root of archive: "' + components[0] + '", only accepts "background.png", "title.png", "correct.wav", "incorrect.wav", "on.wav", "off.wav" and "timeout.wav"'
               next
             end
 
@@ -189,6 +189,15 @@ ActiveAdmin.register ImageSet do
             elsif components[0] == 'incorrect.wav'  
               image_set.incorrect_wav_path = filename
               image_set.incorrect_wav_size = File.size(filename)
+            elsif components[0] == 'on.wav'  
+              image_set.on_wav_path = filename
+              image_set.on_wav_size = File.size(filename)
+            elsif components[0] == 'off.wav'  
+              image_set.off_wav_path = filename
+              image_set.off_wav_size = File.size(filename)
+            elsif components[0] == 'timeout.wav'  
+              image_set.timeout_wav_path = filename
+              image_set.timeout_wav_size = File.size(filename)
             end
 
             image_set.save

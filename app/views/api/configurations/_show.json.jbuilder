@@ -44,6 +44,24 @@ json.image_set_data do
     offset += @configuration.image_set.incorrect_wav_size
   end
 
+  if @configuration.image_set.on_wav_path.present?
+    json.on_l @configuration.image_set.on_wav_size
+    json.on_s offset
+    offset += @configuration.image_set.on_wav_size
+  end
+
+  if @configuration.image_set.off_wav_path.present?
+    json.off_l @configuration.image_set.off_wav_size
+    json.off_s offset
+    offset += @configuration.image_set.off_wav_size
+  end
+
+  if @configuration.image_set.timeout_wav_path.present?
+    json.to_l @configuration.image_set.timeout_wav_size
+    json.to_s offset
+    offset += @configuration.image_set.timeout_wav_size
+  end
+
   json.g @configuration.image_set.image_groups.order(name: :asc) do |group|
     json.n group.name
     json.i group.images.order(name: :asc) do |image|
