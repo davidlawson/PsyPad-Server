@@ -136,4 +136,6 @@ json.specified_seed @configuration.specified_seed
 
 json.attempt_facial_recognition @configuration.attempt_facial_recognition
 
+json.enable_secondary_stimuli @configuration.enable_secondary_stimuli
+
 @configuration = nil

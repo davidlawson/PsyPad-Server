@@ -144,6 +144,8 @@ active_admin_form_for path, options do |f|
     f.input :specified_seed
 
     f.input :attempt_facial_recognition, as: :radio_boolean
+
+    f.input :enable_secondary_stimuli, as: :radio_boolean
   end
 
   f.inputs 'Timestamps' do

@@ -169,6 +169,7 @@ class Configuration < ActiveRecord::Base
         :use_specified_seed,
         :specified_seed,
         :attempt_facial_recognition,
+        :enable_secondary_stimuli,
         :days_of_week => []
     ]
   end
