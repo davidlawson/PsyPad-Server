@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111104826) do
+ActiveRecord::Schema.define(version: 20160211055028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,12 @@ ActiveRecord::Schema.define(version: 20160111104826) do
     t.integer  "incorrect_wav_size"
     t.string   "correct_wav_path"
     t.integer  "correct_wav_size"
+    t.string   "on_wav_path"
+    t.integer  "on_wav_size"
+    t.string   "off_wav_path"
+    t.integer  "off_wav_size"
+    t.string   "timeout_wav_path"
+    t.integer  "timeout_wav_size"
   end
 
   add_index "image_sets", ["user_id"], name: "index_image_sets_on_user_id", using: :btree
