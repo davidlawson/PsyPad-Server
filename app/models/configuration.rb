@@ -95,6 +95,7 @@ class Configuration < ActiveRecord::Base
                                 :sunday], multiple: true
 
   enumerize :num_buttons, in: [1, 2, 3, 4]
+  enumerize :num_secondary_buttons, in: [1, 2, 3, 4]
 
   scope :non_practice_configurations, -> { where(is_practice: false) }
   scope :practice_configurations, -> { where(is_practice: true) }
