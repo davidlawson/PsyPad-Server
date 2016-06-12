@@ -172,32 +172,90 @@ ActiveAdmin.register ImageSet do
 
           if components.count == 1
 
-            if components[0] != 'background.png' && components[0] != 'title.png' && components[0] != 'correct.wav' && components[0] != 'incorrect.wav' && components[0] != 'on.wav' && components[0] != 'off.wav' && components[0] != 'timeout.wav'
-              warnings << 'Unexpected file in root of archive: "' + components[0] + '", only accepts "background.png", "title.png", "correct.wav", "incorrect.wav", "on.wav", "off.wav" and "timeout.wav"'
+            allowed = [
+              'background.png', 
+              'title.png', 
+              'correct.wav', 
+              'incorrect.wav', 
+              'on.wav', 
+              'off.wav', 
+              'timeout.wav', 
+              'button1.png',
+              'button2.png',
+              'button3.png',
+              'button4.png',
+              'secondaryButton1.png',
+              'secondaryButton2.png',
+              'secondaryButton3.png',
+              'secondaryButton4.png'
+            ]
+
+            unless allowed.include?(components[0])
+              warnings << 'Unexpected file in root of archive: "' + components[0] + '", only accepts ' + allowed.join(', ') + '.'
               next
             end
 
-            if components[0] == 'background.png'
-              image_set.background_image_path = filename
-              image_set.background_image_size = File.size(filename)
-            elsif components[0] == 'title.png'
-              image_set.title_image_path = filename
-              image_set.title_image_size = File.size(filename)
-            elsif components[0] == 'correct.wav'
-              image_set.correct_wav_path = filename
-              image_set.correct_wav_size = File.size(filename)
-            elsif components[0] == 'incorrect.wav'  
-              image_set.incorrect_wav_path = filename
-              image_set.incorrect_wav_size = File.size(filename)
-            elsif components[0] == 'on.wav'  
-              image_set.on_wav_path = filename
-              image_set.on_wav_size = File.size(filename)
-            elsif components[0] == 'off.wav'  
-              image_set.off_wav_path = filename
-              image_set.off_wav_size = File.size(filename)
-            elsif components[0] == 'timeout.wav'  
-              image_set.timeout_wav_path = filename
-              image_set.timeout_wav_size = File.size(filename)
+            case components[0]
+
+              when 'background.png'
+                image_set.background_image_path = filename
+                image_set.background_image_size = File.size(filename)
+
+              when 'title.png'
+                image_set.title_image_path = filename
+                image_set.title_image_size = File.size(filename)
+
+              when 'correct.wav'
+                image_set.correct_wav_path = filename
+                image_set.correct_wav_size = File.size(filename)
+
+              when 'incorrect.wav'  
+                image_set.incorrect_wav_path = filename
+                image_set.incorrect_wav_size = File.size(filename)
+
+              when 'on.wav'  
+                image_set.on_wav_path = filename
+                image_set.on_wav_size = File.size(filename)
+
+              when 'off.wav'  
+                image_set.off_wav_path = filename
+                image_set.off_wav_size = File.size(filename)
+
+              when 'timeout.wav'  
+                image_set.timeout_wav_path = filename
+                image_set.timeout_wav_size = File.size(filename)
+
+              when 'button1.png'
+                image_set.button1_image_path = filename
+                image_set.button1_image_size = File.size(filename)
+
+              when 'button2.png'
+                image_set.button2_image_path = filename
+                image_set.button2_image_size = File.size(filename)
+
+              when 'button3.png'
+                image_set.button3_image_path = filename
+                image_set.button3_image_size = File.size(filename)
+
+              when 'button4.png'
+                image_set.button4_image_path = filename
+                image_set.button4_image_size = File.size(filename)
+
+              when 'secondaryButton1.png'
+                image_set.secondary_button1_image_path = filename
+                image_set.secondary_button1_image_size = File.size(filename)
+
+              when 'secondaryButton2.png'
+                image_set.secondary_button2_image_path = filename
+                image_set.secondary_button2_image_size = File.size(filename)
+
+              when 'secondaryButton3.png'
+                image_set.secondary_button3_image_path = filename
+                image_set.secondary_button3_image_size = File.size(filename)
+
+              when 'secondaryButton4.png'
+                image_set.secondary_button4_image_path = filename
+                image_set.secondary_button4_image_size = File.size(filename)
             end
 
             image_set.save

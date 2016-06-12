@@ -12,61 +12,21 @@ class API::ImagesController < API::BaseController
     response.headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
     response.headers['Content-Transfer-Encoding'] = 'binary'
 
-    if image_set.background_image_path.present?
-      File.open(image_set.background_image_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
-
-    if image_set.title_image_path.present?
-      File.open(image_set.title_image_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
-
-    if image_set.correct_wav_path.present?
-      File.open(image_set.correct_wav_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
-
-    if image_set.incorrect_wav_path.present?
-      File.open(image_set.incorrect_wav_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
-
-    if image_set.on_wav_path.present?
-      File.open(image_set.on_wav_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
-
-    if image_set.off_wav_path.present?
-      File.open(image_set.off_wav_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
-
-    if image_set.timeout_wav_path.present?
-      File.open(image_set.timeout_wav_path, 'rb') do |file|
-        while (chunk = file.read(16384))
-          response.stream.write chunk
-        end
-      end
-    end
+    send_if_present image_set.background_image_path
+    send_if_present image_set.title_image_path
+    send_if_present image_set.correct_wav_path
+    send_if_present image_set.incorrect_wav_path
+    send_if_present image_set.on_wav_path
+    send_if_present image_set.off_wav_path
+    send_if_present image_set.timeout_wav_path
+    send_if_present image_set.button1_image_path
+    send_if_present image_set.button2_image_path
+    send_if_present image_set.button3_image_path
+    send_if_present image_set.button4_image_path
+    send_if_present image_set.secondary_button1_image_path
+    send_if_present image_set.secondary_button2_image_path
+    send_if_present image_set.secondary_button3_image_path
+    send_if_present image_set.secondary_button4_image_path
 
     image_set.image_groups.order(name: :asc).each do |image_group|
       image_group.images.order(name: :asc).each do |image|
@@ -81,6 +41,22 @@ class API::ImagesController < API::BaseController
     end
 
     response.stream.close
+
+  end
+
+  private
+
+  def send_if_present(path)
+    
+    if path.present?
+
+      File.open(path, 'rb') do |file|
+        while (chunk = file.read(16384))
+          response.stream.write chunk
+        end
+      end
+
+    end
 
   end
 
