@@ -144,8 +144,58 @@ active_admin_form_for path, options do |f|
     f.input :specified_seed
 
     f.input :attempt_facial_recognition, as: :radio_boolean
+  end
+
+  f.inputs 'Secondary Stimuli' do
 
     f.input :enable_secondary_stimuli, as: :radio_boolean
+
+    f.input :num_secondary_buttons, label: 'Number of secondary buttons', as: :radio
+
+    f.input 'Secondary button text', as: :multiple_strings, fields:
+                             [['1:', :secondary_button1_text],
+                              ['2:', :secondary_button2_text],
+                              ['3:', :secondary_button3_text],
+                              ['4:', :secondary_button4_text]]
+
+    f.input 'Secondary button backgrounds', as: :multiple_strings, input_html: { class: 'colorpicker' }, fields:
+                                    [['1:', :secondary_button1_bg],
+                                     ['2:', :secondary_button2_bg],
+                                     ['3:', :secondary_button3_bg],
+                                     ['4:', :secondary_button4_bg]]
+
+    f.input 'Secondary button text colours', as: :multiple_strings, input_html: { class: 'colorpicker' }, fields:
+                                     [['1:', :secondary_button1_fg],
+                                      ['2:', :secondary_button2_fg],
+                                      ['3:', :secondary_button3_fg],
+                                      ['4:', :secondary_button4_fg]]
+
+    f.li 'Positions are in \'points\' in the range of 1024x768 which will be scaled to the iPad resolution (1024x768 for non-retina, 2048x1536 for retina).'
+
+    f.input 'Secondary button 1 position', as: :multiple_numbers, fields:
+                                   [['X:',      :secondary_button1_x],
+                                    ['Y:',      :secondary_button1_y],
+                                    ['Width:',  :secondary_button1_w],
+                                    ['Height:', :secondary_button1_h]]
+
+    f.input 'Secondary button 2 position', as: :multiple_numbers, fields:
+                                   [['X:',      :secondary_button2_x],
+                                    ['Y:',      :secondary_button2_y],
+                                    ['Width:',  :secondary_button2_w],
+                                    ['Height:', :secondary_button2_h]]
+
+    f.input 'Secondary button 3 position', as: :multiple_numbers, fields:
+                                   [['X:',      :secondary_button3_x],
+                                    ['Y:',      :secondary_button3_y],
+                                    ['Width:',  :secondary_button3_w],
+                                    ['Height:', :secondary_button3_h]]
+
+    f.input 'Secondary button 4 position', as: :multiple_numbers, fields:
+                                   [['X:',      :secondary_button4_x],
+                                    ['Y:',      :secondary_button4_y],
+                                    ['Width:',  :secondary_button4_w],
+                                    ['Height:', :secondary_button4_h]]
+
   end
 
   f.inputs 'Timestamps' do

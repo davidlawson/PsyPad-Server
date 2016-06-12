@@ -120,6 +120,40 @@ json.button4_w @configuration.button4_w
 json.button4_x @configuration.button4_x
 json.button4_y @configuration.button4_y
 
+json.num_secondary_buttons @configuration.num_secondary_buttons
+
+json.secondary_button1_bg @configuration.secondary_button1_bg
+json.secondary_button1_fg @configuration.secondary_button1_fg
+json.secondary_button1_h @configuration.secondary_button1_h
+json.secondary_button1_text @configuration.secondary_button1_text
+json.secondary_button1_w @configuration.secondary_button1_w
+json.secondary_button1_x @configuration.secondary_button1_x
+json.secondary_button1_y @configuration.secondary_button1_y
+
+json.secondary_button2_bg @configuration.secondary_button2_bg
+json.secondary_button2_fg @configuration.secondary_button2_fg
+json.secondary_button2_h @configuration.secondary_button2_h
+json.secondary_button2_text @configuration.secondary_button2_text
+json.secondary_button2_w @configuration.secondary_button2_w
+json.secondary_button2_x @configuration.secondary_button2_x
+json.secondary_button2_y @configuration.secondary_button2_y
+
+json.secondary_button3_bg @configuration.secondary_button3_bg
+json.secondary_button3_fg @configuration.secondary_button3_fg
+json.secondary_button3_h @configuration.secondary_button3_h
+json.secondary_button3_text @configuration.secondary_button3_text
+json.secondary_button3_w @configuration.secondary_button3_w
+json.secondary_button3_x @configuration.secondary_button3_x
+json.secondary_button3_y @configuration.secondary_button3_y
+
+json.secondary_button4_bg @configuration.secondary_button4_bg
+json.secondary_button4_fg @configuration.secondary_button4_fg
+json.secondary_button4_h @configuration.secondary_button4_h
+json.secondary_button4_text @configuration.secondary_button4_text
+json.secondary_button4_w @configuration.secondary_button4_w
+json.secondary_button4_x @configuration.secondary_button4_x
+json.secondary_button4_y @configuration.secondary_button4_y
+
 json.require_next @configuration.require_next
 
 json.time_between_question_mean @configuration.time_between_question_mean
