@@ -187,7 +187,11 @@ ActiveAdmin.register ImageSet do
               'secondaryButton1.png',
               'secondaryButton2.png',
               'secondaryButton3.png',
-              'secondaryButton4.png'
+              'secondaryButton4.png',
+              'secondaryImage1.png',
+              'secondaryImage2.png',
+              'secondaryImage3.png',
+              'secondaryImage4.png'
             ]
 
             unless allowed.include?(components[0])
@@ -256,6 +260,22 @@ ActiveAdmin.register ImageSet do
               when 'secondaryButton4.png'
                 image_set.secondary_button4_image_path = filename
                 image_set.secondary_button4_image_size = File.size(filename)
+
+              when 'secondaryImage1.png'
+                image_set.secondary_image1_path = filename
+                image_set.secondary_image1_size = File.size(filename)
+
+              when 'secondaryImage2.png'
+                image_set.secondary_image2_path = filename
+                image_set.secondary_image2_size = File.size(filename)
+
+              when 'secondaryImage3.png'
+                image_set.secondary_image3_path = filename
+                image_set.secondary_image3_size = File.size(filename)
+
+              when 'secondaryImage4.png'
+                image_set.secondary_image4_path = filename
+                image_set.secondary_image4_size = File.size(filename)
             end
 
             image_set.save

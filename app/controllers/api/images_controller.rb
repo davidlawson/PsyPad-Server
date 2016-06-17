@@ -27,6 +27,10 @@ class API::ImagesController < API::BaseController
     send_if_present image_set.secondary_button2_image_path
     send_if_present image_set.secondary_button3_image_path
     send_if_present image_set.secondary_button4_image_path
+    send_if_present image_set.secondary_image1_path
+    send_if_present image_set.secondary_image2_path
+    send_if_present image_set.secondary_image3_path
+    send_if_present image_set.secondary_image4_path
 
     image_set.image_groups.order(name: :asc).each do |image_group|
       image_group.images.order(name: :asc).each do |image|

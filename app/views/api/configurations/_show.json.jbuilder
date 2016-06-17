@@ -110,6 +110,30 @@ json.image_set_data do
     offset += @configuration.image_set.secondary_button4_image_size
   end
 
+  if @configuration.image_set.secondary_image1_path.present?
+    json.si1_l @configuration.image_set.secondary_image1_size
+    json.si1_s offset
+    offset += @configuration.image_set.secondary_image1_size
+  end
+
+  if @configuration.image_set.secondary_image2_path.present?
+    json.si2_l @configuration.image_set.secondary_image2_size
+    json.si2_s offset
+    offset += @configuration.image_set.secondary_image2_size
+  end
+
+  if @configuration.image_set.secondary_image3_path.present?
+    json.si3_l @configuration.image_set.secondary_image3_size
+    json.si3_s offset
+    offset += @configuration.image_set.secondary_image3_size
+  end
+
+  if @configuration.image_set.secondary_image4_path.present?
+    json.si4_l @configuration.image_set.secondary_image4_size
+    json.si4_s offset
+    offset += @configuration.image_set.secondary_image4_size
+  end
+
   json.g @configuration.image_set.image_groups.order(name: :asc) do |group|
     json.n group.name
     json.i group.images.order(name: :asc) do |image|
