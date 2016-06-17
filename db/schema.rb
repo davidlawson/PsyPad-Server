@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211055028) do
+ActiveRecord::Schema.define(version: 20160612065854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,36 @@ ActiveRecord::Schema.define(version: 20160211055028) do
     t.datetime "created_at",                                                                                                                      null: false
     t.datetime "updated_at",                                                                                                                      null: false
     t.string   "description"
+    t.boolean  "enable_secondary_stimuli",        default: false
+    t.integer  "num_secondary_buttons",           default: 4
+    t.string   "secondary_button1_text"
+    t.string   "secondary_button2_text"
+    t.string   "secondary_button3_text"
+    t.string   "secondary_button4_text"
+    t.string   "secondary_button1_bg",            default: "#6c6c6c"
+    t.string   "secondary_button2_bg",            default: "#6c6c6c"
+    t.string   "secondary_button3_bg",            default: "#6c6c6c"
+    t.string   "secondary_button4_bg",            default: "#6c6c6c"
+    t.string   "secondary_button1_fg",            default: "#ffffff"
+    t.string   "secondary_button2_fg",            default: "#ffffff"
+    t.string   "secondary_button3_fg",            default: "#ffffff"
+    t.string   "secondary_button4_fg",            default: "#ffffff"
+    t.integer  "secondary_button1_x",             default: 237
+    t.integer  "secondary_button1_y",             default: 698
+    t.integer  "secondary_button1_w",             default: 100
+    t.integer  "secondary_button1_h",             default: 40
+    t.integer  "secondary_button2_x",             default: 387
+    t.integer  "secondary_button2_y",             default: 698
+    t.integer  "secondary_button2_w",             default: 100
+    t.integer  "secondary_button2_h",             default: 40
+    t.integer  "secondary_button3_x",             default: 537
+    t.integer  "secondary_button3_y",             default: 698
+    t.integer  "secondary_button3_w",             default: 100
+    t.integer  "secondary_button3_h",             default: 40
+    t.integer  "secondary_button4_x",             default: 687
+    t.integer  "secondary_button4_y",             default: 698
+    t.integer  "secondary_button4_w",             default: 100
+    t.integer  "secondary_button4_h",             default: 40
   end
 
   add_index "configurations", ["image_set_id"], name: "index_configurations_on_image_set_id", using: :btree
@@ -151,9 +181,9 @@ ActiveRecord::Schema.define(version: 20160211055028) do
   create_table "image_sets", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.string   "directory",             null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "directory",                    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "background_image_path"
     t.integer  "background_image_size"
     t.string   "title_image_path"
@@ -168,6 +198,22 @@ ActiveRecord::Schema.define(version: 20160211055028) do
     t.integer  "off_wav_size"
     t.string   "timeout_wav_path"
     t.integer  "timeout_wav_size"
+    t.string   "button1_image_path"
+    t.integer  "button1_image_size"
+    t.string   "button2_image_path"
+    t.integer  "button2_image_size"
+    t.string   "button3_image_path"
+    t.integer  "button3_image_size"
+    t.string   "button4_image_path"
+    t.integer  "button4_image_size"
+    t.string   "secondary_button1_image_path"
+    t.integer  "secondary_button1_image_size"
+    t.string   "secondary_button2_image_path"
+    t.integer  "secondary_button2_image_size"
+    t.string   "secondary_button3_image_path"
+    t.integer  "secondary_button3_image_size"
+    t.string   "secondary_button4_image_path"
+    t.integer  "secondary_button4_image_size"
   end
 
   add_index "image_sets", ["user_id"], name: "index_image_sets_on_user_id", using: :btree

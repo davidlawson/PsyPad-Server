@@ -20,29 +20,95 @@ json.image_set_url @configuration.image_set.url
 json.image_set_data do
   offset = 0
 
-  def output_file(path, size, name)
-    if path.present?
-      json.set! name+'_l', size
-      json.set! name+'_s', offset
-      offset += size
-    end
+  if @configuration.image_set.background_image_path.present?
+    json.bg_l @configuration.image_set.background_image_size
+    json.bg_s offset
+    offset += @configuration.image_set.background_image_size
   end
 
-  output_file @configuration.image_set.background_image_path, @configuration.image_set.background_image_size, 'bg'
-  output_file @configuration.image_set.title_image_path, @configuration.image_set.title_image_size, 't'
-  output_file @configuration.image_set.correct_wav_path, @configuration.image_set.correct_wav_size, 'c'
-  output_file @configuration.image_set.incorrect_wav_path, @configuration.image_set.incorrect_wav_size, 'i'
-  output_file @configuration.image_set.on_wav_path, @configuration.image_set.on_wav_size, 'on'
-  output_file @configuration.image_set.off_wav_path, @configuration.image_set.off_wav_size, 'off'
-  output_file @configuration.image_set.timeout_wav_path, @configuration.image_set.timeout_wav_size, 'to'
-  output_file @configuration.image_set.button1_path, @configuration.image_set.button1_size, 'b1'
-  output_file @configuration.image_set.button2_path, @configuration.image_set.button2_size, 'b2'
-  output_file @configuration.image_set.button3_path, @configuration.image_set.button3_size, 'b3'
-  output_file @configuration.image_set.button4_path, @configuration.image_set.button4_size, 'b4'
-  output_file @configuration.image_set.secondary_button1_path, @configuration.image_set.secondary_button1_size, 'sb1'
-  output_file @configuration.image_set.secondary_button2_path, @configuration.image_set.secondary_button2_size, 'sb2'
-  output_file @configuration.image_set.secondary_button3_path, @configuration.image_set.secondary_button3_size, 'sb3'
-  output_file @configuration.image_set.secondary_button4_path, @configuration.image_set.secondary_button4_size, 'sb4'
+  if @configuration.image_set.title_image_path.present?
+    json.t_l @configuration.image_set.title_image_size
+    json.t_s offset
+    offset += @configuration.image_set.title_image_size
+  end
+
+  if @configuration.image_set.correct_wav_path.present?
+    json.c_l @configuration.image_set.correct_wav_size
+    json.c_s offset
+    offset += @configuration.image_set.correct_wav_size
+  end
+
+  if @configuration.image_set.incorrect_wav_path.present?
+    json.i_l @configuration.image_set.incorrect_wav_size
+    json.i_s offset
+    offset += @configuration.image_set.incorrect_wav_size
+  end
+
+  if @configuration.image_set.on_wav_path.present?
+    json.on_l @configuration.image_set.on_wav_size
+    json.on_s offset
+    offset += @configuration.image_set.on_wav_size
+  end
+
+  if @configuration.image_set.off_wav_path.present?
+    json.off_l @configuration.image_set.off_wav_size
+    json.off_s offset
+    offset += @configuration.image_set.off_wav_size
+  end
+
+  if @configuration.image_set.timeout_wav_path.present?
+    json.to_l @configuration.image_set.timeout_wav_size
+    json.to_s offset
+    offset += @configuration.image_set.timeout_wav_size
+  end
+
+  if @configuration.image_set.button1_image_path.present?
+    json.b1_l @configuration.image_set.button1_image_size
+    json.b1_s offset
+    offset += @configuration.image_set.button1_image_size
+  end
+
+  if @configuration.image_set.button2_image_path.present?
+    json.b2_l @configuration.image_set.button2_image_size
+    json.b2_s offset
+    offset += @configuration.image_set.button2_image_size
+  end
+
+  if @configuration.image_set.button3_image_path.present?
+    json.b3_l @configuration.image_set.button3_image_size
+    json.b3_s offset
+    offset += @configuration.image_set.button3_image_size
+  end
+
+  if @configuration.image_set.button4_image_path.present?
+    json.b4_l @configuration.image_set.button4_image_size
+    json.b4_s offset
+    offset += @configuration.image_set.button4_image_size
+  end
+
+  if @configuration.image_set.secondary_button1_image_path.present?
+    json.sb1_l @configuration.image_set.secondary_button1_image_size
+    json.sb1_s offset
+    offset += @configuration.image_set.secondary_button1_image_size
+  end
+
+  if @configuration.image_set.secondary_button2_image_path.present?
+    json.sb2_l @configuration.image_set.secondary_button2_image_size
+    json.sb2_s offset
+    offset += @configuration.image_set.secondary_button2_image_size
+  end
+
+  if @configuration.image_set.secondary_button3_image_path.present?
+    json.sb3_l @configuration.image_set.secondary_button3_image_size
+    json.sb3_s offset
+    offset += @configuration.image_set.secondary_button3_image_size
+  end
+
+  if @configuration.image_set.secondary_button4_image_path.present?
+    json.sb4_l @configuration.image_set.secondary_button4_image_size
+    json.sb4_s offset
+    offset += @configuration.image_set.secondary_button4_image_size
+  end
 
   json.g @configuration.image_set.image_groups.order(name: :asc) do |group|
     json.n group.name
