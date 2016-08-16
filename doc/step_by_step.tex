@@ -21,7 +21,7 @@
 
 \section*{Introduction}
 
-PsyPad 2.0 has two modes of operation: Demo mode and Participant mode.
+PsyPad 2.4 has two modes of operation: Demo mode and Participant mode.
 Demo mode allows you to run psychophysics experiments (both your own
 and the demonstration experiments in the public gallery) and view their
 results on the iPad immediately.
@@ -29,11 +29,16 @@ Participant mode allows you to configure experiments for participants
 where multiple experiments can be presented sequentially with the
 results uploaded to the server on completion.
 
-Running experiments from the public gallery requires no psychophysics expertise, though if you want to create your own tests, this guide assumes you already know how to set up a psychophysics experiment. For example, you know the difference between MOCS and a staircase, and you know about gamma correction.
+Running experiments from the public gallery requires no psychophysics
+expertise, though if you want to create your own tests, this guide
+assumes you already know how to set up a psychophysics experiment.
+For example, you know the difference between MOCS and a staircase,
+and you know about gamma correction.
 
-Throughout we refer to a \emph{test} as a sequence of stimuli (either MOCS, single or multiple staircases) resulting in reversals or 
-collection of ``\% correct'' results. 
-A collection of tests performed in sequence make up a \emph{session}.
+Throughout we refer to a \emph{test} as a sequence of stimuli (either
+MOCS, single or multiple staircases) resulting in reversals or
+collection of ``\% correct'' results.  A collection of tests performed
+in sequence make up a \emph{session}.
 
 \subsection*{Document History}
 The initial draft of this manual was written by
@@ -44,6 +49,11 @@ Contact \url{aturpin@unimelb.edu.au} for more information.
 and one button doco, added App Version 1.1, fixed a few typos.
 
 20 April 2015: Updated for PsyPad 2.0
+
+9 January 2016: Updated for PsyPad 2.2 and in expectation of V2.3.
+
+15 August 2016: Updated for PsyPad 2.4, including Central Images and Audio.
+
 
 \subsection*{Citation}
 
@@ -88,7 +98,11 @@ free for your use, but perhaps you want to run your own (the server code is open
 Section~\ref{sec-server} discusses the server in more detail.
 
 \item {\bf Registration.}
-You will need an account on the server you are using. All test configurations, images and participants are associated with your login (see Figure~\ref{fig-overview}). You can create an account directly on the iPad app or at \defaultServer.
+You will need an account on the server you are using.
+All test configurations, images and participants are associated with
+your login (see Figure~\ref{fig-overview}).
+You can create an account directly on the iPad app or at
+\defaultServer.
 
 \item {\bf iPad app.}
 You can download the iPad app by searching for PsyPad on the App Store on your iPad or by visiting this link: \url{https://itunes.apple.com/al/app/psypad/id735057966}. After installing the app you will need to open it and log in with your PsyPad account.
@@ -334,7 +348,9 @@ Once you have selected the image set and set the configuration options, click [C
 
 \item {\bf Stimuli.} All stimuli in PsyPad are precomputed 
 24- or 32-bit PNG
-images that are presented centred on the screen, and written over a background image that is also a PNG.
+images that are presented centered on the screen, and written over a background image that is also a PNG.
+As of Version 2.4, there may also be a Central Image that is written over the top
+of the stimuli image for each presentation.
 Dynamic stimuli are a sequence of frames that are also
 PNG images.  The filenames of the images must be in
 a specific format: see Section~\ref{sec-images}.
@@ -342,11 +358,10 @@ If you cannot precompute all the stimuli you might need in a test, then
 PsyPad will not work for you.
 
 \item {\bf Buttons.} What response buttons do you need for your test?  
-Up to four
-rectangular buttons are allowed. Where
+Up to four rectangular buttons with varying text and colors, 
+or an image for each button, are allowed. Where
 should they be placed on the screen? 
-What color, width and height
-should they be?
+What color, width and height should they be?
 
 \item {\bf Thresholding strategy: MOCS or staircase?}
 If you choose a MOCS, you must decide on the stimuli levels you want to
@@ -354,6 +369,7 @@ test, and how many trials per level: see Section~\ref{sec-mocs}.
 For staircases, you must decide how many to interleave; and for each the starting
 values, the number of reversals, and the step sizes between each reversal.
 See Section~\ref{sec-staircase} for more information.
+As of Version 2.4, you can also include a second response for the Central Image.
 
 \item {\bf How many tests in a session?}
 Does a session (from participant login on the iPad
@@ -378,7 +394,8 @@ files.
 \subsection{Submitting to the public gallery}
 \label{sec-submittingConfigurations}
 
-We would love to let you share configurations/image sets that you think would be helpful for other people to use.
+We would love to let you share configurations/image sets that you
+think would be helpful for other people to use.
 
 If you would like to submit a configuration (and its image set) for
 consideration to be added to the public gallery, simply click on [Share
@@ -490,7 +507,7 @@ see Section~\ref{sec-tests}.
 \label{sect-bi}
 
 As of Version 1.1 of the PsyPad app, you can also include a background
-image that is displayed centred on the screen throughout the entire
+image that is displayed centered on the screen throughout the entire
 test, with stimuli and buttons written over the top of that image.
 This is useful for fixation targets, in particular, but could also
 be used in many creative ways.  The background image must be a PNG,
@@ -503,6 +520,69 @@ color.
 To avoid apparent flickering of buttons, the background image should
 either contain the buttons in the actual image, or be small enough
 to not overwrite the buttons when the display is refreshed.
+
+
+\subsection{Central Image}
+\label{sect-second}
+
+As of Version 2.4, it is possible to collect two responses from each trial: the
+first response is to a central target which can have up to 4 different images; 
+and the second response is to
+the the images that are participating in the staircase or MOCS procedure. 
+To activate this feature, you need to select {\tt Secondary Stimuli} as {\tt Yes}
+in the configuration of the test, and select the number of {\tt Secondary Buttons}
+you require.
+
+
+The images to be presented as the central targets should be named 
+{\tt secondaryImage1.png},
+{\tt secondaryImage2.png},
+{\tt secondaryImage3.png}, and 
+{\tt secondaryImage4.png}. 
+If you are only using 2 images, for example, you only need to include
+{\tt secondaryImage1.png} and {\tt secondaryImage2.png} in your zip file.
+
+
+The central image displayed is randomly chosen from the given possibilities
+and appears and remains on the screen at the same time as the main experimental
+stimulus.
+Immediately after the main stimulus presentation is over, the ``secondary
+buttons'' appear (as configured in the {\tt Secondary Stimuli} section), 
+and once one of those buttons is pressed, 
+the buttons for the main experimental stimuli appear (as configured in the {\tt
+Button Configuration} section.
+
+
+
+\subsection{Title  Image}
+\label{sect-ti}
+
+As of Version 2.2 of the PsyPad app, you can also include a title
+image that is displayed centered on the screen behind the ``Begin Test'' button that
+appears at the beginning of each test.
+This is useful for instructions, in particular, but could also
+be used in many creative ways.  The title image must be a PNG,
+and must be named {\tt title.png} in the top directory/folder
+of images.  
+
+
+
+\subsection{Button  Images}
+\label{sect-butti}
+
+As of Version 2.4, you can specify an image to be used as a button. The images must be named 
+              {\tt button1.png},
+              {\tt button2.png},
+              {\tt button3.png}, and
+              {\tt button4.png} for the 4 buttons respectively.
+For buttons used to respond to Central Images (if Secondary Stimuli is enabled), 
+the file names should be:
+{\tt secondaryButton1.png},
+              {\tt secondaryButton2.png},
+              {\tt secondaryButton3.png}, and
+              {\tt secondaryButton4.png}.
+See Section~\ref{sect-second} for more details on Central Images.
+
 
 \subsection{Gamma correction and Auto-brightness}
 
@@ -672,15 +752,24 @@ Number of buttons & The number of response buttons (maximum 4). From Version 1.1
 if only one button is chosen, if it is pressed within the response window this counts as a ``correct'' response,
 otherwise it counts as an ``incorrect'' response.\\
 \hline
-Button text & The text to appear on each button\\
+Button text & The text to appear on each button. 
+Note that if button images are
+present, then they will be displayed instead, and the text will be ignored. See
+Section~\ref{sect-butti} for details.\\
 \hline
 Button presentation delay & The amount of time (in seconds) before the buttons appear after the stimuli has been presented (does not have to be an integer)\\
 \hline
 Button backgrounds & RGB-hex string specifying the background color of each button. For example,
-\#0000FF is blue.\\
+\#0000FF is blue.
+Note that if button images are
+present, then they will be displayed instead, and the text will be ignored. See
+Section~\ref{sect-butti} for details.\\
 \hline
 Button text colours & RGB-hex string specifying the text color of each button. For example,
-\#888888 is grey.\\
+\#888888 is grey.
+Note that if button images are
+present, then they will be displayed instead, and the text will be ignored. See
+Section~\ref{sect-butti} for details.\\
 \hline
 Button positions & For each button, $(x,y)$ width and height.
 All measurements are in pixels, and the top left of the screen is $(0,0)$,
@@ -730,9 +819,28 @@ beginning of every stimulus presentation (beware of the camera ``noise'' that ca
 iPad Settings). The image is processed to locate two eyes and a mouth. The three coordinates are saved
 into the log file. If ``No'', no picture is taken, and nothing is logged.\\
 \hline
+\hline
+{\bf Secondary Stimuli} & \\\nopagebreak
+Enable secondary stimuli & If ''Yes'' then secondary stimuli will be used. See
+Section~\ref{sect-second} for details. \\ 
+\hline
+Number of secondary buttons    & This is the number of Central Images that you
+have supplied, and from which the random central stimuli will be chosen (assuming
+{\tt Enable Secondary Stimuli} is {\tt Yes}). See Section~\ref{sect-second} for
+details. \\
+\hline
+Secondary button text          & See Button text under Button Configuration. \\
+Secondary button backgrounds   & See Button backgrounds under Button Configuration. \\
+Secondary button text colours  & See Button text colours under Button Configuration. \\
+Secondary button 1 position  & See Button positions under Button Configuration. \\
+Secondary button 2 position  & See Button positions under Button Configuration. \\
+Secondary button 3 position  & See Button positions under Button Configuration. \\
+Secondary button 4 position  & See Button positions under Button Configuration. \\
+\hline
 \end{longtable}
 
-After choosing all of your settings, don't forget to save the configuration using the appropriate button at the bottom of the screen.
+After choosing all of your settings, don't forget to save the configuration 
+using the appropriate button at the bottom of the screen.
 
 \subsection{MOCS}
 \label{sec-mocs}
@@ -796,6 +904,30 @@ responses incorrect-correct-correct and correct-correct-incorrect.
 Each staircase terminates when its number of reversals is achieved, or 
 if the count of minimum/maximum stimulus value correct/incorrect reaches 
 the specified number.
+
+
+\subsection{Audio feedback}
+
+As of Version 2.3, it is possible to include two sound files in the 
+image zip file:
+    \begin{description}
+         \item[correct.wav] which will be played after a correct button press; and
+         \item[incorrect.wav] which will be played after an incorrect button press.
+    \end{description}
+These should be valid WAV files. If they are not present, then no sounds are played.
+
+Added in Version 2.4, 
+    \begin{description}
+        \item[on.wav] which will play at the onset of a stimulus presentation;
+        \item[off.wav] which will play at the offset of a stimulus presentation; and 
+        \item[timeout.wav] which will play when no response is made within the response window.
+    \end{description}
+Note that if \emph{Attempt facial recognition} is enabled, then the camera on the iPad will 
+make a sound when a photo is captured during each stimuli presentation. 
+This may confuse things if you are relying on 
+audible feedback for correct and incorrect. It is probably best to turn off 
+facial recognition in this case.
+
 
 \section{Session Configurations}
 \label{sec-configs}
@@ -874,7 +1006,8 @@ Figure~\ref{fig-exampleLog} shows an example log file for a staircase procedure,
 identifier.
 The log file format has been designed for processing with script languages such as awk, Perl, Python, and so on. The
 \defaultServer server offers the summary text. 
-Example Python scripts for processing logfiles can be found in the Gallery at \defaultServer.
+Example Python scripts for processing logfiles can be found in the Gallery at 
+\url{psypad.net.au}.
 
 \begin{figure}
 \begin{center}
@@ -940,7 +1073,7 @@ next\_question      & $d$/$d$ & The question number in the current test (numerat
                                 and the total number of questions (denominator). (MOCS only)\\
 presented\_buttons  & String & Labels of each button presented for this question. \\
 presented\_image    & String & Filename of image that was presented at this time. \\
-reaction\_time      & $d.dd$ms & Time between image presentation and button push. \\
+reaction\_time      & $d.dd$ms & Time between image presentation onset and button released. \\
 reversal            & -- & This response caused a reversal. (Staircase only) \\
 test\_begin         & String & Description of all test parameters in JSON format. \\
 test\_finished      &  -- & Time the test finished.\\
@@ -1009,6 +1142,9 @@ stimulus level was presented in the test.
 
 \end{description}
 
+If Secondary Stimuli are enabled, their responses are in the log file, but not
+displayed nicely on the iPad.
+
 
 \section{iPad Settings}
 \label{sec-ipad}
@@ -1036,19 +1172,85 @@ FaceTime & Turn it off. \\
 \section{Upcoming features}
 
 \begin{itemize}
-\item ``Start screen'' to appear with begin button before each test.
 \item Blocking of MOCS trials to ensure no two of the same level in a row?
-\item Interactive screen preview during test configuration in the server.
 \item Auto emailing of log files from server nominated email addresses.
-\item Audio support.
+      (Note this is supported for some sites, but is not yet documented or
+       released.)
 \end{itemize}
 
 \section{Known Bugs}
 
 \begin{itemize}
-\item On-iPad analysis does not work for single button tests (App Version 1.1)
+\item There is a blank frame added at the start of a movie 
+stimulus. This counts in the reaction 
+time measurement for the stimuli as the timing begins at ``stimuli onset'', 
+which is the first blank frame.
 \end{itemize}
 
+
+\newpage
+
+\appendix
+\section{Appendix A: listing of contents of an image zip file}
+
+Contents of an image set for 20 different stimuli levels for a yes/no
+procedure with a single button and only one stimulus for each level.
+This is taken from a task like automated perimetry for visual field
+testing with audible feedback.
+
+
+\begin{verbatim}
+Archive:  c.zip
+  Length     Date   Time    Name
+ --------    ----   ----    ----
+        0  12-22-15 15:15   200/
+     1121  12-22-15 15:15   200/1_1.png
+        0  12-22-15 15:15   201/
+     1121  12-22-15 15:15   201/1_1.png
+        0  12-22-15 15:15   202/
+     1121  12-22-15 15:15   202/1_1.png
+        0  12-22-15 15:15   203/
+     1122  12-22-15 15:15   203/1_1.png
+        0  12-22-15 15:15   204/
+     1122  12-22-15 15:15   204/1_1.png
+        0  12-22-15 15:15   205/
+     1122  12-22-15 15:15   205/1_1.png
+        0  12-22-15 15:15   206/
+     1122  12-22-15 15:15   206/1_1.png
+        0  12-22-15 15:15   207/
+     1122  12-22-15 15:15   207/1_1.png
+        0  12-22-15 15:15   208/
+     1122  12-22-15 15:15   208/1_1.png
+        0  12-22-15 15:15   209/
+     1122  12-22-15 15:15   209/1_1.png
+        0  12-22-15 15:15   210/
+     1122  12-22-15 15:15   210/1_1.png
+        0  12-22-15 15:15   211/
+     1121  12-22-15 15:15   211/1_1.png
+        0  12-22-15 15:15   212/
+     1116  12-22-15 15:15   212/1_1.png
+        0  12-22-15 15:15   213/
+     1118  12-22-15 15:15   213/1_1.png
+        0  12-22-15 15:15   214/
+     1117  12-22-15 15:15   214/1_1.png
+        0  12-22-15 15:15   215/
+     1119  12-22-15 15:15   215/1_1.png
+        0  12-22-15 15:15   216/
+     1116  12-22-15 15:15   216/1_1.png
+        0  12-22-15 15:15   217/
+     1116  12-22-15 15:15   217/1_1.png
+        0  12-22-15 15:15   218/
+     1115  12-22-15 15:15   218/1_1.png
+        0  12-22-15 15:15   219/
+     1110  12-22-15 15:15   219/1_1.png
+    35486  12-22-15 15:15   background.png
+    29878  12-22-15 15:15   title.png
+    79612  12-22-15 15:15   correct.wav
+    79612  12-22-15 15:15   incorrect.wav
+ --------                   -------
+   603710                   964 files
+
+\end{verbatim}
 
  
 
